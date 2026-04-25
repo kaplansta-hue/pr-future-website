@@ -42,5 +42,5 @@ next-env.d.ts
 # Vercel
 .vercel
 
-# Uploads (runtime user content)
-uploads/
+# Uploads (runtime user content — root-level only, NOT public/uploads)
+/uploads/
