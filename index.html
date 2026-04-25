@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P.R FUTURE — AI Learning Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── BASE ── */
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+  background: #05030e;
+  overflow-x: hidden;
+}
+
+/* ── FIXED BACKGROUND ── */
+.bg-fixed {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.bg-fixed img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+.bg-fixed-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(5,3,14,0.28) 0%,
+      rgba(5,3,14,0.10) 18%,
+      rgba(5,3,14,0.18) 50%,
+      rgba(5,3,14,0.72) 80%,
+      rgba(5,3,14,0.96) 100%
+    );
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 52px;
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  background: rgba(5,3,14,0.28);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff8a50 0%, #ffffff 48%, #3de8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: pointer;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 34px;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  transition: color 0.22s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-cta {
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(14px);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.25s, background 0.25s;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  border-color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── SECTIONS ── */
+section {
+  position: relative;
+  z-index: 10;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 1 — HERO
+═══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 5.8vw, 5.6rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  color: #ffffff;
+  text-wrap: balance;
+  max-width: 900px;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.5), 0 0 80px rgba(0,0,0,0.3);
+}
+.hero-title em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.45;
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+  animation: scrollDrop 2s ease-in-out infinite;
+}
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  60%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════
+   SECTION 2 — VISION
+═══════════════════════════════════════ */
+.vision {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px;
+}
+.vision-inner {
+  max-width: 680px;
+  text-align: center;
+}
+.vision-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+.vision-title span {
+  background: linear-gradient(90deg, #ff8a50, #fff 40%, #3de8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.vision-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  margin: 0 auto 32px;
+}
+.vision-body {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.78);
+  text-wrap: pretty;
+}
+.vision-body strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   SECTION 3 — PROGRAMS
+═══════════════════════════════════════ */
+.programs {
+  padding: 100px 24px 140px;
+}
+.programs-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.programs-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 14px;
+}
+.programs-title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── LIQUID GLASS CARD ── */
+.glass-card {
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(28px) saturate(1.5) brightness(1.05);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5) brightness(1.05);
+  padding: 52px 36px 44px;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.3s,
+    box-shadow 0.4s;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+}
+
+/* top highlight sheen */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.35) 40%,
+    rgba(255,255,255,0.5) 50%,
+    rgba(255,255,255,0.35) 60%,
+    transparent 100%
+  );
+}
+
+/* inner glow on hover */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.10) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  transform: translateY(-10px) scale(1.018);
+  border-color: rgba(255,255,255,0.30);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(255,255,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.glass-card:hover::after { opacity: 1; }
+
+/* color accent tint per card */
+.card-cyan  { box-shadow: 0 8px 40px rgba(61,232,255,0.08); }
+.card-orange{ box-shadow: 0 8px 40px rgba(255,138,80,0.08); }
+.card-violet{ box-shadow: 0 8px 40px rgba(168,100,255,0.08); }
+
+.card-cyan:hover  { box-shadow: 0 24px 60px rgba(61,232,255,0.18), 0 0 80px rgba(61,232,255,0.06); }
+.card-orange:hover{ box-shadow: 0 24px 60px rgba(255,138,80,0.18), 0 0 80px rgba(255,138,80,0.06); }
+.card-violet:hover{ box-shadow: 0 24px 60px rgba(168,100,255,0.18), 0 0 80px rgba(168,100,255,0.06); }
+
+/* ── CARD CONTENTS ── */
+.card-tag {
+  display: inline-block;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+.card-cyan   .card-tag { background: rgba(61,232,255,0.14);  color: #3de8ff; }
+.card-orange .card-tag { background: rgba(255,138,80,0.14);  color: #ff9a5c; }
+.card-violet .card-tag { background: rgba(168,100,255,0.14); color: #c080ff; }
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.card-audience {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 7px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-top: auto;
+  padding-top: 28px;
+  transition: gap 0.22s, opacity 0.22s;
+  opacity: 0.75;
+}
+.glass-card:hover .card-cta { opacity: 1; gap: 11px; }
+.card-cyan   .card-cta { color: #3de8ff; }
+.card-orange .card-cta { color: #ff9a5c; }
+.card-violet .card-cta { color: #c080ff; }
+
+/* ── RIPPLE ── */
+.ripple-ring {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  transform: scale(0);
+  animation: rippleOut 0.65s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes rippleOut {
+  to { transform: scale(5); opacity: 0; }
+}
+
+/* ── WAITLIST SECTION ── */
+.waitlist-section {
+  position: relative;
+  z-index: 10;
+  padding: 60px 24px 100px;
+  display: flex;
+  justify-content: center;
+}
+.waitlist-panel {
+  max-width: 560px;
+  width: 100%;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(30px) saturate(1.4);
+  -webkit-backdrop-filter: blur(30px) saturate(1.4);
+  padding: 52px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.waitlist-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+.waitlist-title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.waitlist-sub {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+.waitlist-form {
+  display: flex;
+  gap: 10px;
+}
+.glass-input {
+  flex: 1;
+  padding: 13px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.87rem;
+  font-weight: 300;
+  outline: none;
+  min-width: 0;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.glass-input::placeholder { color: rgba(255,255,255,0.3); }
+.glass-input:focus {
+  border-color: rgba(255,255,255,0.38);
+  box-shadow: 0 0 0 3px rgba(61,232,255,0.1);
+}
+.btn-submit {
+  padding: 13px 26px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,200,160,0.3);
+  background: linear-gradient(135deg, rgba(255,122,61,0.28), rgba(61,232,255,0.16));
+  backdrop-filter: blur(16px);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+}
+.btn-submit:hover {
+  border-color: rgba(255,200,160,0.55);
+  box-shadow: 0 0 30px rgba(255,100,40,0.22);
+  transform: translateY(-1px);
+}
+.btn-submit:active { transform: translateY(0) scale(0.98); }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.07em;
+}
+
+/* ── TWEAKS PANEL ── */
+#tweaks-panel {
+  display: none;
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 9999;
+  width: 240px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(8,6,20,0.88);
+  backdrop-filter: blur(24px);
+  padding: 18px 20px;
+  font-family: 'Inter', sans-serif;
+  color: rgba(255,255,255,0.75);
+}
+#tweaks-panel h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+}
+.tweak-row { margin-bottom: 13px; }
+.tweak-row label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 5px;
+}
+.tweak-row input[type=range] { width: 100%; accent-color: #3de8ff; }
+
+/* ═══════════════════════════════════════
+   ONBOARDING JOURNEY TIMELINE
+═══════════════════════════════════════ */
+.journey-section {
+  padding: 100px 24px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.journey-header { text-align: center; margin-bottom: 90px; }
+.journey-eyebrow {
+  font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em;
+  text-transform: uppercase; color: #3de8ff; opacity: 0.6; margin-bottom: 14px;
+}
+.journey-title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600; color: #fff; letter-spacing: -0.01em; line-height: 1.15;
+}
+.timeline {
+  position: relative; width: 100%; max-width: 1000px;
+  display: flex; flex-direction: column;
+}
+.timeline-svg-wrap {
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.timeline-svg-wrap svg { width: 100%; height: 100%; overflow: visible; }
+.timeline-path-bg {
+  fill: none; stroke: rgba(61,232,255,0.07);
+  stroke-width: 1.5; stroke-linecap: round;
+}
+.timeline-path-draw {
+  fill: none; stroke: rgba(61,232,255,0.55);
+  stroke-width: 1.5; stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(61,232,255,0.4));
+}
+.step-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 1fr;
+  align-items: center;
+  min-height: 180px;
+  position: relative; z-index: 1;
+  margin-bottom: 20px;
+}
+.step-card-wrap { display: flex; }
+.step-card-wrap.left  { justify-content: flex-end; padding-right: 32px; }
+.step-card-wrap.right { justify-content: flex-start; padding-left: 32px; }
+.step-card {
+  position: relative; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.052);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  padding: 28px 28px 26px;
+  max-width: 360px; width: 100%; overflow: hidden;
+  opacity: 0; transform: translateY(22px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.step-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+}
+.step-card:hover {
+  border-color: rgba(61,232,255,0.28);
+  box-shadow: 0 12px 40px rgba(61,232,255,0.08);
+}
+.step-num {
+  font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #3de8ff; opacity: 0.6; margin-bottom: 10px;
+}
+.step-title {
+  font-size: 1rem; font-weight: 600; color: #fff;
+  margin-bottom: 10px; line-height: 1.3; letter-spacing: 0.01em;
+}
+.step-body {
+  font-size: 0.82rem; font-weight: 300;
+  color: rgba(255,255,255,0.44); line-height: 1.72;
+}
+.step-center { display: flex; align-items: center; justify-content: center; }
+.step-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #3de8ff;
+  box-shadow: 0 0 12px rgba(61,232,255,0.7), 0 0 24px rgba(61,232,255,0.3);
+  opacity: 0; flex-shrink: 0; position: relative; z-index: 2;
+}
+
+/* ═══════════════════════════════════════
+   PROJECT SHOWCASE — CAROUSEL
+═══════════════════════════════════════ */
+.showcase-section {
+  padding: 110px 24px 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.showcase-header {
+  text-align: center;
+  margin-bottom: 80px;
+  max-width: 760px;
+}
+.showcase-quote {
+  font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-style: italic;
+  text-wrap: balance;
+}
+.showcase-quote em { font-style: normal; font-weight: 600; }
+
+/* Carousel stage */
+.carousel-stage {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+/* Individual project card */
+.proj-card {
+  position: absolute;
+  width: 320px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(14,12,30,0.72);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.55s cubic-bezier(0.23,1,0.32,1),
+              opacity 0.55s ease,
+              box-shadow 0.55s ease;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+
+/* Corner dots */
+.proj-card::before, .proj-card::after {
+  content: '';
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+}
+.proj-card::before { top: 14px; left: 14px; }
+.proj-card::after  { top: 14px; right: 14px; }
+
+.card-corner-bl, .card-corner-br {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+}
+.card-corner-bl { bottom: 14px; left: 14px; }
+.card-corner-br { bottom: 14px; right: 14px; }
+
+.proj-card-sheen {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+}
+
+/* Card states */
+.proj-card[data-pos="active"] {
+  z-index: 10;
+  transform: translateX(0) scale(1) translateZ(0);
+  opacity: 1;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+.proj-card[data-pos="prev"] {
+  z-index: 5;
+  transform: translateX(-68%) scale(0.84) translateZ(-60px);
+  opacity: 0.55;
+}
+.proj-card[data-pos="next"] {
+  z-index: 5;
+  transform: translateX(68%) scale(0.84) translateZ(-60px);
+  opacity: 0.55;
+}
+.proj-card[data-pos="prev2"],
+.proj-card[data-pos="next2"] {
+  z-index: 2;
+  transform: translateX(0) scale(0.65) translateZ(-120px);
+  opacity: 0;
+  pointer-events: none;
+}
+.proj-card[data-pos="hidden"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0) scale(0.5);
+  z-index: 0;
+}
+
+/* Brand icon */
+.card-brand-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+.card-brand-icon svg { width: 20px; height: 20px; }
+
+.card-proj-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+
+.card-creator {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.06em;
+  margin-bottom: 18px;
+}
+
+.card-desc-panel {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+.card-desc-panel p {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.65;
+}
+
+.card-valuation-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  transition: box-shadow 0.25s;
+}
+.val-high  { background: rgba(61,232,255,0.12);  color: #3de8ff;  border: 1px solid rgba(61,232,255,0.28);  box-shadow: 0 0 20px rgba(61,232,255,0.1); }
+.val-mid   { background: rgba(255,154,92,0.12);  color: #ff9a5c;  border: 1px solid rgba(255,154,92,0.28);  box-shadow: 0 0 20px rgba(255,154,92,0.1); }
+.val-low   { background: rgba(192,128,255,0.12); color: #c080ff;  border: 1px solid rgba(192,128,255,0.28); box-shadow: 0 0 20px rgba(192,128,255,0.1); }
+.val-elite { background: rgba(255,200,80,0.14);  color: #ffc840;  border: 1px solid rgba(255,200,80,0.32);  box-shadow: 0 0 24px rgba(255,200,80,0.15); }
+
+.card-explore {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.proj-card[data-pos="active"] .card-explore:hover { color: rgba(255,255,255,0.7); }
+
+/* Carousel controls */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+.carousel-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.22s, background 0.22s, color 0.22s;
+}
+.carousel-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.carousel-btn svg { width: 16px; height: 16px; }
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+.c-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  transition: background 0.25s, transform 0.25s;
+  cursor: pointer;
+}
+.c-dot.active {
+  background: #3de8ff;
+  transform: scale(1.3);
+}
+
+/* ═══════════════════════════════════════
+   CORE OBJECTIVES
+═══════════════════════════════════════ */
+.objectives-section {
+  padding: 110px 40px 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.objectives-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.objectives-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #3de8ff;
+  opacity: 0.55;
+  margin-bottom: 14px;
+}
+.objectives-title {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1060px;
+  width: 100%;
+  align-items: start;
+}
+
+.obj-pillar {
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.11);
+  background: rgba(255,255,255,0.052);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  padding: 52px 32px 48px;
+  overflow: hidden;
+  cursor: default;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+
+.obj-pillar:nth-child(1) { margin-top: 0; }
+.obj-pillar:nth-child(2) { margin-top: 48px; }
+.obj-pillar:nth-child(3) { margin-top: 20px; }
+
+.obj-pillar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+.obj-pillar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 100%, var(--pillar-glow) 0%, transparent 65%);
+  opacity: 0.4;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.obj-pillar-1 { --pillar-glow: rgba(61,232,255,0.18); }
+.obj-pillar-2 { --pillar-glow: rgba(255,138,80,0.18); }
+.obj-pillar-3 { --pillar-glow: rgba(168,100,255,0.18); }
+
+.obj-pillar:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.24);
+  transform: translateY(-10px) scale(1.012) !important;
+}
+.obj-pillar-1:hover { box-shadow: 0 20px 60px rgba(61,232,255,0.12), inset 0 0 40px rgba(61,232,255,0.04); }
+.obj-pillar-2:hover { box-shadow: 0 20px 60px rgba(255,138,80,0.12), inset 0 0 40px rgba(255,138,80,0.04); }
+.obj-pillar-3:hover { box-shadow: 0 20px 60px rgba(168,100,255,0.12), inset 0 0 40px rgba(168,100,255,0.04); }
+.obj-pillar:hover::after { opacity: 0.7; }
+
+.obj-index {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.obj-pillar-1 .obj-index { color: #3de8ff; }
+.obj-pillar-2 .obj-index { color: #ff9a5c; }
+.obj-pillar-3 .obj-index { color: #c080ff; }
+.obj-index::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.2;
+}
+.obj-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  transition: text-shadow 0.4s;
+}
+.obj-pillar:hover .obj-title {
+  text-shadow: 0 0 30px rgba(255,255,255,0.25);
+}
+.obj-body {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.46);
+  line-height: 1.8;
+}
+.obj-pillar:hover .obj-body {
+  color: rgba(255,255,255,0.62);
+}
+
+.obj-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0;
+  width: 2px;
+  border-radius: 0 0 0 28px;
+  opacity: 0.35;
+  transition: opacity 0.4s;
+}
+.obj-pillar-1 .obj-line { background: linear-gradient(to bottom, #3de8ff, transparent); }
+.obj-pillar-2 .obj-line { background: linear-gradient(to bottom, #ff9a5c, transparent); }
+.obj-pillar-3 .obj-line { background: linear-gradient(to bottom, #c080ff, transparent); }
+.obj-pillar:hover .obj-line { opacity: 0.7; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 18px 24px; }
+  .nav-links { display: none; }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .glass-card { padding: 32px 26px 28px; }
+}
+
+@media (max-width: 560px) {
+  .waitlist-panel { padding: 36px 24px; }
+  .waitlist-form { flex-direction: column; }
+  .btn-submit { width: 100%; }
+}
+
+/* ═══════════════════════════════════════
+   SPA VIEWS
+═══════════════════════════════════════ */
+.view {
+  position: relative;
+  width: 100%;
+}
+#view-home {
+  display: block;
+  opacity: 1;
+}
+#view-yf {
+  display: none;
+}
+
+/* ── BACK BUTTON ── */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.22s;
+  position: absolute;
+  top: 88px;
+  left: 52px;
+  z-index: 200;
+}
+.back-btn:hover { color: #fff; }
+.back-btn svg { width: 14px; height: 14px; }
+
+/* ═══════════════════════════════════════
+   YOUNG FOUNDERS PAGE
+═══════════════════════════════════════ */
+.yf-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+  position: relative;
+}
+.yf-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #3de8ff;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+.yf-title {
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 20px;
+  text-shadow: 0 0 80px rgba(61,232,255,0.2);
+}
+.yf-subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.06em;
+  margin-bottom: 52px;
+}
+.yf-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-yf {
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.28s, background 0.28s, transform 0.2s;
+  text-decoration: none;
+}
+.btn-yf::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+.btn-yf-primary {
+  background: linear-gradient(135deg, rgba(61,232,255,0.2), rgba(61,232,255,0.08));
+  border-color: rgba(61,232,255,0.35);
+  box-shadow: 0 0 30px rgba(61,232,255,0.12);
+}
+.btn-yf:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
+}
+.btn-yf-primary:hover {
+  border-color: rgba(61,232,255,0.6);
+  box-shadow: 0 0 50px rgba(61,232,255,0.2);
+}
+
+/* YF Vision Section */
+.yf-vision {
+  padding: 100px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.yf-mission {
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+.yf-vision-title {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.01em;
+  margin-bottom: 72px;
+  max-width: 700px;
+  line-height: 1.15;
+}
+
+.pillars-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 860px;
+  width: 100%;
+  gap: 0;
+}
+.pillar-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 48px;
+  padding: 52px 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  transition: border-color 0.3s;
+}
+.pillar-item:last-child {
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.pillar-item:hover { border-color: rgba(61,232,255,0.2); }
+.pillar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+.pillar-number {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3de8ff;
+  opacity: 0.55;
+}
+.pillar-accent {
+  width: 1px;
+  flex: 1;
+  min-height: 32px;
+  background: linear-gradient(to bottom, rgba(61,232,255,0.3), transparent);
+  margin-top: 12px;
+  margin-left: 5px;
+}
+.pillar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+.pillar-body {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.8;
+  max-width: 580px;
+}
+
+/* Transition overlay */
+#page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(5,3,14,1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .back-btn { left: 24px; }
+  .pillar-item { grid-template-columns: 48px 1fr; gap: 0 24px; padding: 36px 0; }
+  .step-row { grid-template-columns: 40px 1fr; min-height: auto; }
+  .step-card-wrap.empty { display: none; }
+  .step-card-wrap.left  { justify-content: flex-start; padding-right: 0; padding-left: 16px; }
+  .step-card-wrap.right { padding-left: 16px; }
+  .timeline-svg-wrap { display: none; }
+  .step-card { opacity: 1 !important; transform: none !important; max-width: none; }
+  .step-dot  { opacity: 1 !important; }
+  .obj-grid { grid-template-columns: 1fr; max-width: 480px; }
+  .obj-pillar:nth-child(1),
+  .obj-pillar:nth-child(2),
+  .obj-pillar:nth-child(3) { margin-top: 0; }
+  .objectives-section { padding: 80px 24px 100px; }
+  .obj-pillar { opacity: 1 !important; transform: translateY(0) !important; }
+  .showcase-section { padding: 80px 24px 100px; }
+  .carousel-stage { height: 480px; }
+  .proj-card { width: 280px; }
+  .proj-card[data-pos="prev"] { transform: translateX(-58%) scale(0.82) translateZ(-60px); }
+  .proj-card[data-pos="next"] { transform: translateX(58%) scale(0.82) translateZ(-60px); }
+}
+
+@media (max-width: 480px) {
+  .carousel-stage { height: 520px; }
+  .proj-card { width: 260px; }
+  .proj-card[data-pos="prev"],
+  .proj-card[data-pos="next"] { opacity: 0.3; transform: translateX(0) scale(0.7); pointer-events: none; }
+}
+
+/* ═══════════════════════════════════════
+   MANIFESTO
+═══════════════════════════════════════ */
+.manifesto-section {
+  padding: 120px 24px 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.manifesto-header {
+  text-align: center;
+  margin-bottom: 96px;
+  max-width: 780px;
+}
+.manifesto-title {
+  font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+.manifesto-intro {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+/* Three-column layout */
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0 48px;
+  max-width: 1060px;
+  width: 100%;
+  align-items: start;
+}
+
+/* Hairline vertical divider */
+.manifesto-divider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.12) 20%,
+    rgba(255,255,255,0.12) 80%,
+    transparent 100%
+  );
+  margin-top: 8px;
+}
+
+/* Each column */
+.manifesto-col {
+  padding: 36px 28px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.0);
+  background: rgba(255,255,255,0.0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition:
+    border-color 0.45s ease,
+    background 0.45s ease,
+    backdrop-filter 0.45s ease,
+    box-shadow 0.45s ease,
+    transform 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+.manifesto-col:hover {
+  border-color: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.042);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+  transform: translateY(-6px);
+}
+
+.manifesto-number {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #3de8ff;
+  opacity: 0.5;
+  margin-bottom: 20px;
+}
+
+.manifesto-principle {
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: 0.005em;
+  margin-bottom: 20px;
+}
+.manifesto-aside {
+  font-weight: 300;
+  opacity: 0.55;
+  font-size: 0.85em;
+}
+
+.manifesto-rule {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(61,232,255,0.55), transparent);
+  margin-bottom: 20px;
+}
+
+.manifesto-body {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.44);
+  line-height: 1.9;
+  transition: color 0.35s;
+}
+.manifesto-col:hover .manifesto-body {
+  color: rgba(255,255,255,0.62);
+}
+
+@media (max-width: 860px) {
+  .manifesto-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 520px;
+  }
+  .manifesto-divider {
+    width: 100%;
+    height: 1px;
+    align-self: auto;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+    margin: 4px 0;
+  }
+  .manifesto-col { padding: 32px 8px 28px; }
+  .manifesto-col:hover { transform: none; }
+}
+
+/* ── FADE-IN ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.32s; }
+
+</style>
+</head>
+<body>
+
+<!-- FIXED BACKGROUND -->
+<div class="bg-fixed">
+  <img src="uploads/Gemini_Generated_Image_okctgmokctgmokct (1).png" alt="P.R FUTURE background">
+  <div class="bg-fixed-overlay"></div>
+</div>
+
+<!-- TRANSITION OVERLAY -->
+<div id="page-transition-overlay"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" id="nav-logo">P.R FUTURE</div>
+  <ul class="nav-links">
+    <li><a href="#vision">Academy</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#waitlist">Enroll</a></li>
+  </ul>
+  <a href="#waitlist" class="nav-cta">Discover Your Path</a>
+</nav>
+
+<!-- ══════════════════ HOME VIEW ══════════════════ -->
+<div id="view-home" class="view">
+
+<!-- SECTION 1 — HERO -->
+<section class="hero">
+  <h1 class="hero-title">The Art of<em> Mastering</em><br>the Future</h1>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SECTION 2 — VISION -->
+<section class="vision" id="vision">
+  <div class="vision-inner">
+    <h2 class="vision-title reveal"><span>P.R FUTURE</span> — The AI Academy</h2>
+    <div class="vision-divider reveal reveal-delay-1"></div>
+    <p class="vision-body reveal reveal-delay-2">
+      We don't just teach AI tools; <strong>we architect your future.</strong><br><br>
+      Exceptional knowledge and rare technological capabilities, designed to solve any challenge and generate unprecedented value.
+    </p>
+  </div>
+</section>
+
+<!-- SECTION 3 — PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <div class="programs-eyebrow">Our Pathways</div>
+    <h2 class="programs-title">Discover our programs</h2>
+  </div>
+
+  <div class="cards-grid">
+
+    <!-- CARD 1 — YOUNG FOUNDERS -->
+    <div class="glass-card card-cyan reveal reveal-delay-1" id="card-yf">
+      <div class="card-tag">Ages 14+</div>
+      <div class="card-title">Young Founders</div>
+      <div class="card-audience">For ambitious youth ready to build</div>
+      <a href="#" class="card-cta" id="cta-yf">Explore path &nbsp;→</a>
+    </div>
+
+    <!-- CARD 2 — AI EXPERTS -->
+    <div class="glass-card card-orange reveal reveal-delay-2">
+      <div class="card-tag">Adults</div>
+      <div class="card-title">AI Experts</div>
+      <div class="card-audience">For professionals levelling up</div>
+      <a href="#waitlist" class="card-cta">Explore path &nbsp;→</a>
+    </div>
+
+    <!-- CARD 3 — BUSINESS AI -->
+    <div class="glass-card card-violet reveal reveal-delay-3">
+      <div class="card-tag">Business</div>
+      <div class="card-title">Business AI</div>
+      <div class="card-audience">For business owners &amp; operators</div>
+      <a href="#waitlist" class="card-cta">Explore path &nbsp;→</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-panel reveal">
+    <h2 class="waitlist-title">Join the Academy</h2>
+    <p class="waitlist-sub">Get early access, curriculum previews, and exclusive resources for your chosen pathway.</p>
+    <div class="waitlist-form">
+      <input type="email" class="glass-input" placeholder="Your email address">
+      <button class="btn-submit">Get Early Access</button>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 P.R FUTURE AI Learning Academy &nbsp;·&nbsp; All rights reserved</footer>
+
+</div><!-- /view-home -->
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <h4>Tweaks</h4>
+  <div class="tweak-row">
+    <label>Overlay Darkness</label>
+    <input type="range" id="tweak-overlay" min="0.05" max="0.9" step="0.01" value="0.45">
+  </div>
+  <div class="tweak-row">
+    <label>Glass Blur</label>
+    <input type="range" id="tweak-blur" min="8" max="48" step="1" value="28">
+  </div>
+  <div class="tweak-row">
+    <label>Card Opacity</label>
+    <input type="range" id="tweak-opacity" min="0.02" max="0.18" step="0.005" value="0.06">
+  </div>
+</div>
+
+<!-- ══════════════════ YOUNG FOUNDERS VIEW ══════════════════ -->
+<div id="view-yf" class="view">
+
+  <!-- Back Button -->
+  <button class="back-btn" id="back-btn">
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 7H2M7 2L2 7l5 5"/></svg>
+    Back
+  </button>
+
+  <!-- YF HERO -->
+  <section class="yf-hero">
+    <div class="yf-eyebrow">P.R FUTURE · Young Founders Track</div>
+    <h1 class="yf-title">Young<br>Founders</h1>
+    <p class="yf-subtitle">Shaping extraordinary youth</p>
+    <div class="yf-buttons">
+      <a href="#yf-vision" class="btn-yf btn-yf-primary">Invest in Your Future</a>
+      <a href="#yf-vision" class="btn-yf">Expert Guidance</a>
+    </div>
+    <div class="scroll-indicator" style="bottom:40px;">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- YF VISION -->
+  <section class="yf-vision" id="yf-vision">
+    <p class="yf-mission">Our mission is to transform high-potential youth into visionary Founders</p>
+    <h2 class="yf-vision-title">What Defines<br>Our Students?</h2>
+
+    <div class="pillars-list">
+
+      <div class="pillar-item">
+        <div class="pillar-left">
+          <span class="pillar-number">01</span>
+          <div class="pillar-accent"></div>
+        </div>
+        <div class="pillar-right">
+          <h3 class="pillar-title">Intellectual Dominance</h3>
+          <p class="pillar-body">They possess a technological edge that sets them far apart from the status quo. Mastering AI agents, automation, and complex business architecture, they navigate the future while others are still catching up.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <div class="pillar-left">
+          <span class="pillar-number">02</span>
+          <div class="pillar-accent"></div>
+        </div>
+        <div class="pillar-right">
+          <h3 class="pillar-title">Competence-Driven Confidence</h3>
+          <p class="pillar-body">Their assurance is built on more than just slogans; it stems from the absolute knowledge that they possess the tools to solve any problem and generate tangible value in any environment.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <div class="pillar-left">
+          <span class="pillar-number">03</span>
+          <div class="pillar-accent"></div>
+        </div>
+        <div class="pillar-right">
+          <h3 class="pillar-title">The Elite Mindset</h3>
+          <p class="pillar-body">Where others see obstacles, they identify opportunities. They speak the language of the modern business world fluently and engage as equals.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ONBOARDING JOURNEY -->
+  <section class="journey-section" id="yf-journey">
+    <div class="journey-header">
+      <div class="journey-eyebrow">Step by Step</div>
+      <h2 class="journey-title">The Onboarding Journey</h2>
+    </div>
+
+    <div class="timeline" id="journey-timeline">
+
+      <div class="timeline-svg-wrap">
+        <svg id="timeline-svg" preserveAspectRatio="none">
+          <path class="timeline-path-bg" id="t-path-bg"/>
+          <path class="timeline-path-draw" id="t-path-draw"/>
+        </svg>
+      </div>
+
+      <!-- Step 1 — LEFT -->
+      <div class="step-row">
+        <div class="step-card-wrap left">
+          <div class="step-card">
+            <div class="step-num">Step 01</div>
+            <h4 class="step-title">Strategic Diagnostic Questionnaire</h4>
+            <p class="step-body">Precise mapping of personal goals and identification of your unique growth opportunities.</p>
+          </div>
+        </div>
+        <div class="step-center"><div class="step-dot"></div></div>
+        <div class="step-card-wrap empty"></div>
+      </div>
+
+      <!-- Step 2 — RIGHT -->
+      <div class="step-row">
+        <div class="step-card-wrap empty"></div>
+        <div class="step-center"><div class="step-dot"></div></div>
+        <div class="step-card-wrap right">
+          <div class="step-card">
+            <div class="step-num">Step 02</div>
+            <h4 class="step-title">Expert AI-Driven Roadmap</h4>
+            <p class="step-body">Comprehensive analysis of questionnaire responses tailored to the student's financial objectives.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 — LEFT -->
+      <div class="step-row">
+        <div class="step-card-wrap left">
+          <div class="step-card">
+            <div class="step-num">Step 03</div>
+            <h4 class="step-title">Comprehensive Potential Assessment</h4>
+            <p class="step-body">In-depth analysis of starting point, existing knowledge, and available study hours.</p>
+          </div>
+        </div>
+        <div class="step-center"><div class="step-dot"></div></div>
+        <div class="step-card-wrap empty"></div>
+      </div>
+
+      <!-- Step 4 — RIGHT -->
+      <div class="step-row">
+        <div class="step-card-wrap empty"></div>
+        <div class="step-center"><div class="step-dot"></div></div>
+        <div class="step-card-wrap right">
+          <div class="step-card">
+            <div class="step-num">Step 04</div>
+            <h4 class="step-title">Premium Tools &amp; Resources Kit</h4>
+            <p class="step-body">Access to advanced technological tools and practical guides, meticulously curated and adapted to your needs.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 — LEFT -->
+      <div class="step-row">
+        <div class="step-card-wrap left">
+          <div class="step-card">
+            <div class="step-num">Step 05</div>
+            <h4 class="step-title">Elite Cohort Learning</h4>
+            <p class="step-body">Up to 4 students per expert. An exclusive environment facilitating rapid progress and full personal support.</p>
+          </div>
+        </div>
+        <div class="step-center"><div class="step-dot"></div></div>
+        <div class="step-card-wrap empty"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CORE OBJECTIVES -->
+  <section class="objectives-section" id="yf-objectives">
+    <div class="objectives-header">
+      <div class="objectives-eyebrow">Program Goals</div>
+      <h2 class="objectives-title">Core Objectives of the Program</h2>
+    </div>
+
+    <div class="obj-grid">
+
+      <div class="obj-pillar obj-pillar-1">
+        <div class="obj-line"></div>
+        <div class="obj-index">01</div>
+        <h3 class="obj-title">Redefining Standards</h3>
+        <p class="obj-body">Equipping youth with a knowledge base that far transcends the formal curriculum, with a specialized focus on the most pivotal technologies of 2026.</p>
+      </div>
+
+      <div class="obj-pillar obj-pillar-2">
+        <div class="obj-line"></div>
+        <div class="obj-index">02</div>
+        <h3 class="obj-title">Freedom of Action</h3>
+        <p class="obj-body">Cultivating independence: empowering students to lead projects from scratch — from the initial concept to full implementation using smart AI agents.</p>
+      </div>
+
+      <div class="obj-pillar obj-pillar-3">
+        <div class="obj-line"></div>
+        <div class="obj-index">03</div>
+        <h3 class="obj-title">Building a High Profile</h3>
+        <p class="obj-body">Preparing for the real world. Graduates emerge with a professional portfolio, masterful public speaking skills, and a 'one-in-a-million' sense of capability.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECT SHOWCASE — CAROUSEL -->
+  <section class="showcase-section" id="yf-showcase">
+    <div class="showcase-header">
+      <p class="showcase-quote">"The future belongs to those who <em>know how to build it.</em>"</p>
+    </div>
+
+    <div class="carousel-stage" id="proj-carousel"></div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="carousel-prev" aria-label="Previous">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg>
+      </button>
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <button class="carousel-btn" id="carousel-next" aria-label="Next">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto-section" id="yf-manifesto">
+    <div class="manifesto-header">
+      <h2 class="manifesto-title">What does it take to build<br>the Youth of the Future?</h2>
+      <p class="manifesto-intro">Shaping an extraordinary generation requires three unyielding principles<br>that we implement throughout the program:</p>
+    </div>
+
+    <div class="manifesto-grid">
+
+      <div class="manifesto-col reveal reveal-delay-1">
+        <div class="manifesto-number">01</div>
+        <h3 class="manifesto-principle">An Environment<br>of Excellence</h3>
+        <div class="manifesto-rule"></div>
+        <p class="manifesto-body">To be extraordinary, you must surround yourself with visionary thinkers. The program fosters a powerful and ambitious "peer group" community.</p>
+      </div>
+
+      <div class="manifesto-divider"></div>
+
+      <div class="manifesto-col reveal reveal-delay-2">
+        <div class="manifesto-number">02</div>
+        <h3 class="manifesto-principle">Tools of Tomorrow<br><span class="manifesto-aside">(Zero-Compromise)</span></h3>
+        <div class="manifesto-rule"></div>
+        <p class="manifesto-body">Utilizing the most advanced technologies (Claude Code, Agents, Automation) without compromise. We don't just teach about the future; we operate within it.</p>
+      </div>
+
+      <div class="manifesto-divider"></div>
+
+      <div class="manifesto-col reveal reveal-delay-3">
+        <div class="manifesto-number">03</div>
+        <h3 class="manifesto-principle">The Intersection of Tech<br>and Character</h3>
+        <div class="manifesto-rule"></div>
+        <p class="manifesto-body">Technical knowledge without mental resilience is hollow. We invest deeply in the student's personal development — focusing on self-discipline, time management, and strategic thinking.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer style="margin-top:40px;">© 2025 P.R FUTURE AI Learning Academy · All rights reserved</footer>
+
+</div><!-- /view-yf -->
+
+<script>
+// ── CAROUSEL ──
+(function() {
+  const projects = [
+    { title: 'Legal Tech AI Agent · Startup Contract Analysis', creator: 'Daniel, 16', desc: 'Saves hours of legal consulting; instantly identifies "loopholes" and risks in agreements.', value: '15,000 NIS', tier: 'val-high' },
+    { title: 'Autonomous Dropshipping Ecosystem', creator: 'Noa, 15', desc: 'End-to-end management: product research, copywriting, and inventory control. Operates a full business with 0 manual labor hours daily.', value: '5,000 NIS', tier: 'val-low' },
+    { title: 'Dental Practice CRM Automation', creator: 'Maya, 15', desc: 'Streamlining appointments and patient relations for private clinics. Prevents cancellations and optimizes schedules fully automatically.', value: '10,000 NIS', tier: 'val-mid' },
+    { title: 'CEO Persona AI · Tone of Voice', creator: 'Yonatan, 17', desc: 'Advanced system that masters a CEO\'s unique communication style to draft emails and high-level social media content.', value: '15,000 NIS', tier: 'val-high' },
+    { title: 'Global Supply Chain Automation', creator: 'Shira, 16', desc: 'Predictive inventory management and automated ordering from international suppliers. Eliminates revenue loss due to stockouts.', value: '5,000 NIS', tier: 'val-low' },
+    { title: 'Dynamic Bio-Sync Fitness AI', creator: 'Omri, 14', desc: 'Tailors training and nutrition plans in real-time based on Apple Watch biometrics. Personal trainer expertise at 1% of the cost.', value: '15,000 NIS', tier: 'val-high' },
+    { title: 'Bespoke Luxury Travel Planner', creator: 'Ariel, 15', desc: 'Curates personalized high-end itineraries (5★ hotels, Michelin dining) including automated reservations.', value: '3,000 NIS', tier: 'val-low' },
+    { title: 'Social Impact Intelligence System', creator: 'Tal, 16', desc: 'Analyzes youth social media discourse for early detection of bullying or distress. Saving lives and fostering safer school environments.', value: '50,000 NIS', tier: 'val-elite' },
+    { title: 'Amazon Market Intelligence Agent', creator: 'Guy, 15', desc: 'Real-time competitor price monitoring and dynamic pricing updates. Ensures maximum profitability and competitiveness 24/7.', value: '5,000 NIS', tier: 'val-low' },
+  ];
+
+  const stage = document.getElementById('proj-carousel');
+  const dotsEl = document.getElementById('carousel-dots');
+  if (!stage) return;
+
+  const cardEls = projects.map((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'proj-card';
+    el.dataset.idx = i;
+    el.innerHTML = `
+      <div class="proj-card-sheen"></div>
+      <div class="card-corner-bl"></div>
+      <div class="card-corner-br"></div>
+      <div class="card-brand-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4">
+          <circle cx="10" cy="10" r="7"/>
+          <path d="M10 6v4l3 2"/>
+          <circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.5)" stroke="none"/>
+        </svg>
+      </div>
+      <h3 class="card-proj-title">${p.title}</h3>
+      <div class="card-creator">${p.creator}</div>
+      <div class="card-desc-panel"><p>${p.desc}</p></div>
+      <div class="card-valuation-btn ${p.tier}">${p.value}</div>
+      <a class="card-explore" href="#">Explore Project &nbsp;→</a>
+    `;
+    stage.appendChild(el);
+    return el;
+  });
+
+  projects.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'c-dot';
+    dot.dataset.idx = i;
+    dot.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(dot);
+  });
+
+  let current = 0;
+
+  function posOf(i) {
+    const diff = (i - current + projects.length) % projects.length;
+    if (diff === 0) return 'active';
+    if (diff === 1) return 'next';
+    if (diff === projects.length - 1) return 'prev';
+    if (diff === 2) return 'next2';
+    if (diff === projects.length - 2) return 'prev2';
+    return 'hidden';
+  }
+
+  function render() {
+    cardEls.forEach((el, i) => { el.dataset.pos = posOf(i); });
+    dotsEl.querySelectorAll('.c-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function goTo(idx) {
+    current = ((idx % projects.length) + projects.length) % projects.length;
+    render();
+  }
+
+  document.getElementById('carousel-prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('carousel-next').addEventListener('click', () => goTo(current + 1));
+
+  stage.addEventListener('click', e => {
+    const card = e.target.closest('.proj-card');
+    if (!card) return;
+    const pos = card.dataset.pos;
+    if (pos === 'prev') goTo(current - 1);
+    if (pos === 'next') goTo(current + 1);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('view-yf').style.display === 'none') return;
+    if (e.key === 'ArrowLeft')  goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+
+  render();
+})();
+
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── OBJECTIVE PILLARS STAGGER ──
+const objObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const idx = [...document.querySelectorAll('.obj-pillar')].indexOf(entry.target);
+      entry.target.style.transition = `opacity 0.7s ${idx * 0.12}s ease, transform 0.7s ${idx * 0.12}s cubic-bezier(0.23,1,0.32,1)`;
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      objObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.obj-pillar').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  objObserver.observe(el);
+});
+
+// ── CARD 3D TILT ──
+document.querySelectorAll('.glass-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const cx = (e.clientX - r.left) / r.width  - 0.5;
+    const cy = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `translateY(-8px) scale(1.015) rotateY(${cx*8}deg) rotateX(${-cy*6}deg)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+// ── LIQUID RIPPLE ──
+document.querySelectorAll('.btn-submit, .nav-cta, .btn-yf').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple-ring';
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;`;
+    btn.style.position = 'relative';
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+  });
+});
+
+// ══════════════════════════════════════
+//  SPA TRANSITIONS (GSAP)
+// ══════════════════════════════════════
+const homeView = document.getElementById('view-home');
+const yfView   = document.getElementById('view-yf');
+const overlay  = document.getElementById('page-transition-overlay');
+
+function navigateTo(target) {
+  const tl = gsap.timeline();
+  tl.to(overlay, { opacity: 1, duration: 0.35, ease: 'power2.inOut', pointerEvents: 'all' })
+  .call(() => {
+    if (target === 'yf') {
+      homeView.style.display = 'none';
+      yfView.style.display   = 'block';
+      window.scrollTo(0, 0);
+      setTimeout(window._initTimeline, 600);
+    } else {
+      yfView.style.display   = 'none';
+      homeView.style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+  })
+  .to(overlay, { opacity: 0, duration: 0.55, ease: 'power2.inOut', pointerEvents: 'none' })
+  .fromTo(target === 'yf' ? '.yf-hero' : '.hero',
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+    '-=0.3'
+  );
+  return tl;
+}
+
+// Young Founders card click
+const yfCard = document.getElementById('card-yf');
+if (yfCard) {
+  yfCard.addEventListener('click', () => navigateTo('yf'));
+  const yfCta = document.getElementById('cta-yf');
+  if (yfCta) yfCta.addEventListener('click', e => { e.preventDefault(); navigateTo('yf'); });
+}
+
+// Nav logo click returns home
+document.getElementById('nav-logo').addEventListener('click', () => {
+  if (yfView.style.display !== 'none') navigateTo('home');
+});
+
+// Back button
+document.getElementById('back-btn').addEventListener('click', () => navigateTo('home'));
+
+// ══════════════════════════════════════
+//  TIMELINE ANIMATION (ScrollTrigger)
+// ══════════════════════════════════════
+function initTimeline() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const timeline = document.getElementById('journey-timeline');
+  const svgEl    = document.getElementById('timeline-svg');
+  const pathBg   = document.getElementById('t-path-bg');
+  const pathDraw = document.getElementById('t-path-draw');
+  const rows     = timeline.querySelectorAll('.step-row');
+
+  function buildPath() {
+    const svgRect = svgEl.parentElement.getBoundingClientRect();
+    const cx = svgRect.width / 2;
+    const points = [];
+
+    rows.forEach((row) => {
+      const dotEl = row.querySelector('.step-dot');
+      const dotRect = dotEl.getBoundingClientRect();
+      const y = dotRect.top - svgRect.top + dotRect.height / 2;
+      points.push({ x: cx, y });
+    });
+
+    if (points.length < 2) return;
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 1; i < points.length; i++) {
+      const prev = points[i - 1];
+      const curr = points[i];
+      const midY = (prev.y + curr.y) / 2;
+      const offset = (i % 2 === 0) ? -30 : 30;
+      d += ` C ${prev.x + offset} ${midY}, ${curr.x - offset} ${midY}, ${curr.x} ${curr.y}`;
+    }
+
+    svgEl.setAttribute('viewBox', `0 0 ${svgRect.width} ${svgRect.height}`);
+    svgEl.style.width  = svgRect.width  + 'px';
+    svgEl.style.height = svgRect.height + 'px';
+    pathBg.setAttribute('d', d);
+    pathDraw.setAttribute('d', d);
+
+    const len = pathDraw.getTotalLength();
+    gsap.set(pathDraw, { strokeDasharray: len, strokeDashoffset: len });
+    return { len, points };
+  }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const result = buildPath();
+      if (!result) return;
+
+      gsap.to(pathDraw, {
+        strokeDashoffset: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#yf-journey',
+          start: 'top 75%',
+          end:   'bottom 60%',
+          scrub: 1.2,
+          scroller: window,
+        }
+      });
+
+      rows.forEach((row) => {
+        const dot  = row.querySelector('.step-dot');
+        const card = row.querySelector('.step-card');
+
+        const trigger = {
+          trigger: row,
+          start: 'top 72%',
+          toggleActions: 'play none none none',
+          scroller: window,
+        };
+
+        gsap.to(dot, {
+          opacity: 1, scale: 1,
+          duration: 0.4, ease: 'back.out(2)',
+          scrollTrigger: trigger
+        });
+
+        gsap.to(card, {
+          opacity: 1, y: 0,
+          duration: 0.65, ease: 'power3.out',
+          delay: 0.12,
+          scrollTrigger: trigger
+        });
+      });
+    });
+  });
+}
+
+window._initTimeline = initTimeline;
+
+// ── TWEAKS PANEL (design tool integration) ──
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').style.display = 'block';
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+document.getElementById('tweak-overlay').addEventListener('input', e => {
+  const v = parseFloat(e.target.value);
+  document.querySelector('.bg-fixed-overlay').style.background =
+    `linear-gradient(to bottom, rgba(5,3,14,${v*0.6}) 0%, rgba(5,3,14,${v*0.22}) 18%, rgba(5,3,14,${v*0.4}) 50%, rgba(5,3,14,${v*1.6}) 80%, rgba(5,3,14,${Math.min(v*2.1,0.98)}) 100%)`;
+});
+document.getElementById('tweak-blur').addEventListener('input', e => {
+  document.querySelectorAll('.glass-card, .pillar-card').forEach(el => {
+    el.style.backdropFilter = `blur(${e.target.value}px) saturate(1.5)`;
+    el.style.webkitBackdropFilter = `blur(${e.target.value}px) saturate(1.5)`;
+  });
+});
+document.getElementById('tweak-opacity').addEventListener('input', e => {
+  document.querySelectorAll('.glass-card').forEach(el => {
+    el.style.background = `rgba(255,255,255,${e.target.value})`;
+  });
+});
+</script>
+</body>
+</html>
