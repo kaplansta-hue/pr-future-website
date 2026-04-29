@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8" />
@@ -1425,69 +1425,53 @@ body { font-family: 'Calibri', 'Inter', sans-serif !important; }
   }
 })();
 
-// ── Typewriter quote ───────────────────────────────────────
+// ── Typewriter quote (language-aware) ────────────────────
+window._yfQuoteTexts = {
+  en: { em: '"Every great company', rest: ' started as a crazy idea in someone's bedroom. We give teens the tools, the mindset, and the mentorship to make theirs real."' },
+  ru: { em: '"Каждая великая компания', rest: ' начиналась с безумной идеи в чьей-то спальне. Мы даём подросткам инструменты, правильное мышление и наставничество, чтобы воплотить их идеи в реальность."' },
+  he: { em: '"כל חברה גדולה', rest: ' התחילה כרעיון משוגע בחדר שינה של מישהו. אנחנו מעניקים לבני הנעור את הכלים, את צורת החשיבה ואת הליווי המקצועי כדי להפוך את הרעיון שלהם למציאות."' }
+};
+
 (function () {
   const quoteEl = document.getElementById('typewriter-quote');
   if (!quoteEl) return;
 
-  // Define text segments: { text, em } — em=true wraps in <em>
-  const segments = [
-    { text: '\u201cEvery great company', em: true },
-    { text: ' started as a crazy idea in someone\u2019s bedroom. We give teens the tools, the mindset, and the mentorship to make theirs real.\u201d', em: false }
-  ];
+  let activeTimer = null;
 
-  let typed = false;
-
-  function runTypewriter() {
-    if (typed) return;
-    typed = true;
-
-    const cursor = quoteEl.querySelector('.tw-cursor');
-    // Flatten into array of {char, em}
+  function retypeQuote(emText, restText) {
+    if (activeTimer) { clearTimeout(activeTimer); activeTimer = null; }
+    quoteEl.innerHTML = '<span class="tw-cursor" aria-hidden="true"></span>';
+    const segs = [{ text: emText, em: true }, { text: restText, em: false }];
     const chars = [];
-    segments.forEach(seg => seg.text.split('').forEach(c => chars.push({ c, em: seg.em })));
-
+    segs.forEach(s => s.text.split('').forEach(c => chars.push({ c, em: s.em })));
     let i = 0;
-    const speed = 35; // ms per character
-
     function tick() {
-      if (i >= chars.length) return; // cursor keeps blinking, we're done
-      const { c, em } = chars[i++];
-
-      // Build the current rendered content
-      // We track rendered segments as nodes before the cursor
-      // Simplest: rebuild innerHTML each tick from typed chars array
-      // (fast enough for a short quote)
-      const typed_chars = chars.slice(0, i);
-      let html = '';
-      let j = 0;
-      while (j < typed_chars.length) {
-        if (typed_chars[j].em) {
-          let emText = '';
-          while (j < typed_chars.length && typed_chars[j].em) {
-            emText += typed_chars[j].c;
-            j++;
-          }
-          html += '<em>' + emText + '</em>';
-        } else {
-          html += typed_chars[j].c;
-          j++;
-        }
+      if (i >= chars.length) return;
+      const typed = chars.slice(0, ++i);
+      let html = '', j = 0;
+      while (j < typed.length) {
+        if (typed[j].em) {
+          let t = '';
+          while (j < typed.length && typed[j].em) t += typed[j++].c;
+          html += '<em>' + t + '</em>';
+        } else { html += typed[j++].c; }
       }
       quoteEl.innerHTML = html + '<span class="tw-cursor" aria-hidden="true"></span>';
-      setTimeout(tick, speed);
+      activeTimer = setTimeout(tick, 35);
     }
-
     tick();
   }
 
+  window.yfRetypeQuote = retypeQuote;
+
   const twObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        twObs.unobserve(quoteEl);
-        // Small delay so the user notices the element before typing starts
-        setTimeout(runTypewriter, 300);
-      }
+      if (!entry.isIntersecting) return;
+      twObs.unobserve(quoteEl);
+      const lang = document.documentElement.lang || 'ru';
+      const Q = window._yfQuoteTexts || {};
+      const q = Q[lang] || Q['en'];
+      setTimeout(() => retypeQuote(q.em, q.rest), 300);
     });
   }, { threshold: 0.5 });
 
@@ -2041,6 +2025,12 @@ document.querySelectorAll('.faq-q').forEach(btn => {
       const delay = _yfSubFirstLoad ? 3500 : 150;
       _yfSubFirstLoad = false;
       setTimeout(() => { let i = 0; function tick() { if (i >= text.length) return; i++; subtitle.innerHTML = text.slice(0,i)+'<span class="hero-tw-cursor" aria-hidden="true"></span>'; setTimeout(tick,36); } tick(); }, delay);
+    }
+    // Re-type showcase quote
+    if (typeof window.yfRetypeQuote === 'function') {
+      const Q = window._yfQuoteTexts || {};
+      const q = Q[lang] || Q['en'];
+      if (q) window.yfRetypeQuote(q.em, q.rest);
     }
     try { localStorage.setItem('prf_lang', lang); } catch(e) {}
   }
