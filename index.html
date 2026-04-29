@@ -136,6 +136,15 @@ body {
   text-transform: none !important;
   margin-bottom: 8px;
 }
+
+/* ── Hero mobile line-break — hidden on desktop, block on mobile ── */
+.mobile-br { display: none; }
+@media (max-width: 768px) {
+  .mobile-br { display: block; }
+}
+
+/* ── Program card description — white text ── */
+.card-audience { color: #ffffff !important; }
 </style>
 </head>
 <body>
@@ -168,7 +177,7 @@ body {
 
 <!-- Hero -->
 <section class="hero">
-  <h1 class="hero-title" data-i18n="hero.title">The Art of Mastering the Future</h1>
+  <h1 class="hero-title" data-i18n-html="hero.title">The Art<br class="mobile-br">of Mastering the Future</h1>
   <div class="scroll-indicator">
     <div class="scroll-line"></div>
   </div>
@@ -201,7 +210,6 @@ body {
     <!-- Card 1: Precision -->
     <div class="usp-card usp-delay-1">
       <div class="usp-body-wrap">
-        <div class="usp-num" data-i18n="usp1.num">01 — Roadmap</div>
         <div class="usp-title" data-i18n="usp1.title">PRECISION</div>
         <div class="usp-rule"></div>
         <p class="usp-text" data-i18n="usp1.body">Your AI expert builds a completely personalized roadmap based on your financial goals and current market demand. You won't build things for no reason. Based on your target income, you will receive project lists, study modules, and personalized ideas tailored to market needs. Everything is ready, everything is for you.</p>
@@ -211,7 +219,6 @@ body {
     <!-- Card 2: Security -->
     <div class="usp-card usp-delay-2">
       <div class="usp-body-wrap">
-        <div class="usp-num" data-i18n="usp2.num">02 — Mentorship</div>
         <div class="usp-title" data-i18n="usp2.title">SECURITY</div>
         <div class="usp-rule"></div>
         <p class="usp-text" data-i18n="usp2.body">No experience or direction needed! Receive full personal mentorship from your AI expert who builds your custom learning path and supports you through every question or issue. They are with you every step of the way, teaching and explaining where the money is and where you are wasting your time.</p>
@@ -221,7 +228,6 @@ body {
     <!-- Card 3: Profit -->
     <div class="usp-card usp-delay-3">
       <div class="usp-body-wrap">
-        <div class="usp-num" data-i18n="usp3.num">03 — Market</div>
         <div class="usp-title" data-i18n="usp3.title">PROFIT</div>
         <div class="usp-rule"></div>
         <p class="usp-text" data-i18n="usp3.body">We have one goal: to make you relevant in tomorrow's job market. Our experts design a personal work plan to safeguard your financial future. All our tracks are built on real-world projects where you earn while you learn!</p>
@@ -318,22 +324,22 @@ body {
   const T = {
     en: {
       'nav.academy':'Academy','nav.programs':'Programs','nav.enroll':'Enroll','nav.apply':'Apply Now',
-      'hero.title':'The Art of Mastering the Future',
+      'hero.title':'The Art<br class="mobile-br">of Mastering the Future',
       'vision.title':'P.R FUTURE AI Academy',
       'vision.body1':'We teach exceptional knowledge and technological capabilities available to a select few',
       'vision.body2':'No experience. No coding. Full expert guidance at every step until you reach a steady income.',
-      'usp1.num':'01 — Roadmap','usp1.title':'PRECISION',
+      'usp1.title':'PRECISION',
       'usp1.body':"Your AI expert builds a completely personalized roadmap based on your financial goals and current market demand. You won't build things for no reason. Based on your target income, you will receive project lists, study modules, and personalized ideas tailored to market needs. Everything is ready, everything is for you.",
-      'usp2.num':'02 — Mentorship','usp2.title':'SECURITY',
+      'usp2.title':'SECURITY',
       'usp2.body':"No experience or direction needed! Receive full personal mentorship from your AI expert who builds your custom learning path and supports you through every question or issue. They are with you every step of the way, teaching and explaining where the money is and where you are wasting your time.",
-      'usp3.num':'03 — Market','usp3.title':'PROFIT',
+      'usp3.title':'PROFIT',
       'usp3.body':"We have one goal: to make you relevant in tomorrow's job market. Our experts design a personal work plan to safeguard your financial future. All our tracks are built on real-world projects where you earn while you learn!",
       'card1.tag':'Ages 14+','card1.title':'Young Founders',
       'card1.desc':"Build real AI products. Launch real startups. Learn what school doesn't teach.",
-      'card2.tag':'Adults','card2.title':'AI Experts Track',
-      'card2.desc':'Master AI tools and automation for your career, business, or creative practice.',
-      'card3.tag':'Organizations','card3.title':'Founders+',
-      'card3.desc':'Transform your team with custom AI training, workshops, and strategy consulting.',
+      'card2.tag':'Adults','card2.title':'AI Experts',
+      'card2.desc':'Demand. Confidence. Relevance. The adult program is designed to make you indispensable in the age of AI.',
+      'card3.tag':'For Business Owners','card3.title':'Business AI',
+      'card3.desc':'How to save hundreds of thousands on advertising and triple income in 90 days with AI agents.',
       'card.explore':'Explore Program \u2192',
       'waitlist.title':'Reserve Your Spot',
       'waitlist.sub':"Enrollment is limited. Join the waitlist and we'll reach out when your program opens.",
@@ -342,23 +348,23 @@ body {
     },
     he: {
       'nav.academy':'האקדמיה','nav.programs':'תוכניות','nav.enroll':'הירשם','nav.apply':'הגש מועמדות',
-      'hero.title':'היכולת לשלוט בעתיד',
+      'hero.title':'היכולת<br class="mobile-br">לשלוט בעתיד',
       'vision.title':'P.R FUTURE אקדמיה לבינה מלאכותית',
       'vision.body1':'אנחנו מלמדים ידע יוצא דופן ויכולות טכנולוגיות שלא תפגשו מעולם',
       'vision.body2':'בלי ניסיון. בלי ידע בתכנות. ליווי מומחים מלא בכל שלב עד להגעה להכנסה יציבה',
-      'usp1.num':'01 — מסלול','usp1.title':'דיוק',
+      'usp1.title':'דיוק',
       'usp1.body':"מומחה ה-AI שלך שבונה לך מסלול אישי לחלוטין — לפי מה שאתה רוצה להרוויח ולפי מה שהשוק מחפש עכשיו. לא תבנה דברים סתם. לפי סכומי ההכנסה שאתה רוצה להרוויח תקבל רשימות פרויקטים, נושאי לימוד, רעיונות מותאמים אישית בהתאם לביקוש שיש כרגע בשוק. הכל מוכן בשבילך.",
-      'usp2.num':'02 — ליווי','usp2.title':'ביטחון',
+      'usp2.title':'ביטחון',
       'usp2.body':'לא צריך ניסיון, לא צריך כיוון! מקבל ליווי אישי מלא ממומחה ה-AI שלך שבונה לך מסלול לימוד ומלווה אותך לכל שאלה תקלה ובעיה. הוא לאורך כל הדרך איתכם. ילמד ויסביר איפה נמצא הכסף ואיפה אתם מבזבזים את הזמן.',
-      'usp3.num':'03 — שוק','usp3.title':'רווח',
+      'usp3.title':'רווח',
       'usp3.body':'יש לנו מטרה אחת: להפוך אתכם לרלוונטיים בשוק העבודה של המחר. המומחים שלנו בונים לכם תוכנית עבודה אישית שנועדה להגן על העתיד הכלכלי שלכם. כל מסלולי הלימוד שלנו בנויים על פרויקטים אמיתיים בהם אתם מרוויחים כסף תוך כדי הלימודים!',
       'programs.eyebrow':'התוכניות שלנו','programs.title':'בחר את המסלול שלך',
       'card1.tag':'גילאים 14+','card1.title':'מייסדים צעירים',
       'card1.desc':'בנה מוצרי AI אמיתיים. השק סטארטאפים אמיתיים. למד מה שבית הספר לא מלמד.',
-      'card2.tag':'מבוגרים','card2.title':'מסלול מומחי AI',
-      'card2.desc':'שלוט בכלי AI ואוטומציה לקריירה, לעסק או לפרקטיקה היצירתית שלך.',
-      'card3.tag':'ארגונים','card3.title':'Founders+',
-      'card3.desc':'שנה את הצוות שלך עם הכשרת AI מותאמת, סדנאות וייעוץ אסטרטגי.',
+      'card2.tag':'מבוגרים','card2.title':'מומחי בינה מלאכותית',
+      'card2.desc':'ביקוש. ביטחון. רלוונטיות. התוכנית למבוגרים נועדה להפוך אתכם לבלתי ניתנים להחלפה בעידן ה-AI.',
+      'card3.tag':'לבעלי עסקים','card3.title':'Business AI',
+      'card3.desc':'איך לחסוך מאות אלפים בפרסום ולשלש את ההכנסות תוך 90 יום בעזרת סוכני בינה מלאכותית.',
       'card.explore':'גלה את התוכנית \u2190',
       'waitlist.title':'שמור את מקומך',
       'waitlist.sub':'ההרשמה מוגבלת. הצטרף לרשימת ההמתנה ונצור איתך קשר כשהתוכנית שלך נפתחת.',
@@ -367,23 +373,23 @@ body {
     },
     ru: {
       'nav.academy':'Академия','nav.programs':'Программы','nav.enroll':'Записаться','nav.apply':'Подать заявку',
-      'hero.title':'Искусство владения будущим',
+      'hero.title':'Искусство<br class="mobile-br">владения будущим',
       'vision.title':'P.R FUTURE Академия Искусственного Интеллекта',
       'vision.body1':'обучаем исключительным знаниям и технологическим возможностям, доступным немногим',
       'vision.body2':'Без опыта. Без программирования. Полное экспертное сопровождение на каждом этапе до выхода на стабильный доход',
-      'usp1.num':'01 — Маршрут','usp1.title':'ТОЧНОСТЬ',
+      'usp1.title':'ТОЧНОСТЬ',
       'usp1.body':'Ваш ИИ-эксперт строит полностью индивидуальный маршрут, исходя из ваших целей по заработку и запросов рынка. Никаких действий впустую. В соответствии с вашим желаемым доходом вы получите списки проектов, учебные темы и идеи, адаптированные под текущий спрос. Все готово, все для вас.',
-      'usp2.num':'02 — Наставник','usp2.title':'БЕЗОПАСНОСТЬ',
+      'usp2.title':'БЕЗОПАСНОСТЬ',
       'usp2.body':'Не нужен опыт, не нужно направление! Вы получаете полное личное сопровождение от вашего ИИ-эксперта, который выстроит ваш план обучения и поможет с любым вопросом. Он будет рядом на протяжении всего пути, объясняя, где находятся деньги, а где вы просто тратите время.',
-      'usp3.num':'03 — Рынок','usp3.title':'ПРИБЫЛЬ',
+      'usp3.title':'ПРИБЫЛЬ',
       'usp3.body':'У нас одна цель: сделать вас востребованными на рынке труда будущего. Наши эксперты строят вам личный план работы для защиты вашего финансового будущего. Все наши программы основаны на реальных проектах, где вы зарабатываете прямо во время учебы!',
       'programs.eyebrow':'Наши программы','programs.title':'Выберите свой путь',
       'card1.tag':'Возраст 14+','card1.title':'Молодые основатели',
       'card1.desc':'Создавайте реальные AI-продукты. Запускайте стартапы. Учитесь тому, чего не преподают в школе.',
-      'card2.tag':'Для взрослых','card2.title':'Трек экспертов ИИ',
-      'card2.desc':'Освойте инструменты ИИ и автоматизацию для карьеры, бизнеса или творческой практики.',
-      'card3.tag':'Организации','card3.title':'Founders+',
-      'card3.desc':'Трансформируйте команду с помощью персонализированного обучения ИИ, воркшопов и стратегического консалтинга.',
+      'card2.tag':'Для взрослых','card2.title':'Эксперты по ИИ',
+      'card2.desc':'Востребованность. Уверенность. Актуальность. Программа для взрослых создана, чтобы сделать вас незаменимыми в эпоху ИИ.',
+      'card3.tag':'Для владельцев бизнеса','card3.title':'Business AI',
+      'card3.desc':'Как экономить сотни тысяч на рекламе и утроить доход за 90 дней с помощью ИИ-агентов.',
       'card.explore':'Изучить программу \u2192',
       'waitlist.title':'Забронируйте место',
       'waitlist.sub':'Набор ограничен. Присоединитесь к списку ожидания, и мы свяжемся с вами, когда откроется ваша программа.',
