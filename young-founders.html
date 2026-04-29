@@ -553,15 +553,22 @@ body { font-family: 'Calibri', 'Inter', sans-serif !important; }
   letter-spacing: 0.01em;
   font-family: 'Calibri', system-ui, sans-serif;
 }
+/* Step title colors — match the neon glow of each number */
+.jp-step-1 .jp-step-title { color: #3de8ff; }
+.jp-step-2 .jp-step-title { color: #a06bff; }
+.jp-step-3 .jp-step-title { color: #D4AF37; }
+.jp-step-4 .jp-step-title { color: #ff9a5c; }
+.jp-step-5 .jp-step-title { color: #c080ff; }
+
 .jp-step-body {
-  font-size: 0.78rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.45);
+  font-size: clamp(0.82rem, 0.95vw, 0.95rem);
+  font-weight: 400;
+  color: #ffffff;
   line-height: 1.7;
   max-width: 220px;
   transition: color 0.3s;
 }
-.jp-step:hover .jp-step-body { color: rgba(255,255,255,0.68); }
+.jp-step:hover .jp-step-body { color: #ffffff; }
 
 /* Hover top border accent */
 .jp-step::before {
