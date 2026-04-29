@@ -173,7 +173,6 @@ body {
     <li><a href="#waitlist" data-i18n="nav.enroll">Enroll</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:14px;">
-    <a href="#waitlist" class="nav-cta" data-i18n="nav.apply">Apply Now</a>
     <div class="lang-switcher" id="lang-switcher">
       <button class="lang-btn active" data-lang="en">EN</button>
       <span class="lang-divider">|</span>
@@ -315,7 +314,7 @@ body {
   });
 
   // Ripple on CTA buttons
-  document.querySelectorAll('.btn-submit, .nav-cta').forEach(btn => {
+  document.querySelectorAll('.btn-submit').forEach(btn => {
     btn.addEventListener('click', e => {
       const rect = btn.getBoundingClientRect();
       const ripple = document.createElement('span');
