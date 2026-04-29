@@ -1,0 +1,4 @@
+uploads/*.tsx
+uploads/*.ts
+.claude/
+scraps/

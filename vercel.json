@@ -1,12 +1,3 @@
 {
-  "version": 2,
-  "framework": null,
-  "buildCommand": null,
-  "devCommand": null,
-  "outputDirectory": ".",
-  "builds": [
-    { "src": "**/*.html", "use": "@vercel/static" },
-    { "src": "**/*.css", "use": "@vercel/static" },
-    { "src": "uploads/**", "use": "@vercel/static" }
-  ]
+  "framework": null
 }
