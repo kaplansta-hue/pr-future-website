@@ -88,7 +88,8 @@ body { font-family: 'Calibri', 'Inter', sans-serif !important; }
 }
 
 /* Page-load entrance animations */
-.yf-eyebrow  { animation: fadeUp 1.2s ease-out 0.0s both; }
+.yf-eyebrow  { animation: fadeUp 1.2s ease-out 0.0s both; font-weight: 700; }
+.yf-mission  { font-weight: 700 !important; }
 .yf-buttons  { animation: fadeUp 1.2s ease-out 0.6s both; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 
@@ -368,12 +369,12 @@ body { font-family: 'Calibri', 'Inter', sans-serif !important; }
 
 <!-- ── Hero ─────────────────────────────────────────── -->
 <section class="yf-hero">
-  <div class="yf-eyebrow" data-i18n="hero.eyebrow">Young Founders Program — Ages 13–18</div>
+  <div class="yf-eyebrow" data-i18n="hero.eyebrow">Young Founders Program — Age 14+</div>
   <h1 class="yf-title" data-i18n-html="hero.title">BUILD YOUR<br>FUTURE</h1>
   <p class="yf-subtitle" id="hero-subtitle"><span class="hero-tw-cursor" aria-hidden="true"></span></p>
   <div class="yf-buttons">
-    <a href="#yf-vision" class="btn-yf btn-yf-primary" data-i18n="hero.cta1">Explore the Program</a>
-    <a href="#yf-showcase" class="btn-yf" data-i18n="hero.cta2">See Student Projects</a>
+    <a href="#yf-showcase" class="btn-yf btn-yf-primary" data-i18n="hero.cta1">See Student Projects</a>
+    <a href="#yf-levels" class="btn-yf" data-i18n="hero.cta2">Explore the Program</a>
   </div>
   <div class="scroll-indicator" style="bottom:40px;">
     <div class="scroll-line"></div>
@@ -1809,10 +1810,10 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   const T = {
     en: {
       'nav.vision':'Vision','nav.journey':'Journey','nav.goals':'Goals','nav.enroll':'Enroll Now','back':'Back',
-      'hero.eyebrow':'Young Founders Program — Ages 13–18',
+      'hero.eyebrow':'Young Founders Program — Age 14+',
       'hero.title':'BUILD YOUR<br>FUTURE',
       'hero.subtitle':'Real AI skills. Real products. Real impact.',
-      'hero.cta1':'Explore the Program','hero.cta2':'See Student Projects',
+      'hero.cta1':'See Student Projects','hero.cta2':'Explore the Program',
       'vision.mission':'What defines our students?',
       'vision.title':'Young. Fearless.<br>Building What Comes Next.',
       'pillar1.number':'01 — Mindset','pillar1.title':'The Founder<br>Mindset',
@@ -1878,11 +1879,11 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     },
     he: {
       'nav.vision':'חזון','nav.journey':'מסע','nav.goals':'מטרות','nav.enroll':'הירשם עכשיו','back':'חזרה',
-      'hero.eyebrow':'תוכנית המייסדים הצעירים — גילאים 13–18',
+      'hero.eyebrow':'תכנית יזמים צעירים — גיל 14+',
       'hero.title':'בנה את<br>העתיד שלך',
       'hero.subtitle':'כישורי AI אמיתיים. מוצרים אמיתיים. השפעה אמיתית.',
-      'hero.cta1':'גלה את התוכנית','hero.cta2':'ראה פרויקטים של סטודנטים',
-      'vision.mission':'מה מגדיר את הסטודנטים שלנו?',
+      'hero.cta1':'ראה פרויקטים של סטודנטים','hero.cta2':'גלה את התוכנית',
+      'vision.mission':'מה מאפיין את התלמידים שלנו?',
       'vision.title':'צעיר. נועז.<br>בונה את מה שיבוא אחר כך.',
       'pillar1.number':'01 — מחשבה','pillar1.title':'החשיבה של<br>המייסד',
       'pillar1.body':'אנחנו לא מלמדים סטודנטים לעקוב אחר הוראות — אנחנו מלמדים אותם לשאול שאלות טובות יותר. כל משתתף לומד לזהות בעיות אמיתיות, לחשוב באופן עצמאי ולבנות פתרונות מאפס עם הכלים החזקים ביותר של זמננו.',
@@ -1947,10 +1948,10 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     },
     ru: {
       'nav.vision':'Видение','nav.journey':'Путь','nav.goals':'Цели','nav.enroll':'Записаться','back':'Назад',
-      'hero.eyebrow':'Программа молодых основателей — возраст 13–18',
+      'hero.eyebrow':'Программа молодых основателей — возраст 14+',
       'hero.title':'СТРОЙ СВОЁ<br>БУДУЩЕЕ',
       'hero.subtitle':'Реальные навыки ИИ. Реальные продукты. Реальное влияние.',
-      'hero.cta1':'Изучить программу','hero.cta2':'Проекты студентов',
+      'hero.cta1':'Проекты студентов','hero.cta2':'Изучить программу',
       'vision.mission':'Что определяет наших студентов?',
       'vision.title':'Молодые. Бесстрашные.<br>Строящие то, что будет дальше.',
       'pillar1.number':'01 — Мышление','pillar1.title':'Мышление<br>основателя',
