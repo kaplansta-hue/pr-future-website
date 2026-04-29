@@ -145,8 +145,15 @@ body {
   .hero-nowrap { white-space: nowrap; display: inline-block; }
 }
 
-/* ── Program card description — white text ── */
-.card-audience { color: #ffffff !important; }
+/* ── Program card description — white text, larger and more readable ── */
+.card-audience {
+  color: #ffffff !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+@media (max-width: 768px) {
+  .card-audience { font-size: 0.95rem !important; }
+}
 </style>
 </head>
 <body>
