@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>5-Step Journey Strip — Standalone</title>
+<style>
+/* ── Reset & Base ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+/* ── Section wrapper ──────────────────────────────────── */
+.journey-section {
+  width: 100%;
+  max-width: 1400px;
+}
+
+/* ── Strip container ──────────────────────────────────── */
+.journey-strip {
+  display: flex;
+  width: 100%;
+  min-height: 580px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ══════════════════════════════════════════════════════
+   TITLE PANEL (left column)
+══════════════════════════════════════════════════════ */
+.jp-title {
+  flex: 0 0 220px;
+  padding: 52px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(5, 3, 14, 0.6);
+
+  /* glassmorphism */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.jp-title-eyebrow {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(61, 232, 255, 0.55);
+}
+
+.jp-title-heading {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.jp-title-rule {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #3de8ff, #c080ff);
+  border-radius: 2px;
+}
+
+.jp-title-meta {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 14px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════════════════
+   STEP PANELS
+══════════════════════════════════════════════════════ */
+.jp-step {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px 32px 40px;
+  border-right: 1px solid rgba(255, 255, 255, 0.055);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+
+  /* glassmorphism */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  /* smooth width expansion on hover */
+  transition: flex 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.jp-step:last-child { border-right: none; }
+.jp-step:hover { flex: 1.35; }
+
+/* ── Per-step background tints (radial glow) ── */
+.jp-step-1 {
+  background: radial-gradient(ellipse 100% 80% at 50% 20%,
+    rgba(61, 232, 255, 0.07) 0%, transparent 65%),
+    rgba(5, 3, 14, 0.5);
+}
+.jp-step-2 {
+  background: radial-gradient(ellipse 100% 80% at 50% 20%,
+    rgba(150, 80, 255, 0.08) 0%, transparent 65%),
+    rgba(5, 3, 14, 0.5);
+}
+.jp-step-3 {
+  background: radial-gradient(ellipse 100% 80% at 50% 20%,
+    rgba(212, 175, 55, 0.08) 0%, transparent 65%),
+    rgba(5, 3, 14, 0.5);
+}
+.jp-step-4 {
+  background: radial-gradient(ellipse 100% 80% at 50% 20%,
+    rgba(255, 154, 92, 0.07) 0%, transparent 65%),
+    rgba(5, 3, 14, 0.5);
+}
+.jp-step-5 {
+  background: radial-gradient(ellipse 100% 80% at 50% 20%,
+    rgba(192, 128, 255, 0.09) 0%, transparent 65%),
+    rgba(5, 3, 14, 0.5);
+}
+
+/* ── Top animated border accent line ── */
+.jp-step::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.jp-step-1::before { background: linear-gradient(90deg, #3de8ff, transparent); }
+.jp-step-2::before { background: linear-gradient(90deg, #a06bff, transparent); }
+.jp-step-3::before { background: linear-gradient(90deg, #D4AF37, transparent); }
+.jp-step-4::before { background: linear-gradient(90deg, #ff9a5c, transparent); }
+.jp-step-5::before { background: linear-gradient(90deg, #c080ff, transparent); }
+.jp-step:hover::before { transform: scaleX(1); }
+
+/* ── Coloured top label ── */
+.jp-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  position: relative;
+  z-index: 1;
+}
+.jp-step:hover .jp-label { opacity: 1; }
+.jp-step-1 .jp-label { color: #3de8ff; }
+.jp-step-2 .jp-label { color: #a06bff; }
+.jp-step-3 .jp-label { color: #D4AF37; }
+.jp-step-4 .jp-label { color: #ff9a5c; }
+.jp-step-5 .jp-label { color: #c080ff; }
+
+/* ── Giant neon outline number ── */
+.jp-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  font-size: clamp(140px, 14vw, 220px);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 0.4s, filter 0.4s;
+  white-space: nowrap;
+  z-index: 0;
+}
+/* Each step gets its own neon stroke + glow colour */
+.jp-step-1 .jp-number {
+  -webkit-text-stroke: 1.5px rgba(61,  232, 255, 0.55);
+  text-shadow: 0 0 40px rgba(61,  232, 255, 0.25), 0 0 80px rgba(61,  232, 255, 0.08);
+}
+.jp-step-2 .jp-number {
+  -webkit-text-stroke: 1.5px rgba(160, 107, 255, 0.55);
+  text-shadow: 0 0 40px rgba(160, 107, 255, 0.25), 0 0 80px rgba(160, 107, 255, 0.08);
+}
+.jp-step-3 .jp-number {
+  -webkit-text-stroke: 1.5px rgba(212, 175,  55, 0.55);
+  text-shadow: 0 0 40px rgba(212, 175,  55, 0.25), 0 0 80px rgba(212, 175,  55, 0.08);
+}
+.jp-step-4 .jp-number {
+  -webkit-text-stroke: 1.5px rgba(255, 154,  92, 0.55);
+  text-shadow: 0 0 40px rgba(255, 154,  92, 0.25), 0 0 80px rgba(255, 154,  92, 0.08);
+}
+.jp-step-5 .jp-number {
+  -webkit-text-stroke: 1.5px rgba(192, 128, 255, 0.55);
+  text-shadow: 0 0 40px rgba(192, 128, 255, 0.25), 0 0 80px rgba(192, 128, 255, 0.08);
+}
+.jp-step:hover .jp-number {
+  filter: brightness(1.6);
+}
+
+/* ── Bottom text block ── */
+.jp-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.jp-duration {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.jp-step-title {
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.jp-step-body {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  max-width: 220px;
+  transition: color 0.3s;
+}
+.jp-step:hover .jp-step-body { color: rgba(255, 255, 255, 0.68); }
+
+/* ── Mobile: vertical stack ── */
+@media (max-width: 900px) {
+  .journey-strip {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .jp-title {
+    flex: none;
+    padding: 40px 24px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .jp-step {
+    flex: none;
+    min-height: 200px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 28px 24px 32px;
+  }
+  .jp-step:last-child { border-bottom: none; }
+  .jp-number { font-size: 120px; opacity: 0.3; }
+  .jp-step-body { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<section class="journey-section">
+  <div class="journey-strip">
+
+    <!-- ── Title panel ───────────────────────────────── -->
+    <div class="jp-title">
+      <div class="jp-title-eyebrow">The Learning Path</div>
+      <h2 class="jp-title-heading">From<br>Zero.<br>To<br>Launch.</h2>
+      <div>
+        <div class="jp-title-rule"></div>
+        <p class="jp-title-meta">12 weeks.<br>5 phases.<br>1 real product.</p>
+      </div>
+    </div>
+
+    <!-- ── Step 1 ─────────────────────────────────────── -->
+    <div class="jp-step jp-step-1">
+      <div class="jp-label"># Phase One</div>
+      <div class="jp-number">1</div>
+      <div class="jp-bottom">
+        <div class="jp-duration">Weeks 1–2</div>
+        <h4 class="jp-step-title">AI &amp; Entrepreneurship Foundations</h4>
+        <p class="jp-step-body">Master the mindset and tools. Learn to think like a founder and prompt like a pro.</p>
+      </div>
+    </div>
+
+    <!-- ── Step 2 ─────────────────────────────────────── -->
+    <div class="jp-step jp-step-2">
+      <div class="jp-label"># Phase Two</div>
+      <div class="jp-number">2</div>
+      <div class="jp-bottom">
+        <div class="jp-duration">Weeks 3–4</div>
+        <h4 class="jp-step-title">Problem Discovery</h4>
+        <p class="jp-step-body">Identify real-world problems worth solving and validate ideas with real conversations.</p>
+      </div>
+    </div>
+
+    <!-- ── Step 3 ─────────────────────────────────────── -->
+    <div class="jp-step jp-step-3">
+      <div class="jp-label"># Phase Three</div>
+      <div class="jp-number">3</div>
+      <div class="jp-bottom">
+        <div class="jp-duration">Weeks 5–6</div>
+        <h4 class="jp-step-title">Build Your MVP</h4>
+        <p class="jp-step-body">Use AI to build fast. Prototype your solution and ship the first working version.</p>
+      </div>
+    </div>
+
+    <!-- ── Step 4 ─────────────────────────────────────── -->
+    <div class="jp-step jp-step-4">
+      <div class="jp-label"># Phase Four</div>
+      <div class="jp-number">4</div>
+      <div class="jp-bottom">
+        <div class="jp-duration">Weeks 7–9</div>
+        <h4 class="jp-step-title">Test &amp; Iterate</h4>
+        <p class="jp-step-body">Put your product in front of real users. Break it. Fix it. Learn to fail forward.</p>
+      </div>
+    </div>
+
+    <!-- ── Step 5 ─────────────────────────────────────── -->
+    <div class="jp-step jp-step-5">
+      <div class="jp-label"># Phase Five</div>
+      <div class="jp-number">5</div>
+      <div class="jp-bottom">
+        <div class="jp-duration">Weeks 10–12</div>
+        <h4 class="jp-step-title">Launch Day</h4>
+        <p class="jp-step-body">Present to mentors and investors. Your product goes live. Your journey begins.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

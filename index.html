@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>P.R FUTURE — AI Learning Academy</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+/* ── Global Calibri font override for homepage ── */
+body {
+  font-family: 'Calibri', 'Inter', sans-serif !important;
+}
+
+/* ── Hero title — slow, deliberate bloom ── */
+.hero-title {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroIn 2.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+@keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+
+/* ── Vision section — Calibri typography ── */
+.vision-title {
+  font-family: 'Calibri', sans-serif !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.vision-body {
+  font-family: 'Calibri', sans-serif !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ── Vision glass container ── */
+.vision-glass {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px) saturate(180%);
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 60px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .vision-glass { padding: 30px; }
+}
+
+/* ── Vision scroll-reveal animations ── */
+.vision-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 2.0s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vision-reveal.v-delay-1 {
+  transition-delay: 0.4s;
+}
+.vision-reveal.v-delay-2 {
+  transition-delay: 0.8s;
+}
+.vision-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ USP SECTION ══════════════════════════════════════════ */
+.usp-section {
+  position: relative; z-index: 10;
+  padding: 0 40px 80px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.usp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 860px;
+  width: 100%;
+}
+.usp-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex; flex-direction: column;
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.22,1,0.36,1),
+              transform 1.8s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.35s, box-shadow 0.35s;
+}
+/* Slide from right for card 1 & 3, from left for card 2 */
+.usp-card.usp-delay-1 { transform: translateX(80px); transition-delay: 0.0s; }
+.usp-card.usp-delay-2 { transform: translateX(-80px); transition-delay: 0.2s; }
+.usp-card.usp-delay-3 { transform: translateX(80px); transition-delay: 0.4s; }
+.usp-card.usp-visible { opacity: 1; transform: translateX(0); }
+.usp-card:hover { border-color: rgba(255,255,255,0.16); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+/* Neon orange edge bars — alternating R / L / R */
+.usp-card::before {
+  content: ''; display: block; position: absolute; top: 10%; height: 80%; width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255,130,10,0.85) 15%, rgba(255,100,0,1.0) 50%, rgba(255,130,10,0.85) 85%, transparent 100%);
+  box-shadow: 0 0 0 1px rgba(255,200,80,0.9), 0 0 8px 3px rgba(255,140,10,0.9), 0 0 22px 8px rgba(255,100,0,0.5), 0 0 55px 18px rgba(255,70,0,0.2);
+  z-index: 10; pointer-events: none;
+  opacity: 0; transition: opacity 0.5s ease 0.3s;
+}
+.usp-card.usp-visible::before { opacity: 1; }
+.usp-card:nth-child(1)::before { right: 0; left: auto; }
+.usp-card:nth-child(2)::before { left: 0; right: auto; }
+.usp-card:nth-child(3)::before { right: 0; left: auto; }
+.usp-card::after {
+  content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+}
+.usp-body-wrap { padding: 36px 40px 38px; display: flex; flex-direction: column; gap: 12px; flex: 1; }.usp-num { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #ffffff; font-family: 'Calibri', sans-serif; }
+.usp-title { font-size: 1.5rem; font-weight: 900; color: #ffffff; letter-spacing: -0.01em; line-height: 1.2; font-family: 'Calibri', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.usp-rule { width: 28px; height: 1px; background: linear-gradient(90deg, rgba(255,130,10,0.65), transparent); }
+.usp-text { font-size: 1rem; font-weight: 700; color: #ffffff; line-height: 1.72; font-family: 'Calibri', sans-serif; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+
+@media (max-width: 900px) {
+  .usp-section { padding: 0 16px 60px; }
+  .usp-grid { max-width: 500px; }
+  .usp-body-wrap { padding: 28px 24px 28px; }
+}
+
+/* ── "Наши программы" eyebrow heading — matches programs-title style ── */
+.programs-eyebrow {
+  font-size: clamp(1.8rem, 3.5vw, 3rem) !important;
+  font-weight: 900 !important;
+  color: #fff !important;
+  letter-spacing: -0.01em !important;
+  font-family: 'Calibri', 'Inter', system-ui, sans-serif !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- Fixed background -->
+<div class="bg-fixed-wrap">
+  <img src="uploads/Gemini_Generated_Image_okctgmokctgmokct.png" alt="P.R FUTURE background" fetchpriority="high" decoding="async" style="object-fit:cover;object-position:center 20%;width:100vw;height:100vh;filter:contrast(1.05) saturate(1.1);" />
+  <div class="bg-fixed-overlay"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">P.R FUTURE</a>
+  <ul class="nav-links">
+    <li><a href="#vision" data-i18n="nav.academy">Academy</a></li>
+    <li><a href="#programs" data-i18n="nav.programs">Programs</a></li>
+    <li><a href="#waitlist" data-i18n="nav.enroll">Enroll</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <a href="#waitlist" class="nav-cta" data-i18n="nav.apply">Apply Now</a>
+    <div class="lang-switcher" id="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" data-lang="he">עב</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" data-lang="ru">РУ</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1 class="hero-title" data-i18n="hero.title">The Art of Mastering the Future</h1>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Vision -->
+<section class="vision" id="vision">
+  <div class="vision-inner">
+    <div class="vision-glass vision-reveal" style="margin-bottom:20px;">
+      <h2 class="vision-title" data-i18n-html="vision.title">We don't teach AI.<br>We teach you to think with it.</h2>
+    </div>
+    <div class="vision-glass vision-reveal v-delay-1">
+      <p class="vision-body" data-i18n="vision.body1">
+        P.R FUTURE is an AI learning academy built for those who refuse to be left behind —
+        young founders, professionals, and leaders who understand that the future belongs to those who build it.
+      </p>
+      <p class="vision-body" style="margin-top:16px;" data-i18n="vision.body2">
+        Our programs combine cutting-edge AI tools with real-world application,
+        turning ideas into products and students into creators.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- USP Cards -->
+<section class="usp-section" id="usp">
+
+  <div class="usp-grid">
+
+    <!-- Card 1: Precision -->
+    <div class="usp-card usp-delay-1">
+      <div class="usp-body-wrap">
+        <div class="usp-num" data-i18n="usp1.num">01 — Roadmap</div>
+        <div class="usp-title" data-i18n="usp1.title">PRECISION</div>
+        <div class="usp-rule"></div>
+        <p class="usp-text" data-i18n="usp1.body">Your AI expert builds a completely personalized roadmap based on your financial goals and current market demand. You won't build things for no reason. Based on your target income, you will receive project lists, study modules, and personalized ideas tailored to market needs. Everything is ready, everything is for you.</p>
+      </div>
+    </div>
+
+    <!-- Card 2: Security -->
+    <div class="usp-card usp-delay-2">
+      <div class="usp-body-wrap">
+        <div class="usp-num" data-i18n="usp2.num">02 — Mentorship</div>
+        <div class="usp-title" data-i18n="usp2.title">SECURITY</div>
+        <div class="usp-rule"></div>
+        <p class="usp-text" data-i18n="usp2.body">No experience or direction needed! Receive full personal mentorship from your AI expert who builds your custom learning path and supports you through every question or issue. They are with you every step of the way, teaching and explaining where the money is and where you are wasting your time.</p>
+      </div>
+    </div>
+
+    <!-- Card 3: Profit -->
+    <div class="usp-card usp-delay-3">
+      <div class="usp-body-wrap">
+        <div class="usp-num" data-i18n="usp3.num">03 — Market</div>
+        <div class="usp-title" data-i18n="usp3.title">PROFIT</div>
+        <div class="usp-rule"></div>
+        <p class="usp-text" data-i18n="usp3.body">We have one goal: to make you relevant in tomorrow's job market. Our experts design a personal work plan to safeguard your financial future. All our tracks are built on real-world projects where you earn while you learn!</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Programs -->
+<section class="programs" id="programs">
+  <div class="programs-header reveal">
+    <div class="programs-eyebrow" data-i18n="programs.eyebrow">Our Programs</div>
+    <h2 class="programs-title" data-i18n="programs.title">Choose Your Path</h2>
+  </div>
+  <div class="cards-grid">
+
+    <a href="young-founders.html" class="glass-card card-cyan reveal reveal-delay-1">
+      <div class="card-tag" data-i18n="card1.tag">Ages 14+</div>
+      <div class="card-title" data-i18n="card1.title">Young Founders</div>
+      <div class="card-audience" data-i18n="card1.desc">Build real AI products. Launch real startups. Learn what school doesn't teach.</div>
+      <span class="card-cta" data-i18n="card.explore">Explore Program →</span>
+    </a>
+
+    <a href="adults.html" class="glass-card card-orange reveal reveal-delay-2">
+      <div class="card-tag" data-i18n="card2.tag">Adults</div>
+      <div class="card-title" data-i18n="card2.title">AI Experts Track</div>
+      <div class="card-audience" data-i18n="card2.desc">Master AI tools and automation for your career, business, or creative practice.</div>
+      <span class="card-cta" data-i18n="card.explore">Explore Program →</span>
+    </a>
+
+    <a href="business.html" class="glass-card card-violet reveal reveal-delay-3">
+      <div class="card-tag" data-i18n="card3.tag">Organizations</div>
+      <div class="card-title" data-i18n="card3.title">Founders+</div>
+      <div class="card-audience" data-i18n="card3.desc">Transform your team with custom AI training, workshops, and strategy consulting.</div>
+      <span class="card-cta" data-i18n="card.explore">Explore Program →</span>
+    </a>
+
+  </div>
+</section>
+
+
+<footer><span data-i18n="footer">© 2025 P.R FUTURE — AI Learning Academy. All rights reserved.</span></footer>
+
+<script>
+  // Scroll reveal — program cards
+  const revealObs = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // USP cards — sequential scroll reveal
+  const uspObs = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('usp-visible'); uspObs.unobserve(e.target); } }),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.usp-card').forEach(el => uspObs.observe(el));
+
+  // Vision section — staggered elegant fade
+  const visionObs = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); visionObs.unobserve(e.target); } }),
+    { threshold: 0.18 }
+  );
+  document.querySelectorAll('.vision-reveal').forEach(el => visionObs.observe(el));
+
+  // 3D tilt on glass cards
+  document.querySelectorAll('.glass-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const cx = (e.clientX - r.left) / r.width - 0.5;
+      const cy = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-8px) scale(1.015) rotateY(${cx * 8}deg) rotateX(${-cy * 6}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  // Ripple on CTA buttons
+  document.querySelectorAll('.btn-submit, .nav-cta').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple-ring';
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+    });
+  });
+</script>
+<script>
+// ── i18n Engine — index.html ───────────────────────────────
+(function () {
+  const T = {
+    en: {
+      'nav.academy':'Academy','nav.programs':'Programs','nav.enroll':'Enroll','nav.apply':'Apply Now',
+      'hero.title':'The Art of Mastering the Future',
+      'vision.title':'P.R FUTURE AI Academy',
+      'vision.body1':'We teach exceptional knowledge and technological capabilities available to a select few',
+      'vision.body2':'No experience. No coding. Full expert guidance at every step until you reach a steady income.',
+      'usp1.num':'01 — Roadmap','usp1.title':'PRECISION',
+      'usp1.body':"Your AI expert builds a completely personalized roadmap based on your financial goals and current market demand. You won't build things for no reason. Based on your target income, you will receive project lists, study modules, and personalized ideas tailored to market needs. Everything is ready, everything is for you.",
+      'usp2.num':'02 — Mentorship','usp2.title':'SECURITY',
+      'usp2.body':"No experience or direction needed! Receive full personal mentorship from your AI expert who builds your custom learning path and supports you through every question or issue. They are with you every step of the way, teaching and explaining where the money is and where you are wasting your time.",
+      'usp3.num':'03 — Market','usp3.title':'PROFIT',
+      'usp3.body':"We have one goal: to make you relevant in tomorrow's job market. Our experts design a personal work plan to safeguard your financial future. All our tracks are built on real-world projects where you earn while you learn!",
+      'card1.tag':'Ages 14+','card1.title':'Young Founders',
+      'card1.desc':"Build real AI products. Launch real startups. Learn what school doesn't teach.",
+      'card2.tag':'Adults','card2.title':'AI Experts Track',
+      'card2.desc':'Master AI tools and automation for your career, business, or creative practice.',
+      'card3.tag':'Organizations','card3.title':'Founders+',
+      'card3.desc':'Transform your team with custom AI training, workshops, and strategy consulting.',
+      'card.explore':'Explore Program \u2192',
+      'waitlist.title':'Reserve Your Spot',
+      'waitlist.sub':"Enrollment is limited. Join the waitlist and we'll reach out when your program opens.",
+      'waitlist.placeholder':'your@email.com','waitlist.btn':'Join Waitlist',
+      'footer':'\u00a9 2025 P.R FUTURE \u2014 AI Learning Academy. All rights reserved.'
+    },
+    he: {
+      'nav.academy':'האקדמיה','nav.programs':'תוכניות','nav.enroll':'הירשם','nav.apply':'הגש מועמדות',
+      'hero.title':'היכולת לשלוט בעתיד',
+      'vision.title':'P.R FUTURE אקדמיה לבינה מלאכותית',
+      'vision.body1':'אנחנו מלמדים ידע יוצא דופן ויכולות טכנולוגיות שלא תפגשו מעולם',
+      'vision.body2':'בלי ניסיון. בלי ידע בתכנות. ליווי מומחים מלא בכל שלב עד להגעה להכנסה יציבה',
+      'usp1.num':'01 — מסלול','usp1.title':'דיוק',
+      'usp1.body':"מומחה ה-AI שלך שבונה לך מסלול אישי לחלוטין — לפי מה שאתה רוצה להרוויח ולפי מה שהשוק מחפש עכשיו. לא תבנה דברים סתם. לפי סכומי ההכנסה שאתה רוצה להרוויח תקבל רשימות פרויקטים, נושאי לימוד, רעיונות מותאמים אישית בהתאם לביקוש שיש כרגע בשוק. הכל מוכן בשבילך.",
+      'usp2.num':'02 — ליווי','usp2.title':'ביטחון',
+      'usp2.body':'לא צריך ניסיון, לא צריך כיוון! מקבל ליווי אישי מלא ממומחה ה-AI שלך שבונה לך מסלול לימוד ומלווה אותך לכל שאלה תקלה ובעיה. הוא לאורך כל הדרך איתכם. ילמד ויסביר איפה נמצא הכסף ואיפה אתם מבזבזים את הזמן.',
+      'usp3.num':'03 — שוק','usp3.title':'רווח',
+      'usp3.body':'יש לנו מטרה אחת: להפוך אתכם לרלוונטיים בשוק העבודה של המחר. המומחים שלנו בונים לכם תוכנית עבודה אישית שנועדה להגן על העתיד הכלכלי שלכם. כל מסלולי הלימוד שלנו בנויים על פרויקטים אמיתיים בהם אתם מרוויחים כסף תוך כדי הלימודים!',
+      'programs.eyebrow':'התוכניות שלנו','programs.title':'בחר את המסלול שלך',
+      'card1.tag':'גילאים 14+','card1.title':'מייסדים צעירים',
+      'card1.desc':'בנה מוצרי AI אמיתיים. השק סטארטאפים אמיתיים. למד מה שבית הספר לא מלמד.',
+      'card2.tag':'מבוגרים','card2.title':'מסלול מומחי AI',
+      'card2.desc':'שלוט בכלי AI ואוטומציה לקריירה, לעסק או לפרקטיקה היצירתית שלך.',
+      'card3.tag':'ארגונים','card3.title':'Founders+',
+      'card3.desc':'שנה את הצוות שלך עם הכשרת AI מותאמת, סדנאות וייעוץ אסטרטגי.',
+      'card.explore':'גלה את התוכנית \u2190',
+      'waitlist.title':'שמור את מקומך',
+      'waitlist.sub':'ההרשמה מוגבלת. הצטרף לרשימת ההמתנה ונצור איתך קשר כשהתוכנית שלך נפתחת.',
+      'waitlist.placeholder':'האימייל שלך@כאן.com','waitlist.btn':'הצטרף לרשימת המתנה',
+      'footer':'\u00a9 2025 P.R FUTURE \u2014 אקדמיה ללמידת AI. כל הזכויות שמורות.'
+    },
+    ru: {
+      'nav.academy':'Академия','nav.programs':'Программы','nav.enroll':'Записаться','nav.apply':'Подать заявку',
+      'hero.title':'Искусство владения будущим',
+      'vision.title':'P.R FUTURE Академия Искусственного Интеллекта',
+      'vision.body1':'обучаем исключительным знаниям и технологическим возможностям, доступным немногим',
+      'vision.body2':'Без опыта. Без программирования. Полное экспертное сопровождение на каждом этапе до выхода на стабильный доход',
+      'usp1.num':'01 — Маршрут','usp1.title':'ТОЧНОСТЬ',
+      'usp1.body':'Ваш ИИ-эксперт строит полностью индивидуальный маршрут, исходя из ваших целей по заработку и запросов рынка. Никаких действий впустую. В соответствии с вашим желаемым доходом вы получите списки проектов, учебные темы и идеи, адаптированные под текущий спрос. Все готово, все для вас.',
+      'usp2.num':'02 — Наставник','usp2.title':'БЕЗОПАСНОСТЬ',
+      'usp2.body':'Не нужен опыт, не нужно направление! Вы получаете полное личное сопровождение от вашего ИИ-эксперта, который выстроит ваш план обучения и поможет с любым вопросом. Он будет рядом на протяжении всего пути, объясняя, где находятся деньги, а где вы просто тратите время.',
+      'usp3.num':'03 — Рынок','usp3.title':'ПРИБЫЛЬ',
+      'usp3.body':'У нас одна цель: сделать вас востребованными на рынке труда будущего. Наши эксперты строят вам личный план работы для защиты вашего финансового будущего. Все наши программы основаны на реальных проектах, где вы зарабатываете прямо во время учебы!',
+      'programs.eyebrow':'Наши программы','programs.title':'Выберите свой путь',
+      'card1.tag':'Возраст 14+','card1.title':'Молодые основатели',
+      'card1.desc':'Создавайте реальные AI-продукты. Запускайте стартапы. Учитесь тому, чего не преподают в школе.',
+      'card2.tag':'Для взрослых','card2.title':'Трек экспертов ИИ',
+      'card2.desc':'Освойте инструменты ИИ и автоматизацию для карьеры, бизнеса или творческой практики.',
+      'card3.tag':'Организации','card3.title':'Founders+',
+      'card3.desc':'Трансформируйте команду с помощью персонализированного обучения ИИ, воркшопов и стратегического консалтинга.',
+      'card.explore':'Изучить программу \u2192',
+      'waitlist.title':'Забронируйте место',
+      'waitlist.sub':'Набор ограничен. Присоединитесь к списку ожидания, и мы свяжемся с вами, когда откроется ваша программа.',
+      'waitlist.placeholder':'ваш@email.com','waitlist.btn':'Присоединиться к списку',
+      'footer':'\u00a9 2025 P.R FUTURE \u2014 Академия обучения ИИ. Все права защищены.'
+    }
+  };
+
+  function applyLang(lang) {
+    const dict = T[lang]; if (!dict) return;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n')]; if (v !== undefined) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n-html')]; if (v !== undefined) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const v = dict[el.getAttribute('data-i18n-placeholder')]; if (v !== undefined) el.placeholder = v;
+    });
+    const isRTL = lang === 'he';
+    document.documentElement.dir  = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('prf_lang', lang); } catch(e) {}
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyLang(lang);
+    });
+  });
+
+  // Restore persisted language; default is Russian
+  (function () {
+    let saved = 'ru';
+    try { saved = localStorage.getItem('prf_lang') || 'ru'; } catch(e) {}
+    const btn = document.querySelector(`.lang-btn[data-lang="${saved}"]`);
+    if (btn) { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+    applyLang(saved);
+  })();
+})();
+</script>
+<script>
+// bubble animation removed
+(function() {
+  return;
+  const canvas = document.getElementById('bubble-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, bubbles = [];
+
+  const BUBBLE_COUNT = 18;
+  const COLORS = [
+    [80, 160, 255],   // blue
+    [200, 80, 255],   // violet
+    [255, 120, 40],   // amber
+    [61, 232, 255],   // cyan
+    [255, 200, 80],   // gold
+    [255, 80, 120],   // rose
+  ];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function createBubble(i) {
+    const r = randBetween(38, 130);
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    return {
+      x: randBetween(r, W - r),
+      y: randBetween(r, H - r),
+      r,
+      color,
+      dx: randBetween(-0.35, 0.35),
+      dy: randBetween(-0.28, 0.28),
+      phase: Math.random() * Math.PI * 2,
+      phaseSpeed: randBetween(0.004, 0.012),
+      wobble: randBetween(0.6, 1.8),
+      opacity: randBetween(0.13, 0.32),
+    };
+  }
+
+  function init() {
+    resize();
+    bubbles = Array.from({ length: BUBBLE_COUNT }, (_, i) => createBubble(i));
+  }
+
+  function drawBubble(b, t) {
+    const wobbleX = Math.sin(b.phase + t * b.phaseSpeed * 0.7) * b.wobble * 4;
+    const wobbleY = Math.cos(b.phase + t * b.phaseSpeed) * b.wobble * 3;
+    const cx = b.x + wobbleX;
+    const cy = b.y + wobbleY;
+    const r  = b.r;
+    const [R, G, B] = b.color;
+
+    ctx.save();
+
+    // Outer glow
+    const glow = ctx.createRadialGradient(cx, cy, r * 0.5, cx, cy, r * 1.6);
+    glow.addColorStop(0, `rgba(${R},${G},${B},${b.opacity * 0.5})`);
+    glow.addColorStop(1, `rgba(${R},${G},${B},0)`);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 1.6, 0, Math.PI * 2);
+    ctx.fillStyle = glow;
+    ctx.fill();
+
+    // Main body — deep glass sphere
+    const body = ctx.createRadialGradient(
+      cx - r * 0.28, cy - r * 0.3, r * 0.05,
+      cx, cy, r
+    );
+    body.addColorStop(0,   `rgba(${R},${G},${B},${b.opacity * 1.1})`);
+    body.addColorStop(0.35,`rgba(${R},${G},${B},${b.opacity * 0.45})`);
+    body.addColorStop(0.7, `rgba(0,0,0,${b.opacity * 0.25})`);
+    body.addColorStop(1,   `rgba(${R},${G},${B},${b.opacity * 0.55})`);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = body;
+    ctx.fill();
+
+    // Inner rim — iridescent ring edge
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${R},${G},${B},${b.opacity * 1.8})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Top-left specular highlight
+    const spec1 = ctx.createRadialGradient(
+      cx - r * 0.32, cy - r * 0.35, 0,
+      cx - r * 0.32, cy - r * 0.35, r * 0.45
+    );
+    spec1.addColorStop(0,   `rgba(255,255,255,0.72)`);
+    spec1.addColorStop(0.4, `rgba(255,255,255,0.18)`);
+    spec1.addColorStop(1,   `rgba(255,255,255,0)`);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = spec1;
+    ctx.fill();
+
+    // Small bottom-right reflection flare
+    const spec2 = ctx.createRadialGradient(
+      cx + r * 0.38, cy + r * 0.4, 0,
+      cx + r * 0.38, cy + r * 0.4, r * 0.22
+    );
+    spec2.addColorStop(0,   `rgba(255,255,255,0.35)`);
+    spec2.addColorStop(1,   `rgba(255,255,255,0)`);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = spec2;
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  function tick(t) {
+    ctx.clearRect(0, 0, W, H);
+
+    bubbles.forEach(b => {
+      b.x += b.dx;
+      b.y += b.dy;
+      b.phase += b.phaseSpeed;
+
+      // Soft boundary bounce
+      if (b.x - b.r < 0)   { b.x = b.r;    b.dx =  Math.abs(b.dx); }
+      if (b.x + b.r > W)   { b.x = W - b.r; b.dx = -Math.abs(b.dx); }
+      if (b.y - b.r < 0)   { b.y = b.r;    b.dy =  Math.abs(b.dy); }
+      if (b.y + b.r > H)   { b.y = H - b.r; b.dy = -Math.abs(b.dy); }
+
+      drawBubble(b, t);
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', resize);
+  init();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

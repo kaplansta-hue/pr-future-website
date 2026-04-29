@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Business AI Track — P.R FUTURE</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+/* ── Hero title — starts hidden, JS drives reveal ───────── */
+.yf-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 2.0s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 2.0s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.yf-title.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ── Hero subtitle — typewriter fills it ───────────────── */
+.yf-subtitle { opacity: 1; min-height: 1.4em; }
+.hero-tw-cursor {
+  display: inline-block; width: 2px; height: 0.9em;
+  background: rgba(255,255,255,0.75); margin-left: 2px;
+  vertical-align: text-bottom; animation: tw-blink 0.85s step-start infinite;
+}
+
+/* ── Page-load entrance (non-hero elements) ─────────────── */
+.yf-eyebrow  { animation: fadeUp 1.2s ease-out 0.0s both; }
+.yf-buttons  { animation: fadeUp 1.2s ease-out 0.6s both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── Business accent overrides (gold/amber tones) ───────── */
+.yf-eyebrow { color: #D4AF37 !important; }
+.btn-yf-primary {
+  background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.08)) !important;
+  border-color: rgba(212,175,55,0.35) !important;
+  box-shadow: 0 0 30px rgba(212,175,55,0.12) !important;
+}
+.btn-yf-primary:hover {
+  border-color: rgba(212,175,55,0.6) !important;
+  box-shadow: 0 0 50px rgba(212,175,55,0.2) !important;
+}
+.manifesto-number { color: #D4AF37 !important; }
+.manifesto-rule { background: linear-gradient(90deg, rgba(212,175,55,0.55), transparent) !important; }
+.levels-eyebrow { color: #D4AF37 !important; }
+.level-card.featured {
+  border-color: rgba(212,175,55,0.3) !important;
+  background: rgba(212,175,55,0.04) !important;
+  box-shadow: 0 0 40px rgba(212,175,55,0.08) !important;
+}
+.level-card.featured:hover {
+  border-color: rgba(212,175,55,0.5) !important;
+  box-shadow: 0 20px 60px rgba(212,175,55,0.15) !important;
+}
+.level-card.featured .level-cta { border-color: rgba(212,175,55,0.35) !important; color: #D4AF37 !important; }
+.level-card.featured .level-cta:hover { background: rgba(212,175,55,0.08) !important; border-color: rgba(212,175,55,0.6) !important; }
+
+/* ── Typewriter cursor ───────────────────────────────────── */
+#typewriter-quote { min-height: 3.9em; }
+.tw-cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: currentColor; margin-left: 2px;
+  vertical-align: text-bottom; animation: tw-blink 0.85s step-start infinite;
+}
+@keyframes tw-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ── Neon glassmorphism pillar cards ─────────────────────── */
+.pillars-list {
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  padding: 16px 52px 60px; max-width: 860px; margin: 0 auto;
+}
+.pillar-item {
+  position: relative; border-radius: 22px;
+  padding: 48px 44px 44px 48px; min-height: 200px;
+  display: flex; flex-direction: column; cursor: default;
+  background: rgba(0,0,0,0.25);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border-color);
+  box-shadow: inset 0 0 60px var(--card-inner-glow), 0 0 30px var(--card-outer-glow);
+  z-index: 0; overflow: visible;
+  transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s;
+}
+.pillar-item:hover {
+  transform: translateY(-5px);
+  box-shadow: inset 0 0 80px var(--card-inner-glow), 0 0 50px var(--card-outer-glow);
+}
+.pillar-item .pillar-title  { color: #ffffff !important; }
+.pillar-item .pillar-body   { color: rgba(255,255,255,0.45) !important; }
+.pillar-item .pillar-number { color: rgba(255,255,255,0.28) !important; }
+
+/* Per-card accent colours — subtle purple for business */
+.pillars-list > .pillar-item:nth-child(1) { --card-border-color: rgba(176,102,255,0.22); --card-inner-glow: rgba(176,102,255,0.06); --card-outer-glow: rgba(176,102,255,0.08); }
+.pillars-list > .pillar-item:nth-child(2) { --card-border-color: rgba(155,81,224,0.22); --card-inner-glow: rgba(155,81,224,0.06); --card-outer-glow: rgba(155,81,224,0.08); }
+.pillars-list > .pillar-item:nth-child(3) { --card-border-color: rgba(192,128,255,0.22); --card-inner-glow: rgba(192,128,255,0.06); --card-outer-glow: rgba(192,128,255,0.08); }
+
+/* Neon purple edge bar — alternating RIGHT / LEFT / RIGHT */
+.pillar-item::before {
+  content: ''; display: block; position: absolute; top: 10%; height: 80%; width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(176,102,255,0.85) 15%, rgba(155,81,224,1.0) 50%, rgba(176,102,255,0.85) 85%, transparent 100%);
+  box-shadow: 0 0 0px 1px rgba(210,180,255,1.0), 0 0 8px 3px rgba(176,102,255,0.95),
+              0 0 22px 8px rgba(155,81,224,0.55), 0 0 55px 18px rgba(130,60,200,0.25);
+  z-index: 10; pointer-events: none;
+  opacity: 0 !important; transition: opacity 0.4s ease !important;
+}
+.pillars-list > .pillar-item:nth-child(1)::before { right: 0; left: auto; }
+.pillars-list > .pillar-item:nth-child(2)::before { left: 0; right: auto; }
+.pillars-list > .pillar-item:nth-child(3)::before { right: 0; left: auto; }
+.pillar-item.bar-visible::before { opacity: 1 !important; }
+
+.pillar-beam, .pillar-beam-floor, .pillar-left, .pillar-accent { display: none; }
+.pillar-right { position: relative; z-index: 1; display: flex; flex-direction: column; flex: 1; }
+.pillar-number { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 8px; font-family: 'Courier New', monospace; }
+.pillar-rule { width: 28px; height: 1px; background: rgba(255,255,255,0.12); margin-bottom: 26px; }
+.pillar-title { font-size: clamp(1.4rem,2vw,1.85rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; color: #ffffff; margin-bottom: 20px; font-family: 'Calibri', system-ui, sans-serif; text-transform: uppercase; }
+.pillar-body { font-size: 0.82rem; line-height: 1.85; color: rgba(255,255,255,0.38); font-weight: 300; flex: 1; }
+
+/* ── Journey strip ───────────────────────────────────────── */
+.journey-strip {
+  display: flex; width: 100%; min-height: 580px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.jp-title { flex: 0 0 220px; padding: 52px 40px; display: flex; flex-direction: column; justify-content: space-between; background: rgba(5,3,14,0.6); border-right: 1px solid rgba(255,255,255,0.06); }
+.jp-title-eyebrow { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(212,175,55,0.65); }
+.jp-title-heading { font-size: clamp(2rem,3vw,2.8rem); font-weight: 900; line-height: 1.05; color: #fff; font-family: 'Calibri', system-ui, sans-serif; letter-spacing: -0.01em; }
+.jp-title-rule { width: 40px; height: 2px; background: linear-gradient(90deg, #D4AF37, #ffe580); border-radius: 2px; }
+.jp-step { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 36px 32px 40px; border-right: 1px solid rgba(255,255,255,0.055); position: relative; overflow: hidden; cursor: default; transition: flex 0.5s cubic-bezier(0.23,1,0.32,1); }
+.jp-step:last-child { border-right: none; }
+.jp-step:hover { flex: 1.35; }
+.jp-step-1 { background: radial-gradient(ellipse 100% 80% at 50% 20%, rgba(212,175,55,0.09) 0%, transparent 65%), rgba(5,3,14,0.5); }
+.jp-step-2 { background: radial-gradient(ellipse 100% 80% at 50% 20%, rgba(255,154,92,0.07) 0%, transparent 65%), rgba(5,3,14,0.5); }
+.jp-step-3 { background: radial-gradient(ellipse 100% 80% at 50% 20%, rgba(160,107,255,0.07) 0%, transparent 65%), rgba(5,3,14,0.5); }
+.jp-step-4 { background: radial-gradient(ellipse 100% 80% at 50% 20%, rgba(255,100,40,0.07) 0%, transparent 65%), rgba(5,3,14,0.5); }
+.jp-step-5 { background: radial-gradient(ellipse 100% 80% at 50% 20%, rgba(80,200,140,0.07) 0%, transparent 65%), rgba(5,3,14,0.5); }
+.jp-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.5; transition: opacity 0.3s; }
+.jp-step:hover .jp-label { opacity: 1; }
+.jp-step-1 .jp-label { color: #D4AF37; }
+.jp-step-2 .jp-label { color: #ff9a5c; }
+.jp-step-3 .jp-label { color: #a06bff; }
+.jp-step-4 .jp-label { color: #ff6a3c; }
+.jp-step-5 .jp-label { color: #50c88c; }
+.jp-number {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-52%);
+  font-size: clamp(140px,14vw,220px); font-weight: 900; font-family: 'Calibri', system-ui, sans-serif;
+  line-height: 1; color: transparent; user-select: none; pointer-events: none; white-space: nowrap;
+  opacity: 0; transition: opacity 1.0s cubic-bezier(0.22,1,0.36,1), filter 1.0s cubic-bezier(0.22,1,0.36,1);
+}
+.jp-step-1 .jp-number { -webkit-text-stroke: 1.5px rgba(212,175,55,0.55);  text-shadow: 0 0 40px rgba(212,175,55,0.25),  0 0 80px rgba(212,175,55,0.08); }
+.jp-step-2 .jp-number { -webkit-text-stroke: 1.5px rgba(255,154,92,0.55);  text-shadow: 0 0 40px rgba(255,154,92,0.25),  0 0 80px rgba(255,154,92,0.08); }
+.jp-step-3 .jp-number { -webkit-text-stroke: 1.5px rgba(160,107,255,0.55); text-shadow: 0 0 40px rgba(160,107,255,0.25), 0 0 80px rgba(160,107,255,0.08); }
+.jp-step-4 .jp-number { -webkit-text-stroke: 1.5px rgba(255,106,60,0.55);  text-shadow: 0 0 40px rgba(255,106,60,0.25),  0 0 80px rgba(255,106,60,0.08); }
+.jp-step-5 .jp-number { -webkit-text-stroke: 1.5px rgba(80,200,140,0.55);  text-shadow: 0 0 40px rgba(80,200,140,0.25),  0 0 80px rgba(80,200,140,0.08); }
+.jp-bottom { opacity: 0; transform: translateY(24px); transition: opacity 1.0s cubic-bezier(0.22,1,0.36,1), transform 1.0s cubic-bezier(0.22,1,0.36,1); }
+.jp-step.num-visible .jp-number { opacity: 1; }
+.jp-step.num-visible:hover .jp-number { filter: brightness(1.6); }
+.jp-step.content-visible .jp-bottom { opacity: 1; transform: translateY(0); }
+.jp-duration { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 10px; font-weight: 500; }
+.jp-step-title { font-size: clamp(0.85rem,1.1vw,1rem); font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.25; font-family: 'Calibri', system-ui, sans-serif; }
+.jp-step-body { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 220px; transition: color 0.3s; }
+.jp-step:hover .jp-step-body { color: rgba(255,255,255,0.68); }
+.jp-step::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.23,1,0.32,1); }
+.jp-step-1::before { background: linear-gradient(90deg, #D4AF37, transparent); }
+.jp-step-2::before { background: linear-gradient(90deg, #ff9a5c, transparent); }
+.jp-step-3::before { background: linear-gradient(90deg, #a06bff, transparent); }
+.jp-step-4::before { background: linear-gradient(90deg, #ff6a3c, transparent); }
+.jp-step-5::before { background: linear-gradient(90deg, #50c88c, transparent); }
+.jp-step:hover::before { transform: scaleX(1); }
+
+/* ── Track heading + card reveal ────────────────────────── */
+.levels-title { opacity: 0; transform: translateY(30px); transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.2s cubic-bezier(0.22,1,0.36,1); }
+.levels-title.is-visible { opacity: 1; transform: translateY(0); }
+/* ── Description paragraph: white, fixed min-height for alignment ── */
+.level-duration {
+  color: #ffffff !important;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  min-height: 3.5em;
+  margin-bottom: 16px;
+}
+
+/* ── Income target: prominent, light blue, above bullets ── */
+.level-income-highlight {
+  font-size: 1.05rem; font-weight: 700;
+  color: #3de8ff;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+  font-family: 'Calibri', sans-serif;
+  text-shadow: 0 0 18px rgba(61,232,255,0.3);
+}
+
+.level-card { opacity: 0; transform: translateY(30px); }
+.level-card.card-revealed { opacity: 1; transform: translateY(0); transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease; }
+
+/* ── Scroll-reveal heading ───────────────────────────────── */
+.scroll-reveal-heading { opacity: 0; transform: translateY(30px); transition: opacity 1.0s cubic-bezier(0.22,1,0.36,1), transform 1.0s cubic-bezier(0.22,1,0.36,1); }
+.scroll-reveal-heading.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ── Pricing cards ───────────────────────────────────────── */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 28px;
+  padding: 0 52px 20px; max-width: 1200px; margin: 0 auto;
+}
+.pricing-card {
+  position: relative; border-radius: 24px; padding: 36px 32px 32px;
+  display: flex; flex-direction: column;
+  background: rgba(0,0,0,0.55); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border: 1.5px solid var(--pc-color);
+  box-shadow: 0 0 0 1px var(--pc-color-dim), 0 0 24px 2px var(--pc-glow-near), 0 0 60px 8px var(--pc-glow-far);
+  z-index: 0; overflow: visible;
+  transition: transform 0.45s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s;
+}
+.pricing-card::before { display: none; }
+.pricing-card::after { content: ''; position: absolute; inset: -8px; border-radius: 32px; background: var(--pc-glow-near, transparent); filter: blur(28px); opacity: 0.20; z-index: -1; transition: opacity 0.4s, filter 0.4s; pointer-events: none; }
+.pricing-card:hover::after { opacity: 0.35; filter: blur(40px); }
+.pricing-card:hover { transform: translateY(-6px); box-shadow: 0 0 0 1px var(--pc-color-dim), 0 0 40px 6px var(--pc-glow-near), 0 0 90px 16px var(--pc-glow-far); }
+.pricing-card:nth-child(1) { --pc-color: rgba(176,102,255,0.7); --pc-color-dim: rgba(176,102,255,0.25); --pc-glow-near: rgba(176,102,255,0.28); --pc-glow-far: rgba(130,60,200,0.12); --pc-accent: #b066ff; }
+.pricing-card:nth-child(2) { --pc-color: rgba(155,81,224,0.7); --pc-color-dim: rgba(155,81,224,0.25); --pc-glow-near: rgba(155,81,224,0.28); --pc-glow-far: rgba(110,50,180,0.12); --pc-accent: #9b51e0; }
+.pricing-card:nth-child(3) { --pc-color: rgba(192,128,255,0.8); --pc-color-dim: rgba(192,128,255,0.30); --pc-glow-near: rgba(176,102,255,0.35); --pc-glow-far: rgba(130,60,200,0.15); --pc-accent: #c080ff; }
+.pc-inner { display: flex; flex-direction: column; flex: 1; background: transparent; }
+.pc-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75); margin-bottom: 24px; align-self: flex-start; }
+.pc-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 18px; }
+.pc-sessions { display: flex; flex-direction: row; align-items: baseline; gap: 10px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+.pc-num { font-size: clamp(2.8rem,4vw,3.8rem); font-weight: 900; letter-spacing: -0.02em; color: #ffffff; }
+.pc-lessons { font-size: clamp(1rem,1.5vw,1.3rem); font-weight: 800; color: #ffffff; letter-spacing: -0.02em; margin-bottom: 4px; }
+.pc-total { font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+.pc-total span { font-size: 1rem; font-weight: 400; color: rgba(255,255,255,0.5); }
+.pc-per-session { font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-bottom: 6px; font-weight: 400; }
+.pc-save { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: #ffb800; margin-bottom: 28px; padding: 3px 10px; border-radius: 6px; background: rgba(255,184,0,0.12); border: 1px solid rgba(255,184,0,0.3); }
+.pc-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px; }
+.pc-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; margin-bottom: 32px; }
+.pc-features li { font-size: 0.82rem; color: rgba(255,255,255,0.55); display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+.pc-features li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--pc-accent); margin-top: 5px; box-shadow: 0 0 8px var(--pc-accent); }
+.pc-cta { display: block; text-align: center; padding: 15px 24px; border-radius: 12px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: opacity 0.25s, transform 0.25s; }
+.pc-cta:hover { opacity: 0.88; transform: translateY(-2px); }
+.pricing-card:nth-child(1) .pc-cta, .pricing-card:nth-child(2) .pc-cta { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: #fff; }
+.pricing-card:nth-child(3) .pc-cta { background: linear-gradient(90deg, #9b51e0 0%, #c080ff 100%); border: none; color: #fff; font-weight: 800; box-shadow: 0 8px 32px rgba(155,81,224,0.4); }
+.pricing-footnote { text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.28); margin-top: 36px; letter-spacing: 0.04em; }
+
+/* Pricing cards — hidden initially via JS */
+[data-pricing-card].card-revealed { transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease; }
+
+/* ── Mobile: pricing horizontal scroll ───────────────────── */
+@media (max-width: 900px) {
+  .investment-section { align-items: stretch !important; padding-left: 0 !important; padding-right: 0 !important; overflow-x: visible !important; }
+  .investment-header { padding: 0 24px !important; }
+  .pricing-grid {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: 85vw !important;
+    grid-template-columns: unset !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 16px !important;
+    padding: 0 24px 20px !important;
+    max-width: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .pricing-grid::-webkit-scrollbar { display: none; }
+  .pricing-card { width: auto !important; max-width: none !important; min-width: unset !important; scroll-snap-align: center !important; box-sizing: border-box !important; }
+}
+
+/* ── Journey strip — mobile vertical ────────────────────── */
+@media (max-width: 900px) {
+  .journey-strip { flex-direction: column; min-height: auto; }
+  .jp-title { flex: none; padding: 40px 24px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .jp-step { flex: none; min-height: 220px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 28px 24px 32px; position: relative; overflow: hidden; }
+  .jp-step:last-child { border-bottom: none; }
+  .jp-number { font-size: clamp(100px,28vw,160px); top: 50%; left: 50%; transform: translate(-50%,-50%); opacity: 0; }
+  .jp-step.num-visible .jp-number { opacity: 0.55; }
+  .jp-step-body { max-width: 100%; }
+}
+
+@media (max-width: 900px) {
+  .pillars-list { padding: 16px 24px 40px; }
+}
+
+/* ══════════════════════════════════════════════════
+   LANGUAGE SWITCHER
+══════════════════════════════════════════════════ */
+.lang-switcher {
+  display: flex; align-items: center; gap: 4px;
+  padding: 6px 14px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(10px);
+  margin-left: 12px;
+}
+.lang-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.38); padding: 2px 5px; border-radius: 4px;
+  font-family: 'Inter', sans-serif; transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+.lang-btn:hover { color: rgba(255,255,255,0.75); }
+.lang-btn.active { color: #D4AF37; background: rgba(212,175,55,0.1); }
+.lang-divider { color: rgba(255,255,255,0.15); font-size: 0.6rem; user-select: none; }
+
+/* ══════════════════════════════════════════════════
+   RTL OVERRIDES — triggered by dir="rtl" on <html>
+══════════════════════════════════════════════════ */
+
+/* Global text direction */
+[dir="rtl"] body { font-family: 'Inter', 'Arial Hebrew', 'David', sans-serif; }
+
+/* Nav: flip order */
+[dir="rtl"] nav { flex-direction: row-reverse; }
+[dir="rtl"] .nav-links { flex-direction: row-reverse; }
+
+/* Back button: flip to right side + mirror arrow */
+[dir="rtl"] .back-btn { left: auto; right: 52px; }
+[dir="rtl"] .back-btn svg { transform: scaleX(-1); }
+@media (max-width: 900px) {
+  [dir="rtl"] .back-btn { left: auto; right: 24px; }
+}
+
+/* Hero: text align */
+[dir="rtl"] .yf-hero { direction: rtl; }
+[dir="rtl"] .yf-buttons { flex-direction: row-reverse; }
+
+/* Pillar neon edge bars — flip alternating sides */
+[dir="rtl"] .pillars-list > .pillar-item:nth-child(1)::before { right: auto; left: 0; }
+[dir="rtl"] .pillars-list > .pillar-item:nth-child(2)::before { left: auto; right: 0; }
+[dir="rtl"] .pillars-list > .pillar-item:nth-child(3)::before { right: auto; left: 0; }
+
+/* Pillar rule: align right */
+[dir="rtl"] .pillar-rule { margin-left: auto; margin-right: 0; }
+
+/* Journey strip: flip border sides */
+[dir="rtl"] .journey-strip { flex-direction: row-reverse; }
+[dir="rtl"] .jp-title { border-right: none; border-left: 1px solid rgba(255,255,255,0.06); }
+[dir="rtl"] .jp-step { border-right: none; border-left: 1px solid rgba(255,255,255,0.055); }
+[dir="rtl"] .jp-step:last-child { border-left: none; }
+
+/* Journey top-line reveal: flip origin to right */
+[dir="rtl"] .jp-step::before { transform-origin: right; }
+[dir="rtl"] .jp-step-1::before { background: linear-gradient(270deg, #D4AF37, transparent); }
+[dir="rtl"] .jp-step-2::before { background: linear-gradient(270deg, #ff9a5c, transparent); }
+[dir="rtl"] .jp-step-3::before { background: linear-gradient(270deg, #a06bff, transparent); }
+[dir="rtl"] .jp-step-4::before { background: linear-gradient(270deg, #ff6a3c, transparent); }
+[dir="rtl"] .jp-step-5::before { background: linear-gradient(270deg, #50c88c, transparent); }
+
+/* Objectives: flip grid */
+[dir="rtl"] .obj-grid { direction: rtl; }
+[dir="rtl"] .obj-line { margin-left: auto; margin-right: 0; }
+
+/* Manifesto */
+[dir="rtl"] .manifesto-grid { direction: rtl; }
+[dir="rtl"] .manifesto-rule { background: linear-gradient(270deg, rgba(212,175,55,0.55), transparent) !important; }
+
+/* Levels / Pricing / Stories: flex rows */
+[dir="rtl"] .levels-track { flex-direction: row-reverse; }
+[dir="rtl"] .stories-grid { direction: rtl; }
+
+/* Pricing features bullet: flip dot alignment */
+[dir="rtl"] .pc-features li { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .level-features li { direction: rtl; }
+
+/* PC tag: align start */
+[dir="rtl"] .pc-tag { align-self: flex-end; }
+
+/* FAQ */
+[dir="rtl"] .faq-q { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .faq-a p { text-align: right; }
+
+/* Pricing footnote */
+[dir="rtl"] .pricing-footnote { direction: rtl; }
+
+/* Journey mobile RTL */
+@media (max-width: 900px) {
+  [dir="rtl"] .journey-strip { flex-direction: column; }
+  [dir="rtl"] .jp-title { border-left: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  [dir="rtl"] .jp-step { border-left: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  [dir="rtl"] .jp-step:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Fixed background -->
+<div class="bg-fixed-wrap">
+  <img src="uploads/Gemini_Generated_Image_okctgmokctgmokct.png" alt="P.R FUTURE background"
+    style="width:100vw;height:100vh;object-fit:cover;object-position:center 20%;filter:contrast(1.05) saturate(1.1);" />
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 55%,rgba(212,175,55,0.08) 0%,transparent 65%),radial-gradient(ellipse 60% 50% at 50% 45%,rgba(255,154,92,0.05) 0%,transparent 60%);"></div>
+  <div class="bg-fixed-overlay"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.55) 0%,transparent 22%);"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">P.R FUTURE</a>
+  <ul class="nav-links">
+    <li><a href="#biz-vision" data-i18n="nav.vision">Vision</a></li>
+    <li><a href="#biz-journey" data-i18n="nav.journey">Journey</a></li>
+    <li><a href="#biz-objectives" data-i18n="nav.goals">Goals</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <a href="index.html#waitlist" class="nav-cta" data-i18n="nav.enroll">Enroll Now</a>
+    <div class="lang-switcher" id="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" data-lang="he">עב</button>
+      <span class="lang-divider">|</span>
+      <button class="lang-btn" data-lang="ru">РУ</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Back button -->
+<a href="index.html" class="back-btn">
+  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 7H2M7 2L2 7l5 5"/></svg>
+  <span data-i18n="back">Back</span>
+</a>
+
+<!-- ── Hero ─────────────────────────────────────────── -->
+<section class="yf-hero">
+  <div class="yf-eyebrow" data-i18n="hero.eyebrow">Business AI Track — Enterprise &amp; Teams</div>
+  <h1 class="yf-title" data-i18n-html="hero.title">TRANSFORM<br>YOUR BUSINESS</h1>
+  <p class="yf-subtitle" id="hero-subtitle"><span class="hero-tw-cursor" aria-hidden="true"></span></p>
+  <div class="yf-buttons">
+    <a href="#biz-vision" class="btn-yf btn-yf-primary" data-i18n="hero.cta1">Explore the Track</a>
+    <a href="#biz-showcase" class="btn-yf" data-i18n="hero.cta2">View Case Studies</a>
+  </div>
+  <div class="scroll-indicator" style="bottom:40px;">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── Vision / Feature Cards ─────────────────────── -->
+<section class="yf-vision" id="biz-vision">
+  <p class="yf-mission reveal" data-i18n="vision.mission">What separates AI-led businesses from the rest?</p>
+  <h2 class="yf-vision-title reveal" data-i18n-html="vision.title">Strategic. Scalable.<br>Building the AI-Native Business.</h2>
+  <div class="pillars-list">
+
+    <div class="pillar-item">
+      <div class="pillar-right">
+        <span class="pillar-number" data-i18n="pillar1.number">01 — Strategy</span>
+        <div class="pillar-rule"></div>
+        <h3 class="pillar-title" data-i18n-html="pillar1.title">The AI-First<br>Business Model</h3>
+        <p class="pillar-body" data-i18n="pillar1.body">We don't retrofit AI onto legacy operations — we help you redesign your business model from the ground up with AI at the core. The result is a leaner, faster, more scalable organization that compounds its advantage every quarter.</p>
+      </div>
+    </div>
+
+    <div class="pillar-item">
+      <div class="pillar-right">
+        <span class="pillar-number" data-i18n="pillar2.number">02 — Efficiency</span>
+        <div class="pillar-rule"></div>
+        <h3 class="pillar-title" data-i18n-html="pillar2.title">Measurable<br>Operational ROI</h3>
+        <p class="pillar-body" data-i18n="pillar2.body">Every AI implementation we deploy is tied to a measurable outcome — reduced cost, faster cycle times, higher output per employee. Our teams don't just learn AI; they build automations that pay for themselves within weeks of going live.</p>
+      </div>
+    </div>
+
+    <div class="pillar-item">
+      <div class="pillar-right">
+        <span class="pillar-number" data-i18n="pillar3.number">03 — Scale</span>
+        <div class="pillar-rule"></div>
+        <h3 class="pillar-title" data-i18n-html="pillar3.title">Enterprise-Ready<br>AI Adoption</h3>
+        <p class="pillar-body" data-i18n="pillar3.body">Sustainable AI transformation requires more than tools — it requires culture, governance, and systems. We give your teams the frameworks to adopt AI responsibly, scale it confidently, and maintain a competitive edge as the technology evolves.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Journey — Cinematic Panel Strip ─────────────── -->
+<section id="biz-journey" style="position:relative;z-index:10;overflow:hidden;">
+<div class="journey-strip">
+
+  <div class="jp-title">
+    <div class="jp-title-eyebrow" data-i18n="journey.eyebrow">The Implementation Path</div>
+    <h2 class="jp-title-heading" data-i18n-html="journey.heading">From<br>Manual.<br>To<br>Machine.</h2>
+    <div>
+      <div class="jp-title-rule"></div>
+      <p style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:14px;line-height:1.6;font-weight:300;" data-i18n-html="journey.desc">10 weeks.<br>5 phases.<br>1 transformed business.</p>
+    </div>
+  </div>
+
+  <div class="jp-step jp-step-1">
+    <div class="jp-label" data-i18n="phase1.label"># Phase One</div>
+    <div class="jp-number">1</div>
+    <div class="jp-bottom">
+      <div class="jp-duration" data-i18n="phase1.duration">Weeks 1–2</div>
+      <h4 class="jp-step-title" data-i18n="phase1.title">AI Readiness Audit</h4>
+      <p class="jp-step-body" data-i18n="phase1.body">Map your current operations, identify the highest-value AI opportunities, and build a prioritized transformation roadmap specific to your business.</p>
+    </div>
+  </div>
+
+  <div class="jp-step jp-step-2">
+    <div class="jp-label" data-i18n="phase2.label"># Phase Two</div>
+    <div class="jp-number">2</div>
+    <div class="jp-bottom">
+      <div class="jp-duration" data-i18n="phase2.duration">Weeks 3–4</div>
+      <h4 class="jp-step-title" data-i18n="phase2.title">Team AI Fluency</h4>
+      <p class="jp-step-body" data-i18n="phase2.body">Upskill your entire team in the AI tools most relevant to your sector. From prompt engineering to automation platforms — practical, fast, no fluff.</p>
+    </div>
+  </div>
+
+  <div class="jp-step jp-step-3">
+    <div class="jp-label" data-i18n="phase3.label"># Phase Three</div>
+    <div class="jp-number">3</div>
+    <div class="jp-bottom">
+      <div class="jp-duration" data-i18n="phase3.duration">Weeks 5–6</div>
+      <h4 class="jp-step-title" data-i18n="phase3.title">Workflow Automation</h4>
+      <p class="jp-step-body" data-i18n="phase3.body">Build and deploy AI automations across your highest-friction workflows — customer service, reporting, content, ops. Start saving hours in week five.</p>
+    </div>
+  </div>
+
+  <div class="jp-step jp-step-4">
+    <div class="jp-label" data-i18n="phase4.label"># Phase Four</div>
+    <div class="jp-number">4</div>
+    <div class="jp-bottom">
+      <div class="jp-duration" data-i18n="phase4.duration">Weeks 7–8</div>
+      <h4 class="jp-step-title" data-i18n="phase4.title">AI Product Build</h4>
+      <p class="jp-step-body" data-i18n="phase4.body">Design and ship an AI-powered product or internal tool tailored to your business. A real asset — not a prototype — ready for live deployment.</p>
+    </div>
+  </div>
+
+  <div class="jp-step jp-step-5">
+    <div class="jp-label" data-i18n="phase5.label"># Phase Five</div>
+    <div class="jp-number">5</div>
+    <div class="jp-bottom">
+      <div class="jp-duration" data-i18n="phase5.duration">Weeks 9–10</div>
+      <h4 class="jp-step-title" data-i18n="phase5.title">Scale &amp; Govern</h4>
+      <p class="jp-step-body" data-i18n="phase5.body">Establish AI governance, scale your best automations company-wide, and build the internal capability to keep improving without external dependency.</p>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ── Core Objectives ─────────────────────────────── -->
+<section class="objectives-section" id="biz-objectives">
+  <div class="objectives-header">
+    <div class="objectives-eyebrow" data-i18n="obj.eyebrow">Core Objectives</div>
+    <h2 class="objectives-title scroll-reveal-heading" data-i18n="obj.title">Three Outcomes We Deliver</h2>
+  </div>
+  <div class="obj-grid">
+    <div class="obj-pillar obj-pillar-1">
+      <div class="obj-line"></div>
+      <div class="obj-index" data-i18n="obj1.index">01</div>
+      <h3 class="obj-title" data-i18n="obj1.title">Operational Efficiency</h3>
+      <p class="obj-body" data-i18n="obj1.body">Identify and eliminate the highest-cost manual processes in your business through AI automation — measurable time and cost savings within the first month.</p>
+    </div>
+    <div class="obj-pillar obj-pillar-2">
+      <div class="obj-line"></div>
+      <div class="obj-index" data-i18n="obj2.index">02</div>
+      <h3 class="obj-title" data-i18n="obj2.title">Team-Wide AI Fluency</h3>
+      <p class="obj-body" data-i18n="obj2.body">Build an organisation where every employee can leverage AI as a force multiplier in their role — not just your tech team, but every department.</p>
+    </div>
+    <div class="obj-pillar obj-pillar-3">
+      <div class="obj-line"></div>
+      <div class="obj-index" data-i18n="obj3.index">03</div>
+      <h3 class="obj-title" data-i18n="obj3.title">Sustainable Advantage</h3>
+      <p class="obj-body" data-i18n="obj3.body">Embed AI capabilities that compound over time — frameworks, governance, and internal expertise that keep you ahead as the technology continues to evolve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Showcase / Quote ───────────────────────────── -->
+<section class="showcase-section" id="biz-showcase">
+  <div class="showcase-header">
+    <p class="showcase-quote" id="typewriter-quote" aria-label='"The businesses that win the next decade won\'t be the ones with the most funding. They\'ll be the ones that moved fastest with AI."'>
+      <span class="tw-cursor" aria-hidden="true"></span>
+    </p>
+  </div>
+  <div class="carousel-stage" id="biz-proj-carousel"></div>
+  <div class="carousel-controls">
+    <button class="carousel-btn" id="biz-carousel-prev" aria-label="Previous">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg>
+    </button>
+    <div class="carousel-dots" id="biz-carousel-dots"></div>
+    <button class="carousel-btn" id="biz-carousel-next" aria-label="Next">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ── Manifesto ───────────────────────────────────── -->
+<section class="manifesto-section" id="biz-manifesto">
+  <div class="manifesto-header">
+    <h2 class="manifesto-title reveal" data-i18n-html="manifesto.title">The businesses that act now<br>will define the next decade.</h2>
+    <p class="manifesto-intro reveal" data-i18n="manifesto.intro">AI is not a future consideration. It is the present competitive reality. The gap between AI-native businesses and those still deliberating grows wider every month.</p>
+  </div>
+  <div class="manifesto-grid">
+    <div class="manifesto-col reveal">
+      <div class="manifesto-number" data-i18n="man1.number">01</div>
+      <h3 class="manifesto-principle" data-i18n-html="man1.principle">ROI Before<br>Theory</h3>
+      <div class="manifesto-rule"></div>
+      <p class="manifesto-body" data-i18n="man1.body">We don't run strategy workshops that end in a slide deck. Every engagement ends with deployed automations, shipped tools, and measurable savings you can see in your numbers.</p>
+    </div>
+    <div class="manifesto-divider"></div>
+    <div class="manifesto-col reveal" style="transition-delay:0.15s">
+      <div class="manifesto-number" data-i18n="man2.number">02</div>
+      <h3 class="manifesto-principle" data-i18n-html="man2.principle">Your Business,<br>Not a Template</h3>
+      <div class="manifesto-rule"></div>
+      <p class="manifesto-body" data-i18n="man2.body">We don't apply generic AI frameworks. We study your operations, your customers, your margins — and build AI solutions that fit your specific business, not someone else's.</p>
+    </div>
+    <div class="manifesto-divider"></div>
+    <div class="manifesto-col reveal" style="transition-delay:0.3s">
+      <div class="manifesto-number" data-i18n="man3.number">03</div>
+      <h3 class="manifesto-principle" data-i18n-html="man3.principle">Build Internal<br>Capability</h3>
+      <div class="manifesto-rule"></div>
+      <p class="manifesto-body" data-i18n="man3.body">Our goal is to make ourselves unnecessary. We transfer capability, build internal champions, and create self-sustaining AI adoption — so your business keeps improving after we're gone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Program Levels ──────────────────────────────── -->
+<section class="program-levels-section" id="biz-levels">
+  <div class="levels-header">
+    <div class="levels-eyebrow" data-i18n="levels.eyebrow">Program Levels</div>
+    <h2 class="levels-title" data-i18n="levels.title">Choose Your Track</h2>
+  </div>
+  <div class="levels-track">
+
+    <div class="level-card" data-track-card="1">
+      <div class="level-badge gold" data-i18n="level1.badge">Level 1</div>
+      <div class="level-name" data-i18n="level1.name">Level 1: AI Foundation</div>
+      <div class="level-duration" data-i18n="level1.duration">Goal: Understanding the new language, cracking the Israeli mindset, and building a strong business identity.</div>
+
+      <ul class="level-features">
+        <li data-i18n="level1.f1">Introduction to the AI world: What an LLM really is, how the artificial brain works, and why everything you knew about work is about to change.</li>
+        <li data-i18n="level1.f2">Prompt Engineering: How to talk to the machine to get million-dollar results. Advanced prompt engineering techniques (Chain of Thought, Few-Shot).</li>
+        <li data-i18n="level1.f3">Cracking the Israeli code: The psychology of the Israeli consumer - what makes them buy? (Speed, bottom line "Tachles", reliability). How AI helps us accurately adapt the tone and message to the local market.</li>
+        <li data-i18n="level1.f4">Building a luxury brand: Using AI for logo design, visual language (color palettes, minimalist aesthetics), and writing a brand story that cannot be ignored.</li>
+        <li data-i18n="level1.f5">Market and competitor research with AI: How to analyze the market in 3 minutes and find the "loophole" through which your business will break through.</li>
+      </ul>
+      <div class="level-price" data-i18n="level1.goal">Portfolio of 15 projects</div>
+    </div>
+
+    <div class="level-card featured" data-track-card="2">
+      <div class="level-badge gold" data-i18n="level2.badge">Level 2</div>
+      <div class="level-name" data-i18n="level2.name">Level 2: AI Architect</div>
+      <div class="level-duration" data-i18n="level2.duration">Goal: Setting up your digital assets and activating a marketing system that works for you.</div>
+
+      <ul class="level-features">
+        <li data-i18n="level2.f1">Website and landing page creation with AI: Landing page structure - from the headline to the purchase button. Using AI tools to build fast, well-designed websites with no coding knowledge.</li>
+        <li data-i18n="level2.f2">Creating the "Digital Avatar": Creating a Digital Twin of yourself or a business representative. Voiceovers, animation, and creating marketing videos where your avatar sells while you sleep.</li>
+        <li data-i18n="level2.f3">Marketing and Advertising 2.0: Automated campaigns - how to let AI manage the budget and optimize ads on Facebook, Instagram, and Google. Aggressive and action-driven copywriting using advanced models.</li>
+        <li data-i18n="level2.f4">Marketing automation: Building funnels that capture leads, warm them up, and send an offer - all on "autopilot".</li>
+      </ul>
+      <div class="level-price" data-i18n="level2.goal">Portfolio of 15 projects</div>
+    </div>
+
+    <div class="level-card" data-track-card="3">
+      <div class="level-badge gold" data-i18n="level3.badge">Level 3</div>
+      <div class="level-name" data-i18n="level3.name">Level 3: PRO</div>
+      <div class="level-duration" data-i18n="level3.duration">Goal: Disconnecting the link between "time" and "money". Building a one-person business with the power of 100 employees.</div>
+
+      <ul class="level-features">
+        <li data-i18n="level3.f1">Building custom AI agents: Creating "neuro-employees": a sales agent, a customer service agent, and a market research agent who know your business inside out. Feeding the agents with business data (documents, professional knowledge, customer history).</li>
+        <li data-i18n="level3.f2">Replacing human workforce: Business mapping and analysis: where do employees make mistakes and where do they cost you the most? Implementing agents who don't make mistakes, don't get tired, and work 24/7.</li>
+        <li data-i18n="level3.f3">Strategic Growth: Learning the strategy that will triple your business profits in just 90 days! Using AI.</li>
+        <li data-i18n="level3.f4">From the Israeli market to the global market: Scaling Global penetration strategies. Adapting the business model to foreign currencies (Dollars/Euros) and different cultures using AI translation and cultural adaptation.</li>
+        <li data-i18n="level3.f5">Managing a one-person empire: How to easily manage a complex technological system, while maintaining millionaire profitability and the self-confidence of market leaders.</li>
+      </ul>
+      <div class="level-price" data-i18n="level3.goal">Portfolio of 15 projects</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Investment Plans ────────────────────────────── -->
+<section class="investment-section">
+  <div class="investment-header">
+    <div class="investment-eyebrow" data-i18n="invest.eyebrow">Investment</div>
+    <h2 class="investment-title" data-i18n="invest.title">Transparent Pricing</h2>
+    <p class="investment-subtitle" data-i18n="invest.subtitle">No hidden fees. No long-term lock-ins. Corporate invoicing available.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- Card 1: Basic -->
+    <div class="pricing-card" data-pricing-card="1">
+      <div class="pc-inner">
+        <div class="pc-tag" data-i18n="pc1.tag">Basic Plan</div>
+        <div class="pc-name" data-i18n="pc1.name">Basic</div>
+        <div class="pc-sessions"><span class="pc-num" data-i18n="pc1.num">3</span><span class="pc-lessons" data-i18n="pc.lessons">LESSONS</span></div>
+        <div class="pc-total" data-i18n-html="pc1.total">₪750 <span>total</span></div>
+        <div class="pc-per-session" data-i18n="pc1.per">₪250 / session</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li data-i18n="pc.bf1">Business Diagnosis</li>
+          <li data-i18n="pc.bf2">Business Analysis</li>
+          <li data-i18n="pc.bf3">Personal guidance on increasing business profits</li>
+          <li data-i18n="pc.f1">Personal work plan from an AI expert</li>
+          <li data-i18n="pc.f2">Individual support</li>
+          <li data-i18n="pc.f3">Ready-to-use prompt library</li>
+          <li data-i18n="pc.f4">Professional study materials</li>
+          <li data-i18n="pc.f5">Small group learning (up to 4 people)</li>
+        </ul>
+        <a href="index.html#waitlist" class="pc-cta" data-i18n="pc.cta">Enroll Now</a>
+      </div>
+    </div>
+
+    <!-- Card 2: Advanced -->
+    <div class="pricing-card" data-pricing-card="2">
+      <div class="pc-inner">
+        <div class="pc-tag" data-i18n="pc2.tag">Advanced Plan</div>
+        <div class="pc-name" data-i18n="pc2.name">Advanced</div>
+        <div class="pc-sessions"><span class="pc-num" data-i18n="pc2.num">6</span><span class="pc-lessons" data-i18n="pc.lessons">LESSONS</span></div>
+        <div class="pc-total" data-i18n-html="pc2.total">₪1,380 <span>total</span></div>
+        <div class="pc-per-session" data-i18n="pc2.per">₪230 / session</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li data-i18n="pc.bf1">Business Diagnosis</li>
+          <li data-i18n="pc.bf2">Business Analysis</li>
+          <li data-i18n="pc.bf3">Personal guidance on increasing business profits</li>
+          <li data-i18n="pc.f1">Personal work plan from an AI expert</li>
+          <li data-i18n="pc.f2">Individual support</li>
+          <li data-i18n="pc.f3">Ready-to-use prompt library</li>
+          <li data-i18n="pc.f4">Professional study materials</li>
+          <li data-i18n="pc.f5">Small group learning (up to 4 people)</li>
+        </ul>
+        <a href="index.html#waitlist" class="pc-cta" data-i18n="pc.cta">Enroll Now</a>
+      </div>
+    </div>
+
+    <!-- Card 3: Elite -->
+    <div class="pricing-card" data-pricing-card="3">
+      <div class="pc-inner">
+        <div class="pc-tag" data-i18n="pc3.tag">Most Profitable</div>
+        <div class="pc-name" data-i18n="pc3.name">Elite</div>
+        <div class="pc-sessions"><span class="pc-num" data-i18n="pc3.num">10</span><span class="pc-lessons" data-i18n="pc.lessons">LESSONS</span></div>
+        <div class="pc-total" data-i18n-html="pc3.total">₪2,100 <span>total</span></div>
+        <div class="pc-per-session" data-i18n="pc3.per">₪210 / session</div>
+        <div class="pc-save" data-i18n="pc3.save">✦ Save 16%</div>
+        <div class="pc-divider"></div>
+        <ul class="pc-features">
+          <li data-i18n="pc.bf1">Business Diagnosis</li>
+          <li data-i18n="pc.bf2">Business Analysis</li>
+          <li data-i18n="pc.bf3">Personal guidance on increasing business profits</li>
+          <li data-i18n="pc.f1">Personal work plan from an AI expert</li>
+          <li data-i18n="pc.f2">Individual support</li>
+          <li data-i18n="pc.f3">Ready-to-use prompt library</li>
+          <li data-i18n="pc.f4">Professional study materials</li>
+          <li data-i18n="pc.f5">Small group learning (up to 4 people)</li>
+        </ul>
+        <a href="index.html#waitlist" class="pc-cta" data-i18n="pc.cta">Enroll Now</a>
+      </div>
+    </div>
+
+  </div>
+  <p class="pricing-footnote" data-i18n="pricing.footnote">All prices are in Israeli Shekels (₪) · Payment is required before the start of classes.</p>
+</section>
+
+<!-- ── Success Stories ─────────────────────────────── -->
+<section class="stories-section">
+  <div class="stories-header">
+    <div class="stories-eyebrow" data-i18n="stories.eyebrow">Success Stories</div>
+    <h2 class="stories-title" data-i18n="stories.title">What Our Clients Say</h2>
+  </div>
+  <div class="stories-grid">
+    <div class="story-card reveal">
+      <div class="story-quote-mark">"</div>
+      <p class="story-quote" data-i18n="story1.quote">We deployed three automations in week five. By month two, we'd reclaimed 200 hours of staff time per month. The ROI was immediate and it's compounding every week.</p>
+      <div class="story-author">
+        <div class="story-avatar">A</div>
+        <div>
+          <div class="story-name" data-i18n="story1.name">Avi L.</div>
+          <div class="story-role" data-i18n="story1.role">CEO, Logistics Firm · Business Transform</div>
+        </div>
+      </div>
+    </div>
+    <div class="story-card reveal reveal-delay-1">
+      <div class="story-quote-mark">"</div>
+      <p class="story-quote" data-i18n="story2.quote">Our entire team went from AI-skeptical to AI-fluent in eight weeks. The culture shift was as valuable as the tools we built. We think and operate differently now.</p>
+      <div class="story-author">
+        <div class="story-avatar">T</div>
+        <div>
+          <div class="story-name" data-i18n="story2.name">Tali M.</div>
+          <div class="story-role" data-i18n="story2.role">Operations Director, SaaS Company · Business Transform</div>
+        </div>
+      </div>
+    </div>
+    <div class="story-card reveal reveal-delay-2">
+      <div class="story-quote-mark">"</div>
+      <p class="story-quote" data-i18n="story3.quote">The Enterprise program gave us a 12-month roadmap, internal champions, and a governance framework. We now have the infrastructure to keep scaling AI on our own terms.</p>
+      <div class="story-author">
+        <div class="story-avatar">R</div>
+        <div>
+          <div class="story-name" data-i18n="story3.name">Ron S.</div>
+          <div class="story-role" data-i18n="story3.role">CTO, Financial Services · Enterprise Track</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────── -->
+<section class="faq-section">
+  <div class="faq-header">
+    <div class="faq-eyebrow" data-i18n="faq.eyebrow">FAQ</div>
+    <h2 class="faq-title" data-i18n="faq.title">Common Questions</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q"><span data-i18n="faq1.q">What size businesses do you work with?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v8M1 5h8"/></svg></span></button>
+      <div class="faq-a"><p data-i18n="faq1.a">The Team Starter is designed for small teams of 3–10. The Business Transform works best for companies of 10–100 employees. The Enterprise track scales to any organisation size — we scope it to your headcount and complexity.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span data-i18n="faq2.q">Does our team need technical experience?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v8M1 5h8"/></svg></span></button>
+      <div class="faq-a"><p data-i18n="faq2.a">No. We've trained teams from logistics, law, finance, healthcare, retail, and hospitality — none required prior technical knowledge. We meet your team exactly where they are.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span data-i18n="faq3.q">How disruptive is the program to day-to-day operations?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v8M1 5h8"/></svg></span></button>
+      <div class="faq-a"><p data-i18n="faq3.a">Minimal. Sessions run in 3-hour blocks, scheduled around your team's availability. We work around your calendar, not the other way around. The program is intentionally designed to not disrupt your core operations while transforming them.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span data-i18n="faq4.q">What do we actually walk away with?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v8M1 5h8"/></svg></span></button>
+      <div class="faq-a"><p data-i18n="faq4.a">Deployed automations, at least one custom AI tool, a trained team, and a documented roadmap for continuing your AI transformation internally. Not slides — working systems.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span data-i18n="faq5.q">Can we start with one department?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v8M1 5h8"/></svg></span></button>
+      <div class="faq-a"><p data-i18n="faq5.a">Absolutely. Many clients start with their operations or marketing team as a pilot, demonstrate clear ROI, and then roll out across the organisation. The Team Starter is designed exactly for this approach.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q"><span data-i18n="faq6.q">Is ongoing support available after the program?</span><span class="faq-icon"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 1v8M1 5h8"/></svg></span></button>
+      <div class="faq-a"><p data-i18n="faq6.a">Yes. All plans include post-program support. The Transform track includes 3 months; the Enterprise track includes a 12-month advisory retainer. Additional retainer packages are available for all tiers.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer><span data-i18n="footer">© 2025 P.R FUTURE — AI Learning Academy. All rights reserved.</span></footer>
+
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+// ── Hero: title fade-up (1.5s delay) ──────────────────────
+// Subtitle is typed by applyLang below (avoids double-typing)
+(function () {
+  const title = document.querySelector('.yf-title');
+  if (title) setTimeout(() => title.classList.add('is-visible'), 1500);
+})();
+
+// ── Scroll reveal (.reveal) ────────────────────────────────
+const revealObs = new IntersectionObserver(
+  (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.12 }
+);
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── Objectives heading ────────────────────────────────────
+const headingRevealObs = new IntersectionObserver(
+  (entries) => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); headingRevealObs.unobserve(e.target); }
+  }), { threshold: 0.4 }
+);
+document.querySelectorAll('.scroll-reveal-heading').forEach(el => headingRevealObs.observe(el));
+
+// ── Objective pillars stagger ─────────────────────────────
+const objObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const idx = [...document.querySelectorAll('.obj-pillar')].indexOf(entry.target);
+    entry.target.style.transition = `opacity 0.7s ${idx * 0.12}s ease, transform 0.7s ${idx * 0.12}s cubic-bezier(0.23,1,0.32,1)`;
+    entry.target.style.opacity = '1';
+    entry.target.style.transform = 'translateY(0)';
+    objObs.unobserve(entry.target);
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.obj-pillar').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(30px)'; objObs.observe(el);
+});
+
+// ── Feature cards (pillars) — RTL-aware inline-transition reveal ────
+(function () {
+  const EASING  = 'cubic-bezier(0.22,1,0.36,1)';
+  const pillars = Array.from(document.querySelectorAll('.pillars-list .pillar-item'));
+
+  function setPillarInitial() {
+    const isRTL = document.documentElement.dir === 'rtl';
+    pillars.forEach((card, i) => {
+      card.style.opacity   = '0';
+      // In RTL the visual alternation is mirrored
+      const slideRight = isRTL ? (i % 2 === 1) : (i % 2 !== 1);
+      card.style.transform = slideRight ? 'translateX(60px)' : 'translateX(-60px)';
+    });
+  }
+  setPillarInitial();
+
+  // Re-expose so i18n can call it on lang switch
+  window._resetPillarInitial = setPillarInitial;
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      // Step A: bar fades in
+      card.classList.add('bar-visible');
+      // Step B: card slides in
+      setTimeout(() => {
+        card.style.transition = `opacity 0.6s ${EASING}, transform 0.6s ${EASING}`;
+        card.getBoundingClientRect();
+        card.style.opacity   = '1';
+        card.style.transform = 'translateX(0)';
+        setTimeout(() => { card.style.transition = ''; }, 660);
+      }, 180);
+      obs.unobserve(card);
+    });
+  }, { threshold: 0.18 });
+  pillars.forEach(card => obs.observe(card));
+})();
+
+// ── Journey phase Step A / Step B reveal ─────────────────
+(function () {
+  const steps = document.querySelectorAll('.jp-step');
+  const stepObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const step = entry.target;
+      step.classList.add('num-visible');
+      setTimeout(() => step.classList.add('content-visible'), 800);
+      stepObs.unobserve(step);
+    });
+  }, { threshold: 0.15 });
+  steps.forEach(step => stepObs.observe(step));
+})();
+
+// ── Choose Your Track cards ────────────────────────────────
+(function () {
+  const EASING   = 'cubic-bezier(0.22, 1, 0.36, 1)';
+  const DURATION = '0.5s';
+  const cards    = Array.from(document.querySelectorAll('[data-track-card]'));
+  if (!cards.length) return;
+
+  function revealCard(card, delay) {
+    setTimeout(() => {
+      card.style.transition = `opacity ${DURATION} ${EASING}, transform ${DURATION} ${EASING}`;
+      card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+      setTimeout(() => { card.style.transition = ''; card.style.opacity = ''; card.style.transform = ''; card.classList.add('card-revealed'); }, 550);
+    }, delay);
+  }
+
+  const isMobile = () => window.innerWidth <= 768;
+  if (!isMobile()) {
+    let fired = false;
+    const track = document.querySelector('.levels-track');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting && !fired) { fired = true; obs.unobserve(track); cards.forEach((card, i) => revealCard(card, i * 180)); } });
+    }, { threshold: 0.2 });
+    if (track) obs.observe(track);
+  } else {
+    const mobileDelays = [0, 120, 240];
+    let mobileFired = false;
+    const mobileObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !mobileFired) {
+          mobileFired = true; mobileObs.disconnect();
+          cards.forEach((card, i) => {
+            const d = mobileDelays[i];
+            card.style.transition = `opacity ${DURATION} ${EASING} ${d}ms, transform ${DURATION} ${EASING} ${d}ms`;
+            card.getBoundingClientRect();
+            card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+            setTimeout(() => { card.style.transition = ''; card.style.opacity = ''; card.style.transform = ''; card.classList.add('card-revealed'); }, 550 + d);
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+    if (cards[0]) mobileObs.observe(cards[0]);
+  }
+})();
+
+// ── Typewriter quote ───────────────────────────────────────
+(function () {
+  const quoteEl = document.getElementById('typewriter-quote');
+  if (!quoteEl) return;
+  const segments = [
+    { text: '\u201cThe businesses that win the next decade', em: true },
+    { text: ' won\u2019t be the ones with the most funding. They\u2019ll be the ones that moved fastest with AI.\u201d', em: false }
+  ];
+  let typed = false;
+  function run() {
+    if (typed) return; typed = true;
+    const chars = [];
+    segments.forEach(seg => seg.text.split('').forEach(c => chars.push({ c, em: seg.em })));
+    let i = 0;
+    function tick() {
+      if (i >= chars.length) return;
+      i++;
+      const typed_chars = chars.slice(0, i);
+      let html = ''; let j = 0;
+      while (j < typed_chars.length) {
+        if (typed_chars[j].em) {
+          let s = '';
+          while (j < typed_chars.length && typed_chars[j].em) { s += typed_chars[j].c; j++; }
+          html += '<em>' + s + '</em>';
+        } else { html += typed_chars[j].c; j++; }
+      }
+      quoteEl.innerHTML = html + '<span class="tw-cursor" aria-hidden="true"></span>';
+      setTimeout(tick, 35);
+    }
+    tick();
+  }
+  const twObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { twObs.unobserve(quoteEl); setTimeout(run, 300); } });
+  }, { threshold: 0.5 });
+  twObs.observe(quoteEl);
+})();
+
+// ── Levels title reveal ────────────────────────────────────
+(function () {
+  const el = document.querySelector('.levels-title');
+  if (!el) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { el.classList.add('is-visible'); obs.unobserve(el); } });
+  }, { threshold: 0.4 });
+  obs.observe(el);
+})();
+
+// ── Pricing cards reveal ───────────────────────────────────
+(function () {
+  const EASING   = 'cubic-bezier(0.22, 1, 0.36, 1)';
+  const DURATION = '1.0s';
+  const pCards   = Array.from(document.querySelectorAll('[data-pricing-card]'));
+  if (!pCards.length) return;
+
+  // Hide via JS
+  pCards.forEach(card => { card.style.opacity = '0'; card.style.transform = 'translateY(30px)'; });
+
+  function revealPricingCard(card, delayMs) {
+    card.style.transition = `opacity ${DURATION} ${EASING} ${delayMs}ms, transform ${DURATION} ${EASING} ${delayMs}ms`;
+    card.getBoundingClientRect();
+    card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+    setTimeout(() => { card.style.transition = ''; card.style.opacity = ''; card.style.transform = ''; card.classList.add('card-revealed'); }, 1050 + delayMs);
+  }
+
+  const isMobile = () => window.innerWidth <= 900;
+  if (!isMobile()) {
+    let fired = false;
+    const grid = document.querySelector('.pricing-grid');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting && !fired) { fired = true; obs.unobserve(grid); pCards.forEach((card, i) => revealPricingCard(card, i * 400)); } });
+    }, { threshold: 0.1 });
+    if (grid) obs.observe(grid);
+  } else {
+    const mobileDelays = [0, 120, 240];
+    let fired = false;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting && !fired) { fired = true; obs.disconnect(); pCards.forEach((card, i) => revealPricingCard(card, mobileDelays[i])); } });
+    }, { threshold: 0.1 });
+    if (pCards[0]) obs.observe(pCards[0]);
+  }
+})();
+
+// ── Business Case Studies Carousel ────────────────────────
+const projects = [
+  { title: 'SupplySync',   creator: 'Avi, Logistics CEO',          desc: 'AI-powered supply chain orchestrator that reduced procurement costs by 22% and eliminated manual order tracking across 12 suppliers.', value: '₪180K saved/yr', tier: 'val-elite' },
+  { title: 'LegalFlow',    creator: 'Noa, Law Firm Partner',       desc: 'Automated contract lifecycle management: drafting, review, signature tracking, and renewal alerts — zero manual input from associates.', value: '₪95K saved/yr',  tier: 'val-high' },
+  { title: 'SalesOS',      creator: 'Yoav, Sales Director',        desc: 'AI sales intelligence platform that personalises outreach, scores leads in real time, and auto-generates follow-up sequences.', value: '3× pipeline',    tier: 'val-elite' },
+  { title: 'ClinicOps',    creator: 'Dr. Sarah, Medical Director', desc: 'Patient intake, triage, and follow-up automation that handles 80% of administrative work — freeing staff for patient-facing care.', value: '₪140K saved/yr', tier: 'val-elite' },
+  { title: 'BrandPilot',   creator: 'Roni, Marketing VP',         desc: 'Full content operations platform: briefs AI-generated across all channels, maintaining brand voice, published and distributed automatically.', value: '8× output',     tier: 'val-high' },
+  { title: 'HRIntelligence',creator: 'Shira, CHRO',               desc: 'End-to-end talent acquisition AI: sourcing, screening, scheduling, and onboarding — reducing time-to-hire from 45 days to 12.', value: '70% faster',     tier: 'val-high' },
+  { title: 'FinancePilot', creator: 'Dror, CFO',                  desc: 'Automated financial reporting, anomaly detection, and cash flow forecasting — board-ready reports generated in minutes, not days.', value: '₪80K saved/yr',  tier: 'val-mid' },
+  { title: 'RetailBrain',  creator: 'Ronit, Retail Chain Owner',  desc: 'AI demand forecasting, dynamic pricing, and personalised customer journeys across 18 locations — unified in one dashboard.', value: '31% margin lift', tier: 'val-elite' },
+];
+const stage  = document.getElementById('biz-proj-carousel');
+const dotsEl = document.getElementById('biz-carousel-dots');
+const cardEls = projects.map((p, i) => {
+  const el = document.createElement('div');
+  el.className = 'proj-card'; el.dataset.idx = String(i);
+  el.innerHTML = `
+    <div class="proj-card-sheen"></div>
+    <div class="card-corner-bl"></div><div class="card-corner-br"></div>
+    <div class="card-brand-icon"><svg viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 10h6M10 7v6"/></svg></div>
+    <h3 class="card-proj-title">${p.title}</h3>
+    <div class="card-creator">${p.creator}</div>
+    <div class="card-desc-panel"><p>${p.desc}</p></div>
+    <div class="card-valuation-btn ${p.tier}">${p.value}</div>
+    <a class="card-explore" href="#">View Case Study &nbsp;→</a>
+  `;
+  stage.appendChild(el); return el;
+});
+projects.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'c-dot'; dot.addEventListener('click', () => goTo(i)); dotsEl.appendChild(dot);
+});
+let current = 0;
+const posOf = i => {
+  const diff = (i - current + projects.length) % projects.length;
+  if (diff === 0) return 'active'; if (diff === 1) return 'next'; if (diff === projects.length - 1) return 'prev';
+  if (diff === 2) return 'next2'; if (diff === projects.length - 2) return 'prev2'; return 'hidden';
+};
+const render = () => {
+  cardEls.forEach((el, i) => { el.dataset.pos = posOf(i); });
+  dotsEl.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+};
+const goTo = idx => { current = ((idx % projects.length) + projects.length) % projects.length; render(); };
+document.getElementById('biz-carousel-prev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('biz-carousel-next').addEventListener('click', () => goTo(current + 1));
+stage.addEventListener('click', e => {
+  const card = e.target.closest('.proj-card'); if (!card) return;
+  if (card.dataset.pos === 'prev') goTo(current - 1);
+  if (card.dataset.pos === 'next') goTo(current + 1);
+});
+render();
+
+// ── Ripple ─────────────────────────────────────────────────
+document.querySelectorAll('.btn-yf, .nav-cta').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const rect = btn.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple-ring';
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+    btn.style.position = 'relative'; btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+  });
+});
+
+// ── FAQ accordion ──────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+<!-- ══════════════════════════════════════════════════════
+     i18n ENGINE — full EN / HE / RU dictionary + switcher
+════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  // ── Translations ─────────────────────────────────────────
+  const T = {
+    en: {
+      'nav.vision':'Vision','nav.journey':'Journey','nav.goals':'Goals','nav.enroll':'Enroll Now','back':'Back',
+      'hero.eyebrow':'Business AI Track — Enterprise &amp; Teams',
+      'hero.title':'TRANSFORM<br>YOUR BUSINESS',
+      'hero.subtitle':'Scalable AI implementation for teams and businesses that refuse to fall behind.',
+      'hero.cta1':'Explore the Track','hero.cta2':'View Case Studies',
+      'vision.mission':'What separates AI-led businesses from the rest?',
+      'vision.title':'Strategic. Scalable.<br>Building the AI-Native Business.',
+      'pillar1.number':'01 — Strategy','pillar1.title':'The AI-First<br>Business Model',
+      'pillar1.body':"We don't retrofit AI onto legacy operations — we help you redesign your business model from the ground up with AI at the core. The result is a leaner, faster, more scalable organization that compounds its advantage every quarter.",
+      'pillar2.number':'02 — Efficiency','pillar2.title':'Measurable<br>Operational ROI',
+      'pillar2.body':"Every AI implementation we deploy is tied to a measurable outcome — reduced cost, faster cycle times, higher output per employee. Our teams don't just learn AI; they build automations that pay for themselves within weeks of going live.",
+      'pillar3.number':'03 — Scale','pillar3.title':'Enterprise-Ready<br>AI Adoption',
+      'pillar3.body':"Sustainable AI transformation requires more than tools — it requires culture, governance, and systems. We give your teams the frameworks to adopt AI responsibly, scale it confidently, and maintain a competitive edge as the technology evolves.",
+      'journey.eyebrow':'The Implementation Path','journey.heading':'From<br>Manual.<br>To<br>Machine.',
+      'journey.desc':'10 weeks.<br>5 phases.<br>1 transformed business.',
+      'phase1.label':'# Phase One','phase1.duration':'Weeks 1–2','phase1.title':'AI Readiness Audit',
+      'phase1.body':'Map your current operations, identify the highest-value AI opportunities, and build a prioritized transformation roadmap specific to your business.',
+      'phase2.label':'# Phase Two','phase2.duration':'Weeks 3–4','phase2.title':'Team AI Fluency',
+      'phase2.body':'Upskill your entire team in the AI tools most relevant to your sector. From prompt engineering to automation platforms — practical, fast, no fluff.',
+      'phase3.label':'# Phase Three','phase3.duration':'Weeks 5–6','phase3.title':'Workflow Automation',
+      'phase3.body':'Build and deploy AI automations across your highest-friction workflows — customer service, reporting, content, ops. Start saving hours in week five.',
+      'phase4.label':'# Phase Four','phase4.duration':'Weeks 7–8','phase4.title':'AI Product Build',
+      'phase4.body':'Design and ship an AI-powered product or internal tool tailored to your business. A real asset — not a prototype — ready for live deployment.',
+      'phase5.label':'# Phase Five','phase5.duration':'Weeks 9–10','phase5.title':'Scale &amp; Govern',
+      'phase5.body':'Establish AI governance, scale your best automations company-wide, and build the internal capability to keep improving without external dependency.',
+      'obj.eyebrow':'Core Objectives','obj.title':'Three Outcomes We Deliver',
+      'obj1.index':'01','obj1.title':'Operational Efficiency',
+      'obj1.body':'Identify and eliminate the highest-cost manual processes in your business through AI automation — measurable time and cost savings within the first month.',
+      'obj2.index':'02','obj2.title':'Team-Wide AI Fluency',
+      'obj2.body':'Build an organisation where every employee can leverage AI as a force multiplier in their role — not just your tech team, but every department.',
+      'obj3.index':'03','obj3.title':'Sustainable Advantage',
+      'obj3.body':'Embed AI capabilities that compound over time — frameworks, governance, and internal expertise that keep you ahead as the technology continues to evolve.',
+      'quote.em':'\u201cThe businesses that win the next decade',
+      'quote.rest':" won\u2019t be the ones with the most funding. They\u2019ll be the ones that moved fastest with AI.\u201d",
+      'manifesto.title':'The businesses that act now<br>will define the next decade.',
+      'manifesto.intro':'AI is not a future consideration. It is the present competitive reality. The gap between AI-native businesses and those still deliberating grows wider every month.',
+      'man1.number':'01','man1.principle':'ROI Before<br>Theory',
+      'man1.body':"We don't run strategy workshops that end in a slide deck. Every engagement ends with deployed automations, shipped tools, and measurable savings you can see in your numbers.",
+      'man2.number':'02','man2.principle':'Your Business,<br>Not a Template',
+      'man2.body':"We don't apply generic AI frameworks. We study your operations, your customers, your margins — and build AI solutions that fit your specific business, not someone else's.",
+      'man3.number':'03','man3.principle':'Build Internal<br>Capability',
+      'man3.body':"Our goal is to make ourselves unnecessary. We transfer capability, build internal champions, and create self-sustaining AI adoption — so your business keeps improving after we're gone.",
+      'levels.eyebrow':'Program Levels','levels.title':'Choose Your Track',
+      'level1.badge':'Level 1','level1.name':'Level 1: AI Foundation','level1.duration':'Goal: Understanding the new language, cracking the Israeli mindset, and building a strong business identity.',
+      'level1.f1':'Introduction to the AI world: What an LLM really is, how the artificial brain works, and why everything you knew about work is about to change.',
+      'level1.f2':'Prompt Engineering: How to talk to the machine to get million-dollar results. Advanced prompt engineering techniques (Chain of Thought, Few-Shot).',
+      'level1.f3':'Cracking the Israeli code: The psychology of the Israeli consumer - what makes them buy? (Speed, bottom line "Tachles", reliability). How AI helps us accurately adapt the tone and message to the local market.',
+      'level1.f4':'Building a luxury brand: Using AI for logo design, visual language (color palettes, minimalist aesthetics), and writing a brand story that cannot be ignored.',
+      'level1.f5':'Market and competitor research with AI: How to analyze the market in 3 minutes and find the "loophole" through which your business will break through.',
+      'level1.goal':'Portfolio of 15 projects',
+      'level2.badge':'Level 2','level2.name':'Level 2: AI Architect','level2.duration':'Goal: Setting up your digital assets and activating a marketing system that works for you.',
+      'level2.f1':'Website and landing page creation with AI: Landing page structure - from the headline to the purchase button. Using AI tools to build fast, well-designed websites with no coding knowledge.',
+      'level2.f2':'Creating the "Digital Avatar": Creating a Digital Twin of yourself or a business representative. Voiceovers, animation, and creating marketing videos where your avatar sells while you sleep.',
+      'level2.f3':'Marketing and Advertising 2.0: Automated campaigns - how to let AI manage the budget and optimize ads on Facebook, Instagram, and Google. Aggressive and action-driven copywriting using advanced models.',
+      'level2.f4':'Marketing automation: Building funnels that capture leads, warm them up, and send an offer - all on "autopilot".',
+      'level2.goal':'Portfolio of 15 projects',
+      'level3.badge':'Level 3','level3.name':'Level 3: PRO','level3.duration':'Goal: Disconnecting the link between "time" and "money". Building a one-person business with the power of 100 employees.',
+      'level3.f1':'Building custom AI agents: Creating "neuro-employees": a sales agent, a customer service agent, and a market research agent who know your business inside out. Feeding the agents with business data (documents, professional knowledge, customer history).',
+      'level3.f2':'Replacing human workforce: Business mapping and analysis: where do employees make mistakes and where do they cost you the most? Implementing agents who don\'t make mistakes, don\'t get tired, and work 24/7.',
+      'level3.f3':'Strategic Growth: Learning the strategy that will triple your business profits in just 90 days! Using AI.',
+      'level3.f4':'From the Israeli market to the global market: Scaling Global penetration strategies. Adapting the business model to foreign currencies (Dollars/Euros) and different cultures using AI translation and cultural adaptation.',
+      'level3.f5':'Managing a one-person empire: How to easily manage a complex technological system, while maintaining millionaire profitability and the self-confidence of market leaders.',
+      'level3.goal':'Portfolio of 15 projects',
+      'invest.eyebrow':'Investment','invest.title':'Transparent Pricing',
+      'invest.subtitle':'No hidden fees. No long-term lock-ins. Corporate invoicing available.',
+      'pc1.tag':'Basic Plan','pc1.name':'Basic','pc1.num':'3','pc1.total':'₪750 <span>total</span>','pc1.per':'₪250 / session',
+      'pc2.tag':'Advanced Plan','pc2.name':'Advanced','pc2.num':'6','pc2.total':'₪1,380 <span>total</span>','pc2.per':'₪230 / session',
+      'pc3.tag':'Most Profitable','pc3.name':'Elite','pc3.num':'10','pc3.total':'₪2,100 <span>total</span>','pc3.per':'₪210 / session','pc3.save':'✦ Save 16%',
+      'pc.lessons':'LESSONS',
+      'pc.bf1':'Business Diagnosis','pc.bf2':'Business Analysis','pc.bf3':'Personal guidance on increasing business profits',
+      'pc.f1':'Personal work plan from an AI expert','pc.f2':'Individual support','pc.f3':'Ready-to-use prompt library','pc.f4':'Professional study materials','pc.f5':'Small group learning (up to 4 people)',
+      'pc.cta':'Enroll Now',
+      'pricing.footnote':'All prices are in Israeli Shekels (₪) · Payment is required before the start of classes.',
+      'stories.eyebrow':'Success Stories','stories.title':'What Our Clients Say',
+      'story1.quote':"We deployed three automations in week five. By month two, we'd reclaimed 200 hours of staff time per month. The ROI was immediate and it's compounding every week.",
+      'story1.name':'Avi L.','story1.role':'CEO, Logistics Firm · Business Transform',
+      'story2.quote':"Our entire team went from AI-skeptical to AI-fluent in eight weeks. The culture shift was as valuable as the tools we built. We think and operate differently now.",
+      'story2.name':'Tali M.','story2.role':'Operations Director, SaaS Company · Business Transform',
+      'story3.quote':"The Enterprise program gave us a 12-month roadmap, internal champions, and a governance framework. We now have the infrastructure to keep scaling AI on our own terms.",
+      'story3.name':'Ron S.','story3.role':'CTO, Financial Services · Enterprise Track',
+      'faq.eyebrow':'FAQ','faq.title':'Common Questions',
+      'faq1.q':'What size businesses do you work with?',
+      'faq1.a':'The Team Starter is designed for small teams of 3–10. The Business Transform works best for companies of 10–100 employees. The Enterprise track scales to any organisation size — we scope it to your headcount and complexity.',
+      'faq2.q':'Does our team need technical experience?',
+      'faq2.a':"No. We've trained teams from logistics, law, finance, healthcare, retail, and hospitality — none required prior technical knowledge. We meet your team exactly where they are.",
+      'faq3.q':'How disruptive is the program to day-to-day operations?',
+      'faq3.a':"Minimal. Sessions run in 3-hour blocks, scheduled around your team's availability. We work around your calendar, not the other way around. The program is intentionally designed to not disrupt your core operations while transforming them.",
+      'faq4.q':'What do we actually walk away with?',
+      'faq4.a':'Deployed automations, at least one custom AI tool, a trained team, and a documented roadmap for continuing your AI transformation internally. Not slides — working systems.',
+      'faq5.q':'Can we start with one department?',
+      'faq5.a':'Absolutely. Many clients start with their operations or marketing team as a pilot, demonstrate clear ROI, and then roll out across the organisation. The Team Starter is designed exactly for this approach.',
+      'faq6.q':'Is ongoing support available after the program?',
+      'faq6.a':'Yes. All plans include post-program support. The Transform track includes 3 months; the Enterprise track includes a 12-month advisory retainer. Additional retainer packages are available for all tiers.',
+      'footer':'\u00a9 2025 P.R FUTURE \u2014 AI Learning Academy. All rights reserved.'
+    },
+
+    he: {
+      'nav.vision':'חזון','nav.journey':'מסע','nav.goals':'מטרות','nav.enroll':'הירשם עכשיו','back':'חזרה',
+      'hero.eyebrow':'מסלול AI עסקי — ארגונים וצוותות',
+      'hero.title':'שנה<br>את העסק שלך',
+      'hero.subtitle':'יישום AI מדרגי לצוותות ועסקים שסרבים להישאר מאחור.',
+      'hero.cta1':'גלה את המסלול','hero.cta2':'סקרי מקרה',
+      'vision.mission':'מה מבדיל עסקים מובלי AI מהשאר?',
+      'vision.title':'אסטרטגי. מדרגי.<br>בניית העסק הנולד עם AI.',
+      'pillar1.number':'01 — אסטרטגיה','pillar1.title':'מודל העסק<br>AI-First',
+      'pillar1.body':'אנחנו לא מרכיבים AI על תשתיות ישנות — אנחנו עוזרים לך לעצב מחדש את מודל העסק מהיסוד עם AI במרכז. התוצאה היא ארגון רזה יותר, מהיר יותר ומדרגי יותר שמגדיל את יתרונו מדי רבעון.',
+      'pillar2.number':'02 — יעילות','pillar2.title':'החזר ROI<br>תפעולי מדיד',
+      'pillar2.body':'כל יישום AI שאנחנו פורסים קשור לתוצאה מדידה — הפחתת עלויות, מחזורים מהירים יותר, תפוקה גבוהה יותר לעובד. הצוותות שלנו לא רק לומדים AI — הם בונים אוטומציות שמשלמות את עצמן תוך שבועות מהרגע שהן עולות לאוויר.',
+      'pillar3.number':'03 — צמיחה','pillar3.title':'אימוץ AI<br>מוכן לארגון',
+      'pillar3.body':'טרנספורמציית AI בת-קיימא דורשת יותר מכלים — היא דורשת תרבות, ממשל ומערכות. אנחנו נותנים לצוותות שלך את המסגרות לאמץ AI באחריות, להרחיב אותו בביטחון, ולשמור על יתרון תחרותי ככל שהטכנולוגיה מתפתחת.',
+      'journey.eyebrow':'נתיב היישום','journey.heading':'ממנואלי.<br>למכונה.',
+      'journey.desc':'10 שבועות.<br>5 שלבים.<br>עסק אחד שהשתנה.',
+      'phase1.label':'# שלב ראשון','phase1.duration':'שבועות 1–2','phase1.title':'ביקורת מוכנות AI',
+      'phase1.body':'מיפוי הפעילות הנוכחית שלך, זיהוי הזדמנויות ה-AI בעלות הערך הגבוה ביותר, ובניית מפת דרכים לטרנספורמציה עדיפה ספציפית לעסק שלך.',
+      'phase2.label':'# שלב שני','phase2.duration':'שבועות 3–4','phase2.title':'שטף AI לצוות',
+      'phase2.body':'שדרוג הצוות כולו בכלי ה-AI הרלוונטיים ביותר למגזר שלך. מהנדסת פרומפטים ועד פלטפורמות אוטומציה — מעשי, מהיר, ללא מיותרות.',
+      'phase3.label':'# שלב שלישי','phase3.duration':'שבועות 5–6','phase3.title':'אוטומציה של תהליכים',
+      'phase3.body':'בנייה ופריסת אוטומציות AI בפרוצסים בעלי הפריכה הגבוהה ביותר — שירות לקוחות, דיווח, תוכן, תפעול. התחל לחסוך שעות בשבוע החמישי.',
+      'phase4.label':'# שלב רביעי','phase4.duration':'שבועות 7–8','phase4.title':'בניית מוצר AI',
+      'phase4.body':'עיצוב ומשלוח מוצר מבוסס AI או כלי פנימי מותאם לעסק שלך. נכס אמיתי — לא אב-טיפוס — מוכן לפריסה חיה.',
+      'phase5.label':'# שלב חמישי','phase5.duration':'שבועות 9–10','phase5.title':'הרחבה וממשל',
+      'phase5.body':'הקמת ממשל AI, הרחבת האוטומציות הטובות ביותר ברחבי החברה, ובניית היכולת הפנימית להמשיך ולהשתפר ללא תלות חיצונית.',
+      'obj.eyebrow':'מטרות ליבה','obj.title':'שלושה תוצאות שאנחנו מספקים',
+      'obj1.index':'01','obj1.title':'יעילות תפעולית',
+      'obj1.body':'זיהוי וחיסול התהליכים הידניים בעלות הגבוהה ביותר בעסק שלך באמצעות אוטומציית AI — חיסכון מדיד בזמן ובעלויות תוך החודש הראשון.',
+      'obj2.index':'02','obj2.title':'שטף AI לכלל הצוות',
+      'obj2.body':'בניית ארגון שבו כל עובד יכול לנצל AI כמכפיל כוח בתפקידו — לא רק צוות הטכנולוגיה, אלא כל מחלקה.',
+      'obj3.index':'03','obj3.title':'יתרון בר-קיימא',
+      'obj3.body':'הטמעת יכולות AI שמצטברות לאורך זמן — מסגרות, ממשל ומומחיות פנימית שמשמרים אתכם בחזית ככל שהטכנולוגיה ממשיכה להתפתח.',
+      'quote.em':'״העסקים שינצחו בעשור הבא',
+      'quote.rest':' לא יהיו אלה עם הכי הרבה מימון. הם יהיו אלה שזזו מהר יותר עם AI.״',
+      'manifesto.title':'העסקים שפועלים עכשיו<br>יגדירו את העשור הבא.',
+      'manifesto.intro':'AI אינו שיקול עתידי. זוהי המציאות התחרותית הנוכחית. הפער בין עסקים AI-Native לבין אלה שעדיין מתלבטים מתרחב בכל חודש.',
+      'man1.number':'01','man1.principle':'ROI לפני<br>תיאוריה',
+      'man1.body':'אנחנו לא מנהלים סדנאות אסטרטגיה שמסתיימות במצגת. כל מעורבות מסתיימת עם אוטומציות פרוסות, כלים שנשלחו, וחיסכון מדיד שאתה יכול לראות במספרים שלך.',
+      'man2.number':'02','man2.principle':'העסק שלך,<br>לא תבנית',
+      'man2.body':'אנחנו לא מיישמים מסגרות AI גנריות. אנחנו חוקרים את הפעילות שלך, הלקוחות שלך, השולי הרווח שלך — ובונים פתרונות AI שמתאימים לעסק הספציפי שלך, לא של מישהו אחר.',
+      'man3.number':'03','man3.principle':'בניית יכולת<br>פנימית',
+      'man3.body':'המטרה שלנו היא להפוך את עצמנו למיותרים. אנחנו מעבירים יכולות, בונים אלופים פנימיים, ויוצרים אימוץ AI בר-קיימא עצמי — כדי שהעסק שלך ימשיך להשתפר אחרי שאנחנו נלך.',
+      'levels.eyebrow':'רמות התוכנית','levels.title':'בחר את המסלול שלך',
+      'level1.badge':'רמה 1','level1.name':'Level 1: AI Foundation','level1.duration':'המטרה: הבנת השפה החדשה, פיצוח המיינדסט הישראלי ובניית זהות עסקית חזקה.',
+      'level1.f1':'מבוא לעולם ה-AI: מה זה באמת LLM, איך המוח המלאכותי עובד ולמה כל מה שידעתם על עבודה עומד להשתנות.',
+      'level1.f2':'אומנות הפרומפטינג (Prompt Engineering): איך לדבר עם המכונה כדי לקבל תוצאות של מיליון דולר. טכניקות הנדסת פקודות מתקדמות (Chain of Thought, Few-Shot).',
+      'level1.f3':'פיצוח הקוד הישראלי: פסיכולוגיה של הצרכן הישראלי: מה גורם לו לקנות? (מהירות, "תכל\'ס", אמינות). איך AI עוזר לנו להתאים את הטון והמסר לשוק המקומי בצורה מדויקת.',
+      'level1.f4':'בניית מותג יוקרתי: שימוש ב-AI לעיצוב לוגו, שפה חזותית (פלטות צבעים, אסתטיקה מינימליסטית) וכתיבת סיפור מותג שאי אפשר להתעלם ממנו.',
+      'level1.f5':'מחקר שוק ומתחרים ב-AI: איך לנתח את השוק בשלוש דקות ולמצוא את ה"פרצה" שדרכה העסק שלכם יפרוץ.',
+      'level1.goal':'תיק עבודות שכולל 15 פרויקטים',
+      'level2.badge':'רמה 2','level2.name':'Level 2: AI Architect','level2.duration':'המטרה: הקמת הנכסים הדיגיטליים שלכם והפעלת מערך שיווק שעובד בשבילכם.',
+      'level2.f1':'הקמת אתר ודפי נחיתה ב-AI: מבנה דף נחיתה – מהכותרת ועד כפתור הרכישה. שימוש בכלי AI לבניית אתרים מהירים, מעוצבים ללא ידע בתכנות.',
+      'level2.f2':'יצירת ה"אווטאר הדיגיטלי": יצירת דמות דיגיטלית (Digital Twin) שלכם או של נציג העסק. דיבוב, הנפשה ויצירת סרטוני שיווק שבהם האווטאר שלכם מוכר, בזמן שאתם ישנים.',
+      'level2.f3':'שיווק ופרסום 2.0: קמפיינים אוטומטיים: איך לתת ל-AI לנהל את התקציב ולעשות אופטימיזציה למודעות בפייסבוק, אינסטגרם וגוגל. כתיבת קופי (Copywriting) שיווקי אגרסיבי ומניע לפעולה בעזרת מודלים מתקדמים.',
+      'level2.f4':'אוטומציה שיווקית: בניית משפכים (Funnels) שקולטים ליד, מחממים אותו ושולחים הצעה – הכל על "טייס אוטומטי".',
+      'level2.goal':'תיק עבודות שכולל 15 פרויקטים',
+      'level3.badge':'רמה 3','level3.name':'Level 3: PRO','level3.duration':'המטרה: ניתוק הקשר בין "זמן" ל"כסף". בניית עסק של איש אחד עם עוצמה של 100 עובדים.',
+      'level3.f1':'בניית סוכני AI מותאמים אישית: יצירת "נוירו-עובדים": סוכן מכירות, סוכן שירות לקוחות וסוכן מחקר שוק שמכירים את העסק שלכם מבפנים. הזנת הסוכנים בדאטה של העסק (מסמכים, ידע מקצועי, היסטוריית לקוחות).',
+      'level3.f2':'החלפת כוח אדם אנושי: מיפוי וניתוח העסק: איפה עובדים טועים ואיפה הם עולים לכם הכי הרבה? הטמעת סוכנים שלא טועים, לא מתעייפים ועובדים 24/7.',
+      'level3.f3':'צמיחה אסטרטגית: לימוד האסטרטגיה שתשלש את הרווחים העסקיים שלך תוך 90 יום בלבד! בעזרת שימוש AI.',
+      'level3.f4':'מהשוק הישראלי לשוק העולמי: אסטרטגיות חדירה לחו"ל (Scaling Global). התאמת המודל העסקי למטבעות זרים (דולר/יורו) ותרבויות שונות בעזרת תרגום והתאמה תרבותית של AI.',
+      'level3.f5':'ניהול אימפריה של איש אחד: איך לנהל מערך טכנולוגי מורכב בקלות, תוך שמירה על רווחיות של מיליונרים וביטחון עצמי של מובילי שוק.',
+      'level3.goal':'תיק עבודות שכולל 15 פרויקטים',
+      'invest.eyebrow':'השקעה','invest.title':'תמחור שקוף',
+      'invest.subtitle':'אין עמלות נסתרות. אין התחייבויות ארוכות טווח. חשבוניות ארגוניות זמינות.',
+      'pc1.tag':'תוכנית בסיסית','pc1.name':'בסיסי','pc1.num':'3','pc1.total':'₪750 <span>סה"כ</span>','pc1.per':'₪250 / שיעור',
+      'pc2.tag':'תוכנית מתקדמת','pc2.name':'מתקדם','pc2.num':'6','pc2.total':'₪1,380 <span>סה"כ</span>','pc2.per':'₪230 / שיעור',
+      'pc3.tag':'הכי משתלם','pc3.name':'אליט','pc3.num':'10','pc3.total':'₪2,100 <span>סה"כ</span>','pc3.per':'₪210 / שיעור','pc3.save':'✦ חסכון 16%',
+      'pc.lessons':'שיעורים',
+      'pc.bf1':'איבחון של העסק שלך','pc.bf2':'ניתוח העסק שלך','pc.bf3':'הנחיות אישיות איך להגדיל את הרווחים של העסק',
+      'pc.f1':'תוכנית עבודה אישית ממומחה AI','pc.f2':'תמיכה אישית','pc.f3':'ספריית פרומפטים מוכנה לשימוש','pc.f4':'חומרי לימוד מקצועיים','pc.f5':'למידה בקבוצה קטנה (עד 4 אנשים)',
+      'pc.cta':'הירשם עכשיו',
+      'pricing.footnote':'כל המחירים בשקלים ישראליים (₪) · התשלום נדרש לפני תחילת הלימודים.',
+      'stories.eyebrow':'סיפורי הצלחה','stories.title':'מה הלקוחות שלנו אומרים',
+      'story1.quote':'פרסנו שלוש אוטומציות בשבוע החמישי. עד החודש השני, החזרנו 200 שעות של זמן צוות בחודש. ה-ROI היה מיידי וממשיך להצטבר כל שבוע.',
+      'story1.name':'אבי ל.','story1.role':'מנכ"ל, חברת לוגיסטיקה · טרנספורמציה עסקית',
+      'story2.quote':'הצוות שלנו כולו עבר מספקנות כלפי AI לשטף ב-AI תוך שמונה שבועות. השינוי התרבותי היה בעל ערך כמו הכלים שבנינו. אנחנו חושבים ופועלים אחרת עכשיו.',
+      'story2.name':'טלי מ.','story2.role':'מנהלת תפעול, חברת SaaS · טרנספורמציה עסקית',
+      'story3.quote':'התוכנית הארגונית נתנה לנו מפת דרכים ל-12 חודשים, אלופים פנימיים ומסגרת ממשל. כעת יש לנו את התשתית להמשיך ולהרחיב AI בתנאים שלנו.',
+      'story3.name':'רון ס.','story3.role':'מנמ"ר, שירותים פיננסיים · מסלול ארגוני',
+      'faq.eyebrow':'שאלות נפוצות','faq.title':'שאלות נפוצות',
+      'faq1.q':'עם איזה גודל עסקים אתם עובדים?',
+      'faq1.a':'הסטארטר לצוות מיועד לצוותות קטנות של 3–10. הטרנספורמציה העסקית מתאימה ביותר לחברות של 10–100 עובדים. המסלול הארגוני מדרגי לכל גודל ארגון — אנחנו מגדירים אותו לפי מספר העובדים והמורכבות שלך.',
+      'faq2.q':'האם הצוות שלנו זקוק לניסיון טכני?',
+      'faq2.a':'לא. הכשרנו צוותות מלוגיסטיקה, משפט, פיננסים, בריאות, קמעונאות ואירוח — אף אחד לא הצריך ידע טכני מוקדם. אנחנו פוגשים את הצוות שלך בדיוק היכן שהוא.',
+      'faq3.q':'עד כמה התוכנית מפריעה לפעילות היומיומית?',
+      'faq3.a':'מינימלית. הפגישות מתנהלות בבלוקים של 3 שעות, מתוזמנות סביב זמינות הצוות שלך. אנחנו עובדים סביב הלוח שלך, לא להיפך. התוכנית תוכננה במכוון לא להפריע לפעילות הליבה שלך תוך שהיא משנה אותה.',
+      'faq4.q':'עם מה אנחנו בסופו של דבר יוצאים?',
+      'faq4.a':'אוטומציות פרוסות, לפחות כלי AI מותאם אחד, צוות מוכשר ומפת דרכים מתועדת להמשך טרנספורמציית ה-AI שלך באופן פנימי. לא שקפים — מערכות עובדות.',
+      'faq5.q':'האם אנחנו יכולים להתחיל עם מחלקה אחת?',
+      'faq5.a':'בהחלט. לקוחות רבים מתחילים עם מחלקת התפעול או השיווק שלהם כפיילוט, מוכיחים ROI ברור, ואז מרחיבים לכל הארגון. הסטארטר לצוות מיועד בדיוק לגישה זו.',
+      'faq6.q':'האם תמיכה שוטפת זמינה לאחר התוכנית?',
+      'faq6.a':'כן. כל התוכניות כוללות תמיכה לאחר התוכנית. מסלול הטרנספורמציה כולל 3 חודשים; המסלול הארגוני כולל ריטיינר ייעוץ ל-12 חודשים. חבילות ריטיינר נוספות זמינות לכל הרמות.',
+      'footer':'\u00a9 2025 P.R FUTURE \u2014 אקדמיה ללמידת AI. כל הזכויות שמורות.'
+    },
+
+    ru: {
+      'nav.vision':'Видение','nav.journey':'Путь','nav.goals':'Цели','nav.enroll':'Записаться','back':'Назад',
+      'hero.eyebrow':'Бизнес-трек AI — Корпорации и команды',
+      'hero.title':'ТРАНСФОРМИРУЙ<br>СВОЙ БИЗНЕС',
+      'hero.subtitle':'Масштабируемое внедрение ИИ для команд и бизнесов, которые не готовы отставать.',
+      'hero.cta1':'Изучить трек','hero.cta2':'Кейсы клиентов',
+      'vision.mission':'Что отличает бизнесы под управлением ИИ от остальных?',
+      'vision.title':'Стратегично. Масштабируемо.<br>Строим бизнес, рождённый с ИИ.',
+      'pillar1.number':'01 — Стратегия','pillar1.title':'Бизнес-модель<br>AI-First',
+      'pillar1.body':'Мы не накладываем ИИ на устаревшие операции — мы помогаем переосмыслить бизнес-модель с нуля, поставив ИИ в центр. Результат — более стройная, быстрая и масштабируемая организация, наращивающая преимущество каждый квартал.',
+      'pillar2.number':'02 — Эффективность','pillar2.title':'Измеримый<br>операционный ROI',
+      'pillar2.body':'Каждое внедрение ИИ привязано к измеримому результату — снижению затрат, ускорению циклов, росту выпуска на сотрудника. Наши команды не просто изучают ИИ — они создают автоматизации, которые окупаются в течение нескольких недель после запуска.',
+      'pillar3.number':'03 — Масштаб','pillar3.title':'Корпоративное<br>внедрение ИИ',
+      'pillar3.body':'Устойчивая трансформация ИИ требует большего, чем инструменты — нужны культура, управление и системы. Мы даём командам фреймворки для ответственного внедрения ИИ, уверенного масштабирования и сохранения конкурентного преимущества.',
+      'journey.eyebrow':'Путь внедрения','journey.heading':'От ручного.<br>К машинному.',
+      'journey.desc':'10 недель.<br>5 этапов.<br>1 трансформированный бизнес.',
+      'phase1.label':'# Этап первый','phase1.duration':'Недели 1–2','phase1.title':'Аудит готовности к ИИ',
+      'phase1.body':'Картирование текущих операций, выявление наиболее ценных возможностей ИИ и создание приоритетной дорожной карты трансформации для вашего бизнеса.',
+      'phase2.label':'# Этап второй','phase2.duration':'Недели 3–4','phase2.title':'Владение ИИ для команды',
+      'phase2.body':'Обучение всей команды наиболее релевантным инструментам ИИ для вашей отрасли. От промпт-инжиниринга до платформ автоматизации — практично, быстро, без воды.',
+      'phase3.label':'# Этап третий','phase3.duration':'Недели 5–6','phase3.title':'Автоматизация процессов',
+      'phase3.body':'Создание и развёртывание ИИ-автоматизаций в наиболее проблемных процессах — клиентском сервисе, отчётности, контенте, операциях. Начните экономить часы уже на пятой неделе.',
+      'phase4.label':'# Этап четвёртый','phase4.duration':'Недели 7–8','phase4.title':'Создание ИИ-продукта',
+      'phase4.body':'Разработка и запуск продукта на базе ИИ или внутреннего инструмента, адаптированного под ваш бизнес. Реальный актив — не прототип — готовый к боевому развёртыванию.',
+      'phase5.label':'# Этап пятый','phase5.duration':'Недели 9–10','phase5.title':'Масштаб и управление',
+      'phase5.body':'Внедрение ИИ-управления, масштабирование лучших автоматизаций по всей компании и формирование внутренней компетенции для непрерывного совершенствования без внешней зависимости.',
+      'obj.eyebrow':'Ключевые цели','obj.title':'Три результата, которые мы достигаем',
+      'obj1.index':'01','obj1.title':'Операционная эффективность',
+      'obj1.body':'Выявление и устранение наиболее затратных ручных процессов в вашем бизнесе через ИИ-автоматизацию — измеримая экономия времени и средств в первый месяц.',
+      'obj2.index':'02','obj2.title':'Владение ИИ всей командой',
+      'obj2.body':'Создание организации, где каждый сотрудник может использовать ИИ как усилитель своей роли — не только IT-отдел, но и каждое подразделение.',
+      'obj3.index':'03','obj3.title':'Устойчивое преимущество',
+      'obj3.body':'Внедрение возможностей ИИ, которые накапливаются со временем — фреймворки, управление и внутренняя экспертиза, удерживающие вас впереди по мере развития технологий.',
+      'quote.em':'«Бизнесы, победившие в следующем десятилетии,',
+      'quote.rest':' будут не теми, у кого больше финансирования. Это будут те, кто быстрее всех освоил ИИ.»',
+      'manifesto.title':'Бизнесы, действующие сейчас,<br>определят следующее десятилетие.',
+      'manifesto.intro':'ИИ — не вопрос будущего. Это настоящая конкурентная реальность. Разрыв между AI-native бизнесами и теми, кто ещё раздумывает, увеличивается каждый месяц.',
+      'man1.number':'01','man1.principle':'ROI до<br>теории',
+      'man1.body':'Мы не проводим стратегические воркшопы, заканчивающиеся презентацией. Каждое взаимодействие завершается развёрнутыми автоматизациями, запущенными инструментами и измеримой экономией, которую видно в цифрах.',
+      'man2.number':'02','man2.principle':'Ваш бизнес,<br>не шаблон',
+      'man2.body':'Мы не применяем универсальные ИИ-фреймворки. Мы изучаем ваши операции, ваших клиентов, вашу маржу — и строим ИИ-решения, подходящие именно вашему бизнесу.',
+      'man3.number':'03','man3.principle':'Внутренняя<br>компетенция',
+      'man3.body':'Наша цель — сделать себя ненужными. Мы передаём компетенции, развиваем внутренних чемпионов и создаём самоподдерживающееся внедрение ИИ — чтобы ваш бизнес продолжал совершенствоваться после нашего ухода.',
+      'levels.eyebrow':'Уровни программы','levels.title':'Выберите свой трек',
+      'level1.badge':'Уровень 1','level1.name':'Уровень 1: Основы ИИ','level1.duration':'Цель: Понимание нового языка, разгадка израильского мышления и создание сильной бизнес-идентичности.',
+      'level1.f1':'Введение в мир ИИ: Что такое LLM на самом деле, как работает искусственный мозг и почему все, что вы знали о работе, скоро изменится.',
+      'level1.f2':'Промпт-инжиниринг: Как говорить с машиной, чтобы получать результаты на миллион долларов. Продвинутые техники (Chain of Thought, Few-Shot).',
+      'level1.f3':'Взлом израильского кода: Психология израильского потребителя - что заставляет его покупать? (Скорость, конкретика "Тахлес", надежность). Как ИИ помогает точно адаптировать тон и сообщение для местного рынка.',
+      'level1.f4':'Создание премиального бренда: Использование ИИ для дизайна логотипа, визуального языка (цветовые палитры, минималистичная эстетика) и написания истории бренда, которую невозможно игнорировать.',
+      'level1.f5':'Исследование рынка и конкурентов с ИИ: Как проанализировать рынок за 3 минуты и найти "лазейку", через которую прорвется ваш бизнес.',
+      'level1.goal':'Портфолио из 15 проектов',
+      'level2.badge':'Уровень 2','level2.name':'Уровень 2: ИИ-Архитектор','level2.duration':'Цель: Создание ваших цифровых активов и запуск маркетинговой системы, которая работает на вас.',
+      'level2.f1':'Создание сайтов и целевых страниц с ИИ: Структура целевой страницы - от заголовка до кнопки покупки. Использование ИИ для быстрого создания красивых сайтов без навыков программирования.',
+      'level2.f2':'Создание "Цифрового аватара": Создание вашего цифрового двойника (Digital Twin) или представителя бизнеса. Озвучка, анимация и создание маркетинговых видео, где ваш аватар продает, пока вы спите.',
+      'level2.f3':'Маркетинг и реклама 2.0: Автоматизированные кампании - как поручить ИИ управление бюджетом и оптимизацию рекламы в Facebook, Instagram и Google. Написание агрессивных и побуждающих к действию текстов с использованием продвинутых моделей.',
+      'level2.f4':'Маркетинговая автоматизация: Построение воронок (Funnels), которые захватывают лиды, подогревают их и отправляют предложение - все на "автопилоте".',
+      'level2.goal':'Портфолио из 15 проектов',
+      'level3.badge':'Уровень 3','level3.name':'Уровень 3: PRO','level3.duration':'Цель: Разрыв связи между "временем" и "деньгами". Создание бизнеса одного человека с мощью 100 сотрудников.',
+      'level3.f1':'Создание кастомных ИИ-агентов: Создание "нейро-сотрудников": агент по продажам, агент по обслуживанию клиентов и агент по исследованию рынка, которые знают ваш бизнес изнутри. Загрузка бизнес-данных в агентов (документы, профессиональные знания, история клиентов).',
+      'level3.f2':'Замена человеческого персонала: Картирование и анализ бизнеса: где сотрудники ошибаются и где они обходятся вам дороже всего? Внедрение агентов, которые не ошибаются, не устают и работают 24/7.',
+      'level3.f3':'Стратегический рост: Изучение стратегии, которая утроит прибыль вашего бизнеса всего за 90 дней! С помощью использования ИИ.',
+      'level3.f4':'От израильского рынка к глобальному: Стратегии выхода за рубеж (Scaling Global). Адаптация бизнес-модели к иностранным валютам (доллары/евро) и различным культурам с помощью ИИ-перевода и культурной адаптации.',
+      'level3.f5':'Управление империей одного человека: Как легко управлять сложной технологической системой, сохраняя рентабельность на уровне миллионеров и уверенность лидеров рынка.',
+      'level3.goal':'Портфолио из 15 проектов',
+      'invest.eyebrow':'Инвестиции','invest.title':'Прозрачные цены',
+      'invest.subtitle':'Без скрытых платежей. Без долгосрочных обязательств. Корпоративное выставление счетов доступно.',
+      'pc1.tag':'Базовый план','pc1.name':'Базовый','pc1.num':'3','pc1.total':'₪750 <span>итого</span>','pc1.per':'₪250 / занятие',
+      'pc2.tag':'Продвинутый план','pc2.name':'Продвинутый','pc2.num':'6','pc2.total':'₪1,380 <span>итого</span>','pc2.per':'₪230 / занятие',
+      'pc3.tag':'Самый выгодный','pc3.name':'Элит','pc3.num':'10','pc3.total':'₪2,100 <span>итого</span>','pc3.per':'₪210 / занятие','pc3.save':'✦ Экономия 16%',
+      'pc.lessons':'ЗАНЯТИЙ',
+      'pc.bf1':'Диагностика вашего бизнеса','pc.bf2':'Анализ вашего бизнеса','pc.bf3':'Персональные рекомендации по увеличению прибыли',
+      'pc.f1':'Личный план работы от ИИ-эксперта','pc.f2':'Индивидуальная поддержка','pc.f3':'Готовая библиотека промптов','pc.f4':'Профессиональные учебные материалы','pc.f5':'Обучение в малой группе (до 4 человек)',
+      'pc.cta':'Записаться',
+      'pricing.footnote':'Все цены указаны в израильских шекелях (₪) · Оплата производится до начала занятий.',
+      'stories.eyebrow':'Истории успеха','stories.title':'Что говорят наши клиенты',
+      'story1.quote':'Мы развернули три автоматизации на пятой неделе. К второму месяцу вернули 200 часов рабочего времени персонала в месяц. ROI был немедленным и продолжает нарастать каждую неделю.',
+      'story1.name':'Ави Л.','story1.role':'Генеральный директор, логистическая компания · Бизнес-трансформация',
+      'story2.quote':'Наша вся команда перешла от скептицизма к владению ИИ за восемь недель. Культурный сдвиг оказался столь же ценным, как и созданные инструменты. Теперь мы мыслим и действуем иначе.',
+      'story2.name':'Тали М.','story2.role':'Директор по операциям, SaaS-компания · Бизнес-трансформация',
+      'story3.quote':'Корпоративная программа дала нам 12-месячную дорожную карту, внутренних чемпионов и фреймворк управления. Теперь у нас есть инфраструктура для масштабирования ИИ на наших условиях.',
+      'story3.name':'Рон С.','story3.role':'CTO, финансовые услуги · Корпоративный трек',
+      'faq.eyebrow':'FAQ','faq.title':'Частые вопросы',
+      'faq1.q':'С какими по размеру бизнесами вы работаете?',
+      'faq1.a':'Стартовый пакет рассчитан на небольшие команды 3–10 человек. Бизнес-трансформация лучше всего подходит компаниям 10–100 сотрудников. Корпоративный трек масштабируется под любой размер организации.',
+      'faq2.q':'Нужен ли нашей команде технический опыт?',
+      'faq2.a':'Нет. Мы обучали команды из логистики, юриспруденции, финансов, здравоохранения, розницы и гостеприимства — никому не требовались предварительные технические знания.',
+      'faq3.q':'Насколько программа нарушает повседневную работу?',
+      'faq3.a':'Минимально. Сессии проходят в 3-часовых блоках, запланированных вокруг доступности команды. Мы подстраиваемся под ваш календарь. Программа намеренно разработана так, чтобы не мешать основным операциям, трансформируя их.',
+      'faq4.q':'С чем мы в итоге уходим?',
+      'faq4.a':'Развёрнутые автоматизации, как минимум один кастомный ИИ-инструмент, обученная команда и задокументированная дорожная карта. Не слайды — работающие системы.',
+      'faq5.q':'Можем ли мы начать с одного подразделения?',
+      'faq5.a':'Абсолютно. Многие клиенты начинают с операционного или маркетингового отдела в качестве пилота, демонстрируют чёткий ROI, а затем распространяют по всей организации.',
+      'faq6.q':'Доступна ли постоянная поддержка после программы?',
+      'faq6.a':'Да. Все планы включают поддержку после программы. Трек трансформации включает 3 месяца; корпоративный трек — консультационный ретейнер на 12 месяцев.',
+      'footer':'\u00a9 2025 P.R FUTURE \u2014 Академия обучения ИИ. Все права защищены.'
+    }
+  };
+
+  // ── Core apply function ──────────────────────────────────
+  let _bzSubFirstLoad = true;
+  function applyLang(lang) {
+    const dict = T[lang];
+    if (!dict) return;
+
+    // Text nodes
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+
+    // innerHTML (supports <br>, <span>, <em>)
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+
+    // RTL / LTR
+    const isRTL = lang === 'he';
+    document.documentElement.dir  = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+
+    // Re-init pillar slide direction for RTL (only if not yet revealed)
+    if (typeof window._resetPillarInitial === 'function') {
+      window._resetPillarInitial();
+    }
+
+    // Re-trigger hero subtitle typewriter with translated text
+    const subtitle = document.getElementById('hero-subtitle');
+    if (subtitle) {
+      subtitle.innerHTML = '<span class="hero-tw-cursor" aria-hidden="true"></span>';
+      const text = dict['hero.subtitle'] || '';
+      const delay = _bzSubFirstLoad ? 3500 : 150;
+      _bzSubFirstLoad = false;
+      setTimeout(() => { let i = 0; function tick() { if (i >= text.length) return; i++; subtitle.innerHTML = text.slice(0,i)+'<span class="hero-tw-cursor" aria-hidden="true"></span>'; setTimeout(tick,36); } tick(); }, delay);
+    }
+
+    // Re-trigger typewriter quote if already visible
+    const quoteEl = document.getElementById('typewriter-quote');
+    if (quoteEl && quoteEl.textContent.trim().length > 2) {
+      const emText   = dict['quote.em']   || '';
+      const restText = dict['quote.rest'] || '';
+      const chars = [
+        ...emText.split('').map(c => ({ c, em: true })),
+        ...restText.split('').map(c => ({ c, em: false }))
+      ];
+      quoteEl.innerHTML = '';
+      let qi = 0;
+      function qtick() {
+        if (qi >= chars.length) return;
+        qi++;
+        const slice = chars.slice(0, qi);
+        let html = ''; let j = 0;
+        while (j < slice.length) {
+          if (slice[j].em) {
+            let s = '';
+            while (j < slice.length && slice[j].em) { s += slice[j].c; j++; }
+            html += '<em>' + s + '</em>';
+          } else { html += slice[j].c; j++; }
+        }
+        quoteEl.innerHTML = html + '<span class="tw-cursor" aria-hidden="true"></span>';
+        setTimeout(qtick, 28);
+      }
+      qtick();
+    }
+
+    // Persist
+    try { localStorage.setItem('prf_lang', lang); } catch(e) {}
+  }
+
+  // ── Lang switcher buttons ────────────────────────────────
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyLang(lang);
+    });
+  });
+
+  // ── Restore persisted language on load ──────────────────
+  (function () {
+    let saved = 'en';
+    try { saved = localStorage.getItem('prf_lang') || 'en'; } catch(e) {}
+    if (saved !== 'en' && T[saved]) {
+      const btn = document.querySelector(`.lang-btn[data-lang="${saved}"]`);
+      if (btn) {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      applyLang(saved);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
