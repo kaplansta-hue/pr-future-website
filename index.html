@@ -139,8 +139,10 @@ body {
 
 /* ── Hero mobile line-break — hidden on desktop, block on mobile ── */
 .mobile-br { display: none; }
+.hero-nowrap { white-space: normal; }
 @media (max-width: 768px) {
   .mobile-br { display: block; }
+  .hero-nowrap { white-space: nowrap; display: inline-block; }
 }
 
 /* ── Program card description — white text ── */
@@ -373,7 +375,7 @@ body {
     },
     ru: {
       'nav.academy':'Академия','nav.programs':'Программы','nav.enroll':'Записаться','nav.apply':'Подать заявку',
-      'hero.title':'Искусство <br class="mobile-br">владения будущим',
+      'hero.title':'Искусство <br class="mobile-br"><span class="hero-nowrap">владения будущим</span>',
       'vision.title':'P.R FUTURE Академия Искусственного Интеллекта',
       'vision.body1':'обучаем исключительным знаниям и технологическим возможностям, доступным немногим',
       'vision.body2':'Без опыта. Без программирования. Полное экспертное сопровождение на каждом этапе до выхода на стабильный доход',

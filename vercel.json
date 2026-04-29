@@ -1,4 +1,12 @@
 {
   "framework": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/young-founders", "dest": "/young-founders.html" },
+    { "src": "/adults", "dest": "/adults.html" },
+    { "src": "/business", "dest": "/business.html" },
+    { "src": "/journey-strip-standalone", "dest": "/journey-strip-standalone.html" },
+    { "handle": "filesystem" }
+  ]
 }
